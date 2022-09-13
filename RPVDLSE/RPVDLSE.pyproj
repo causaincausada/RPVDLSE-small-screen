@@ -30,9 +30,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\views\main_frames\GuiResults.py" />
-    <Compile Include="Code\views\main_frames\module1.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Code\views\others\GuiMenuBar.py">
       <SubType>Code</SubType>
     </Compile>
