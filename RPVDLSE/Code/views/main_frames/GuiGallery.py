@@ -1,5 +1,7 @@
+import os
 import tkinter as tk 
-from tkinter import ttk
+from PIL import Image, ImageTk
+from tkinter import Toplevel, ttk
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
 
@@ -35,14 +37,26 @@ class GuiGallery(ttk.Frame):
         frame_up.grid(column=0, row=0, sticky='NEWS')
 
         #Buttons Frame Up: Control of Gallery
+        path = os.path.dirname(__file__)
+        filename = os.path.join(path, '../../../media/back3.png')
+        self.back_icon = tk.PhotoImage(file=filename)
 
-        import os
-        dirname = os.path.dirname(__file__)
-        print(dirname)
 
-        #back_icon = tk.PhotoImage(file='../../back.png')
+        newWindow = Toplevel(root)
+ 
+        # sets the title of the
+        # Toplevel widget
+        newWindow.title("New Window")
+ 
+        # sets the geometry of toplevel
+        newWindow.geometry("200x200")
+        btn = ttk.Button(newWindow, image=self.back_icon)
+        btn.pack()
+        # A Label widget to show in toplevel
+        self.img = ImageTk.PhotoImage(Image.open(filename))
+        tk.Label(newWindow,image=self.img).pack()
 
-        btn_back = ttk.Button(frame_up, text="<-")
+        btn_back = ttk.Button(frame_up, image=self.back_icon)
         btn_next = ttk.Button(frame_up, text="->")
         btn_update = ttk.Button(frame_up, text="O")
         btn_camera = ttk.Button(frame_up, text="C")
