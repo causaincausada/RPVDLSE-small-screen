@@ -19,3 +19,4 @@ class GuiResults(ttk.Frame):
         style = ttk.Style()
         style.configure('Big.TRadiobutton', 
                         font=(None, DEFAULT_SIZE_RADIO_BUTTON))
+        #comentario prueba
