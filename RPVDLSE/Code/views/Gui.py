@@ -9,9 +9,9 @@ from Code.views.others.Messages import Messages
 
 DEFAULT_THEME = 'adapta'
 DEFAULT_WINDOW_TITLE = 'RPVDLSE'
-GEOMETRY = '700x600+0+0'
-MINSIZE_WINDOW_X = 700
-MINSIZE_WINDOW_Y = 600
+GEOMETRY = '750x750+0+0'
+MINSIZE_WINDOW_X = 750
+MINSIZE_WINDOW_Y = 750
 #TEXT_TAB_GALLERY = 'Galería' #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Texto Ingles/Español
 
 
