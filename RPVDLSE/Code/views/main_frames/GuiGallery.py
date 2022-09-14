@@ -41,21 +41,6 @@ class GuiGallery(ttk.Frame):
         filename = os.path.join(path, '../../../media/back3.png')
         self.back_icon = tk.PhotoImage(file=filename)
 
-
-        newWindow = Toplevel(root)
- 
-        # sets the title of the
-        # Toplevel widget
-        newWindow.title("New Window")
- 
-        # sets the geometry of toplevel
-        newWindow.geometry("200x200")
-        btn = ttk.Button(newWindow, image=self.back_icon)
-        btn.pack()
-        # A Label widget to show in toplevel
-        self.img = ImageTk.PhotoImage(Image.open(filename))
-        tk.Label(newWindow,image=self.img).pack()
-
         btn_back = ttk.Button(frame_up, image=self.back_icon)
         btn_next = ttk.Button(frame_up, text="->")
         btn_update = ttk.Button(frame_up, text="O")
