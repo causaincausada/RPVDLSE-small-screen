@@ -38,13 +38,20 @@ class GuiGallery(ttk.Frame):
 
         #Buttons Frame Up: Control of Gallery
         path = os.path.dirname(__file__)
-        filename = os.path.join(path, '../../../media/back3.png')
+        filename = os.path.join(path, '../../../media/back.png')
+        #icons
         self.back_icon = tk.PhotoImage(file=filename)
+        filename = os.path.join(path, '../../../media/next.png')
+        self.next_icon = tk.PhotoImage(file=filename)
+        filename = os.path.join(path, '../../../media/update.png')
+        self.update_icon = tk.PhotoImage(file=filename)
+        filename = os.path.join(path, '../../../media/camera.png')
+        self.camera_icon = tk.PhotoImage(file=filename)
 
         btn_back = ttk.Button(frame_up, image=self.back_icon)
-        btn_next = ttk.Button(frame_up, text="->")
-        btn_update = ttk.Button(frame_up, text="O")
-        btn_camera = ttk.Button(frame_up, text="C")
+        btn_next = ttk.Button(frame_up, image=self.next_icon)
+        btn_update = ttk.Button(frame_up, image=self.update_icon)
+        btn_camera = ttk.Button(frame_up, image=self.camera_icon)
 
         #Frame RadioButton in Frame Up
         #Layout Management: Place
