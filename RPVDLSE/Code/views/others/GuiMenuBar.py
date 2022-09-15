@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, Menu
+from tkinter import Menu
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
 

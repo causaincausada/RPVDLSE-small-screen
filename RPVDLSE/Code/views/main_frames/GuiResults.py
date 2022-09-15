@@ -4,7 +4,6 @@ from tkcalendar import DateEntry
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
 
-DEFAULT_SIZE_RADIO_BUTTON = 15
 
 class GuiResults(ttk.Frame):
     def __init__(self, root):
@@ -16,10 +15,6 @@ class GuiResults(ttk.Frame):
         self.messages = Messages(root.numlanguage)
         self.language.languageChange(root.numlanguage)
 
-        #Style
-        style = ttk.Style()
-        style.configure('Big.TRadiobutton', 
-                        font=(None, DEFAULT_SIZE_RADIO_BUTTON))
         #Layout Management: pack
         
         #Frame Filters 
