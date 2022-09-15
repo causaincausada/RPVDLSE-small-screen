@@ -2,6 +2,7 @@ from tkinter import ttk
 from ttkthemes import ThemedTk
 from ctypes import windll
 from Code.views.main_frames.GuiGallery import GuiGallery
+from Code.views.main_frames.GuiResults import GuiResults
 from Code.views.others.GuiMenuBar import GuiMenuBar
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
@@ -37,6 +38,7 @@ class Gui(ThemedTk):
         #Tabs GUI: i.e. Gallery and Results
         self.tab_control = ttk.Notebook(self)
         self.frame_tab_gallery = GuiGallery(self) #Frame gallery
+        self.frame_tab_results = GuiResults(self) #Frame results
         #Poner aqui #Frame Results
         self.tab_control.add(self.frame_tab_gallery, text = self.language.galery)
         #tab_control.add(frame_tab_gallery, text ='Tab 1')

@@ -37,6 +37,7 @@ class GuiResults(ttk.Frame):
         frame_filters_date_hour.rowconfigure(0, wight=1)
         frame_filters_date_hour.rowconfigure(1, wight=1)
         frame_filters_date_hour.rowconfigure(2, wight=1)
+
         label_filters_date = ttk.Label(frame_filters_date_hour,
                                        text=self.language.date)
         label_filters_hour = ttk.Label(frame_filters_date_hour,
@@ -45,19 +46,25 @@ class GuiResults(ttk.Frame):
                                        text=self.language.begin)
         label_filters_end = ttk.Label(frame_filters_date_hour,
                                        text=self.language.end)
+
         label_filters_date.grid(column=1, row=0)
         label_filters_hour.grid(column=2, row=0)
         label_filters_begin.grid(column=0, row=1)
         label_filters_end.grid(column=0, row=2)
+
         dateentry_filters_begin_date = DateEntry(frame_filters_date_hour, selectmode='day')
         dateentry_filters_end_date = DateEntry(frame_filters_date_hour, selectmode='day')
-        entry_filters_begin_hour_text = tk.StringVar()
-        entry_filters_end_hour_text = tk.StringVar()
-        entry_filters_begin_hour = ttk.Entry(frame_filters_date_hour, textvariable=entry_filters_begin_hour_text)
-        entry_filters_end_hour = ttk.Entry(frame_filters_date_hour, textvariable=entry_filters_end_hour_text)
-
+        self.entry_filters_begin_hour_text = tk.StringVar()
+        self.entry_filters_end_hour_text = tk.StringVar()
+        entry_filters_begin_hour = ttk.Entry(frame_filters_date_hour, textvariable=self.entry_filters_begin_hour_text)
+        entry_filters_end_hour = ttk.Entry(frame_filters_date_hour, textvariable=self.entry_filters_end_hour_text)
+        dateentry_filters_begin_date.grid(column=1, row=1)
+        dateentry_filters_end_date.grid(column=1, row=2)
+        entry_filters_begin_hour.grid(column=2, row=1)
+        entry_filters_end_hour.grid(column=2, row=2)
         #Frame filters Plate
         #layout pack
+
 
         #Frame filters name
         #layout pack
