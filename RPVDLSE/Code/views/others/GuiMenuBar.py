@@ -73,6 +73,7 @@ class GuiMenuBar(Menu):
             font = ("", size_font_menu_item),
             menu = settings_menu
         )
+    
     def activador_ask_confirm_backup(self):
         self.messages.ask_confirm_backup(5)
 

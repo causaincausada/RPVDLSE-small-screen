@@ -13,7 +13,6 @@ DEFAULT_WINDOW_TITLE = 'RPVDLSE'
 GEOMETRY = '750x750+0+0'
 MINSIZE_WINDOW_X = 750
 MINSIZE_WINDOW_Y = 750
-#TEXT_TAB_GALLERY = 'Galería' #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Texto Ingles/Español
 
 
 class Gui(ThemedTk):
@@ -50,6 +49,7 @@ class Gui(ThemedTk):
             windll.shcore.SetProcessDpiAwareness(1)
         finally:
             pass;
+    
     #fuction to change language
     def change_language(self, numlanguage):
         self.numlanguage = numlanguage
@@ -65,4 +65,3 @@ class Gui(ThemedTk):
         self.tab_control.add(self.frame_tab_results, text = self.language.results)
         self.tab_control.pack(expand = 1, fill ="both")
         
-
