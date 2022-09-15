@@ -14,30 +14,22 @@ class GuiResults(ttk.Frame):
         self.language = Language()
         self.messages = Messages(root.numlanguage)
         self.language.languageChange(root.numlanguage)
-
-        #Layout Management: pack
         
         #Frame Filters 
         #layout grid
         #configure grid
         self.frame_filters = ttk.Frame(self)
-        self.frame_filters.columnconfigure(0, weight=5)
-        self.frame_filters.columnconfigure(1, weight=5)
-        self.frame_filters.rowconfigure(0, weight=5)
-        self.frame_filters.rowconfigure(1, weight=5)
-        self.frame_filters.rowconfigure(2, weight=5)
-        self.frame_filters.rowconfigure(3, weight=5)
 
         #Frame filters date-hour
         #layout grid
         #configure grid
         self.frame_filters_date_hour = ttk.Frame(self.frame_filters)
-        self.frame_filters_date_hour.columnconfigure(0, weight=5)
-        self.frame_filters_date_hour.columnconfigure(1, weight=5)
-        self.frame_filters_date_hour.columnconfigure(2, weight=5)
-        self.frame_filters_date_hour.rowconfigure(0, weight=5)
-        self.frame_filters_date_hour.rowconfigure(1, weight=5)
-        self.frame_filters_date_hour.rowconfigure(2, weight=5)
+        self.frame_filters_date_hour.columnconfigure(0, weight=1)
+        self.frame_filters_date_hour.columnconfigure(1, weight=1)
+        self.frame_filters_date_hour.columnconfigure(2, weight=1)
+        self.frame_filters_date_hour.rowconfigure(0, weight=1)
+        self.frame_filters_date_hour.rowconfigure(1, weight=1)
+        self.frame_filters_date_hour.rowconfigure(2, weight=1)
 
         label_filters_date = ttk.Label(self.frame_filters_date_hour,
                                        text=self.language.date)
