@@ -19,6 +19,12 @@ class GuiResults(ttk.Frame):
         #layout grid
         #configure grid
         self.frame_filters = ttk.Frame(self)
+        self.frame_filters.columnconfigure(0, weight=1)
+        self.frame_filters.columnconfigure(1, weight=1)
+        self.frame_filters.rowconfigure(0, weight=1)
+        self.frame_filters.rowconfigure(1, weight=1)
+        self.frame_filters.rowconfigure(2, weight=1)
+        self.frame_filters.rowconfigure(3, weight=1)
 
         #Frame filters date-hour
         #layout grid
