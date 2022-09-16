@@ -6,12 +6,13 @@ from Code.views.main_frames.GuiResults import GuiResults
 from Code.views.others.GuiMenuBar import GuiMenuBar
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
+from Code.props.Img import Img #quitar
 
 
 DEFAULT_THEME = 'adapta'
 DEFAULT_WINDOW_TITLE = 'RPVDLSE'
-GEOMETRY = '750x750+0+0'
-MINSIZE_WINDOW_X = 750
+GEOMETRY = '1050x750+0+0'
+MINSIZE_WINDOW_X = 1050
 MINSIZE_WINDOW_Y = 750
 
 
@@ -29,7 +30,8 @@ class Gui(ThemedTk):
         self.geometry(GEOMETRY)
         self.minsize(MINSIZE_WINDOW_X, MINSIZE_WINDOW_Y)
         self.title(DEFAULT_WINDOW_TITLE)
-        self.state('zoomed')
+        self.resizable(False, False)
+        #self.state('zoomed') #quitar?
 
         #Menu bar
         self.menubar= GuiMenuBar(self)
@@ -41,9 +43,14 @@ class Gui(ThemedTk):
         #Poner aqui #Frame Results
         self.tab_control.add(self.frame_tab_gallery, text = self.language.galery)
         self.tab_control.add(self.frame_tab_results, text = self.language.results)
-        #tab_control.add(frame_tab_gallery, text ='Tab 1')
         self.tab_control.pack(expand = 1, fill ="both") #!!!!!!!!!!!!!!!!!!!!!! Ver si pack, grid o place
         
+
+        ####tests
+        i = Img("C:/Users/carlo/Downloads/hola2.jpg")
+        list_img = [i, i, i, i]
+        self.frame_tab_gallery.set_images(list_img)
+
         try:
             #Configuration to Windows OS
             windll.shcore.SetProcessDpiAwareness(1)
