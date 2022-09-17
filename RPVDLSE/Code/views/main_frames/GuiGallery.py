@@ -13,7 +13,7 @@ class GuiGallery(ttk.Frame):
     def __init__(self, root):
         super().__init__(root.tab_control)
         #radio_button select var 
-        selected_radio_button = tk.StringVar()
+        self.selected_radio_button = tk.StringVar()
         #gui elements list
         self.btns_imgs = []
         self.l_imgs = []
@@ -54,10 +54,14 @@ class GuiGallery(ttk.Frame):
         filename = os.path.join(path, '../../../media/camera.png')
         self.camera_icon = tk.PhotoImage(file=filename)
 
-        self.btn_back = ttk.Button(frame_up, image=self.back_icon)
-        self.btn_next = ttk.Button(frame_up, image=self.next_icon)
-        self.btn_update = ttk.Button(frame_up, image=self.update_icon)
-        self.btn_camera = ttk.Button(frame_up, image=self.camera_icon)
+        self.btn_back = ttk.Button(frame_up, image=self.back_icon, 
+                                   command = self.click_btn_back)
+        self.btn_next = ttk.Button(frame_up, image=self.next_icon, 
+                                   command = self.click_btn_next)
+        self.btn_update = ttk.Button(frame_up, image=self.update_icon, 
+                                     command = self.click_btn_update)
+        self.btn_camera = ttk.Button(frame_up, image=self.camera_icon, 
+                                     command = self.click_btn_camera)
 
         #Frame RadioButton in Frame Up
         #Layout Management: Place
@@ -67,25 +71,27 @@ class GuiGallery(ttk.Frame):
                                     relheight=1, 
                                     relwidth=0.20)
         
-        rb_internas = ttk.Radiobutton(frame_radio_button_ie, 
+        rb_internals = ttk.Radiobutton(frame_radio_button_ie, 
                                       text=self.language.internals,
                                       value='internal', 
-                                      variable=selected_radio_button,
+                                      variable=self.selected_radio_button,
+                                      command = self.click_rb_internal,
                                       style = "Big.TRadiobutton")
-        rb_externas = ttk.Radiobutton(frame_radio_button_ie, 
+        rb_externals = ttk.Radiobutton(frame_radio_button_ie, 
                                       text=self.language.externals,
-                                      value='external', 
-                                      variable=selected_radio_button,
+                                      value='external',
+                                      command = self.click_rb_external,
+                                      variable=self.selected_radio_button,
                                       style = "Big.TRadiobutton")
-        selected_radio_button.set("internal") #Default option 
+        self.selected_radio_button.set("internal") #Default option 
 
         #Lacation elements(Buttons and Radiobutton in Frame Up and Frame Radio)
         self.btn_back.place(relx=0.05, rely=0.0, relheight=1, relwidth=0.10)
         self.btn_next.place(relx=0.15, rely=0.0, relheight=1, relwidth=0.10)
         self.btn_update.place(relx=0.25, rely=0.0, relheight=1, relwidth=0.10)
         self.btn_camera.place(relx=0.65, rely=0.0, relheight=1, relwidth=0.10)
-        rb_internas.place(relx=0.15, rely=0.00, relheight=0.5, relwidth=0.85)
-        rb_externas.place(relx=0.15, rely=0.5, relheight=0.5, relwidth=0.85)
+        rb_internals.place(relx=0.15, rely=0.00, relheight=0.5, relwidth=0.85)
+        rb_externals.place(relx=0.15, rely=0.5, relheight=0.5, relwidth=0.85)
 
         
         #Frame Center
@@ -195,16 +201,24 @@ class GuiGallery(ttk.Frame):
         frame_down.grid(column=0, row=2, sticky='NEWS')
 
         #Buttons Frame Down: Gallery Images Options
-        btn_open = ttk.Button(frame_down, text=self.language.open)
-        btn_delete = ttk.Button(frame_down, text=self.language.delet)
-        btn_rename = ttk.Button(frame_down, text=self.language.rename)
-        btn_recognize = ttk.Button(frame_down, text=self.language.recognize)
+        btn_open = ttk.Button(frame_down, text=self.language.open, 
+                              command = self.click_btn_open)
+        btn_delete = ttk.Button(frame_down, text=self.language.delet,
+                                command = self.click_btn_delete)
+        btn_rename = ttk.Button(frame_down, text=self.language.rename,
+                                command = self.click_btn_rename)
+        btn_recognize = ttk.Button(frame_down, text=self.language.recognize,
+                                   command = self.click_btn_recognize)
 
         #Lacation elements (Buttons in Frame Down)
-        btn_open.place(relx=0.05, rely=0.0, relheight=1, relwidth=0.1875)
-        btn_delete.place(relx=0.2875, rely=0.0, relheight=1, relwidth=0.1875)
-        btn_rename.place(relx=0.525, rely=0.0, relheight=1, relwidth=0.1875)
-        btn_recognize.place(relx=0.7625, rely=0.0, relheight=1, relwidth=0.1875)
+        btn_open.place(relx=0.05, rely=0.0, relheight=1, 
+                       relwidth=0.1875)
+        btn_delete.place(relx=0.2875, rely=0.0, relheight=1, 
+                         relwidth=0.1875)
+        btn_rename.place(relx=0.525, rely=0.0, relheight=1, 
+                         relwidth=0.1875)
+        btn_recognize.place(relx=0.7625, rely=0.0, relheight=1, 
+                            relwidth=0.1875)
 
     def set_images(self, images: List[Img]):
         i = 0
@@ -236,3 +250,33 @@ class GuiGallery(ttk.Frame):
 
     def enable_btn_next(self):
         self.btn_next.config(state = NORMAL)
+
+    def click_btn_back(self):
+        print("click btn back")
+
+    def click_btn_next(self):
+        print("click btn next")
+    
+    def click_btn_update(self):
+        print("click btn update")
+
+    def click_btn_camera(self):
+        print("click btn camera")
+
+    def click_rb_internal(self):
+        print("internal")
+
+    def click_rb_external(self):
+        print("extenal")
+
+    def click_btn_open(self):
+        print("open")
+
+    def click_btn_delete(self):
+        print("delete")
+
+    def click_btn_rename(self):
+        print("rename")
+
+    def click_btn_recognize(self):
+        print("recognize")
