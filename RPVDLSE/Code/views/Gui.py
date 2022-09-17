@@ -50,6 +50,10 @@ class Gui(ThemedTk):
         i = Img("C:/Users/carlo/Downloads/hola2.jpg")
         list_img = [i, i, i, i]
         self.frame_tab_gallery.set_images(list_img)
+        self.frame_tab_gallery.disabled_btn_back()
+        self.frame_tab_gallery.enable_btn_back()
+        self.frame_tab_gallery.disabled_btn_next()
+        self.frame_tab_gallery.enable_btn_next()
 
         try:
             #Configuration to Windows OS

@@ -54,10 +54,10 @@ class GuiGallery(ttk.Frame):
         filename = os.path.join(path, '../../../media/camera.png')
         self.camera_icon = tk.PhotoImage(file=filename)
 
-        btn_back = ttk.Button(frame_up, image=self.back_icon)
-        btn_next = ttk.Button(frame_up, image=self.next_icon)
-        btn_update = ttk.Button(frame_up, image=self.update_icon)
-        btn_camera = ttk.Button(frame_up, image=self.camera_icon)
+        self.btn_back = ttk.Button(frame_up, image=self.back_icon)
+        self.btn_next = ttk.Button(frame_up, image=self.next_icon)
+        self.btn_update = ttk.Button(frame_up, image=self.update_icon)
+        self.btn_camera = ttk.Button(frame_up, image=self.camera_icon)
 
         #Frame RadioButton in Frame Up
         #Layout Management: Place
@@ -80,10 +80,10 @@ class GuiGallery(ttk.Frame):
         selected_radio_button.set("internal") #Default option 
 
         #Lacation elements(Buttons and Radiobutton in Frame Up and Frame Radio)
-        btn_back.place(relx=0.05, rely=0.0, relheight=1, relwidth=0.10)
-        btn_next.place(relx=0.15, rely=0.0, relheight=1, relwidth=0.10)
-        btn_update.place(relx=0.25, rely=0.0, relheight=1, relwidth=0.10)
-        btn_camera.place(relx=0.65, rely=0.0, relheight=1, relwidth=0.10)
+        self.btn_back.place(relx=0.05, rely=0.0, relheight=1, relwidth=0.10)
+        self.btn_next.place(relx=0.15, rely=0.0, relheight=1, relwidth=0.10)
+        self.btn_update.place(relx=0.25, rely=0.0, relheight=1, relwidth=0.10)
+        self.btn_camera.place(relx=0.65, rely=0.0, relheight=1, relwidth=0.10)
         rb_internas.place(relx=0.15, rely=0.00, relheight=0.5, relwidth=0.85)
         rb_externas.place(relx=0.15, rely=0.5, relheight=0.5, relwidth=0.85)
 
@@ -224,3 +224,15 @@ class GuiGallery(ttk.Frame):
             else:
                 l_img.config(text = "")
             i += 1
+
+    def disabled_btn_back(self):
+        self.btn_back.config(state = DISABLED)
+
+    def enable_btn_back(self):
+        self.btn_back.config(state = NORMAL)
+
+    def disabled_btn_next(self):
+        self.btn_next.config(state = DISABLED)
+
+    def enable_btn_next(self):
+        self.btn_next.config(state = NORMAL)
