@@ -46,14 +46,14 @@ class Gui(ThemedTk):
         self.tab_control.pack(expand = 1, fill ="both") #!!!!!!!!!!!!!!!!!!!!!! Ver si pack, grid o place
         
 
-        ####tests
-        i = Img("C:/Users/carlo/Downloads/hola2.jpg")
-        list_img = [i, i, i, i]
-        self.frame_tab_gallery.set_images(list_img)
-        self.frame_tab_gallery.disabled_btn_back()
-        self.frame_tab_gallery.enable_btn_back()
-        self.frame_tab_gallery.disabled_btn_next()
-        self.frame_tab_gallery.enable_btn_next()
+        #####tests
+        #i = Img("C:/Users/carlo/Downloads/hola2.jpg")
+        #list_img = [i, i, i, i]
+        #self.frame_tab_gallery.set_images(list_img)
+        #self.frame_tab_gallery.disabled_btn_back()
+        #self.frame_tab_gallery.enable_btn_back()
+        #self.frame_tab_gallery.disabled_btn_next()
+        #self.frame_tab_gallery.enable_btn_next()
 
         try:
             #Configuration to Windows OS
