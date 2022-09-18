@@ -4,7 +4,7 @@ from tkinter import DISABLED, NORMAL, ttk
 from typing import List
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
-from Code.props.Img import Img#quitar
+from Code.props.Img import Img
 
 DEFAULT_SIZE_RADIO_BUTTON = 15
 
@@ -12,13 +12,10 @@ class GuiGallery(ttk.Frame):
     def __init__(self, root):
         super().__init__(root.tab_control)
         #radio_button select var 
-        self.selected_radio_button = tk.StringVar()#Se ocupa????
+        self.selected_radio_button = tk.StringVar()
         #gui elements list
         self.btns_imgs = []
         self.l_imgs = []
-        #images
-        self.imgs = []
-        self.select_img = None
         #Language and Messages
         self.root = root
         self.language = Language()
@@ -255,34 +252,28 @@ class GuiGallery(ttk.Frame):
         self.btn_next.config(state = NORMAL)
 
     def click_btn_back(self):
-        print("click btn back")
-        self.select_img = None
+        self.root.appLogic.select_image(-1)
 
     def click_btn_next(self):
-        print("click btn next")
-        self.select_img = None
+        self.root.appLogic.select_image(-1)
     
     def click_btn_update(self):
-        print("click btn update")
-        self.select_img = None
+        self.root.appLogic.select_image(-1)
 
     def click_btn_camera(self):
-        print("click btn camera")
-        self.select_img = None
+        self.root.appLogic.select_image(-1)
 
     def click_rb_internal(self):
-        print("internal")
-        self.select_img = None
+        self.root.appLogic.select_image(-1)
 
     def click_rb_external(self):
-        print("extenal")
-        self.select_img = None
+        self.root.appLogic.select_image(-1)
 
     def click_btn_open(self):
         print("open")
 
     def click_btn_delete(self):
-        print("delete")
+        self.root.appLogic.select_image(-1)
 
     def click_btn_rename(self):
         print("rename")
@@ -291,61 +282,37 @@ class GuiGallery(ttk.Frame):
         print("recognize")
     
     def click_btn_img_1(self):
-        print("btn_img_1")#quit
-        if(len(self.imgs) >= 1):
-            self.select_img = self.imgs[0]
+        self.root.appLogic.select_image(1)
     
     def click_btn_img_2(self):
-        print("btn_img_2")#quit
-        if(len(self.imgs) >= 2):
-            self.select_img = self.imgs[1]
+        self.root.appLogic.select_image(2)
 
     def click_btn_img_3(self):
-        print("btn_img_3")#quit
-        if(len(self.imgs) >= 3):
-            self.select_img = self.imgs[2]
+        self.root.appLogic.select_image(3)
 
     def click_btn_img_4(self):
-        print("btn_img_4")#quit
-        if(len(self.imgs) >= 4):
-            self.select_img = self.imgs[3]
+        self.root.appLogic.select_image(4)
     
     def click_btn_img_5(self):
-        print("btn_img_5")#quit
-        if(len(self.imgs) >= 5):
-            self.select_img = self.imgs[4]
+        self.root.appLogic.select_image(5)
 
     def click_btn_img_6(self):
-        print("btn_img_6")#quit
-        if(len(self.imgs) >= 6):
-            self.select_img = self.imgs[5]
+        self.root.appLogic.select_image(6)
 
     def click_btn_img_7(self):
-        print("btn_img_7")#quit
-        if(len(self.imgs) >= 7):
-            self.select_img = self.imgs[6]
+        self.root.appLogic.select_image(7)
     
     def click_btn_img_8(self):
-        print("btn_img_8")#quit
-        if(len(self.imgs) >= 8):
-            self.select_img = self.imgs[7]
+        self.root.appLogic.select_image(8)
 
     def click_btn_img_9(self):
-        print("btn_img_9")#quit
-        if(len(self.imgs) >= 9):
-            self.select_img = self.imgs[8]
+        self.root.appLogic.select_image(9)
 
     def click_btn_img_10(self):
-        print("btn_img_10")#quit
-        if(len(self.imgs) >= 10):
-            self.select_img = self.imgs[9]
+        self.root.appLogic.select_image(10)
     
     def click_btn_img_11(self):
-        print("btn_img_11")#quit
-        if(len(self.imgs) >= 11):
-            self.select_img = self.imgs[10]
+        self.root.appLogic.select_image(11)
 
     def click_btn_img_12(self):
-        print("btn_img_12")#quit
-        if(len(self.imgs) >= 12):
-            self.select_img = self.imgs[11]
+        self.root.appLogic.select_image(12)

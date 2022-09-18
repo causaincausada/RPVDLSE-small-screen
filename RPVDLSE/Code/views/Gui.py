@@ -67,5 +67,5 @@ class Gui(ThemedTk):
         self.tab_control.pack(expand = 1, fill ="both")
 
     def set_controller(self, appLogic: ApplicationLogic):
-        pass
+        self.appLogic = appLogic
         
