@@ -6,7 +6,7 @@ from Code.views.main_frames.GuiResults import GuiResults
 from Code.views.others.GuiMenuBar import GuiMenuBar
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
-from Code.props.Img import Img #quitar
+from Code.application_logic.ApplicationLogic import ApplicationLogic
 
 
 DEFAULT_THEME = 'adapta'
@@ -45,16 +45,6 @@ class Gui(ThemedTk):
         self.tab_control.add(self.frame_tab_results, text = self.language.results)
         self.tab_control.pack(expand = 1, fill ="both") #!!!!!!!!!!!!!!!!!!!!!! Ver si pack, grid o place
         
-
-        #####tests
-        #i = Img("C:/Users/carlo/Downloads/hola2.jpg")
-        #list_img = [i, i, i, i]
-        #self.frame_tab_gallery.set_images(list_img)
-        #self.frame_tab_gallery.disabled_btn_back()
-        #self.frame_tab_gallery.enable_btn_back()
-        #self.frame_tab_gallery.disabled_btn_next()
-        #self.frame_tab_gallery.enable_btn_next()
-
         try:
             #Configuration to Windows OS
             windll.shcore.SetProcessDpiAwareness(1)
@@ -75,4 +65,7 @@ class Gui(ThemedTk):
         self.tab_control.add(self.frame_tab_gallery, text=self.language.galery)
         self.tab_control.add(self.frame_tab_results, text = self.language.results)
         self.tab_control.pack(expand = 1, fill ="both")
+
+    def set_controller(self, appLogic: ApplicationLogic):
+        pass
         
