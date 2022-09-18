@@ -5,7 +5,6 @@ from typing import List
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
 from Code.props.Img import Img#quitar
-from PIL import Image, ImageTk #quitar
 
 DEFAULT_SIZE_RADIO_BUTTON = 15
 
@@ -13,10 +12,13 @@ class GuiGallery(ttk.Frame):
     def __init__(self, root):
         super().__init__(root.tab_control)
         #radio_button select var 
-        self.selected_radio_button = tk.StringVar()
+        self.selected_radio_button = tk.StringVar()#Se ocupa????
         #gui elements list
         self.btns_imgs = []
         self.l_imgs = []
+        #images
+        self.imgs = []
+        self.select_img = None
         #Language and Messages
         self.root = root
         self.language = Language()
@@ -119,29 +121,29 @@ class GuiGallery(ttk.Frame):
         frame_middle.rowconfigure(5, weight = 1)
 
         #gallery images in buttons
-        btn_img_1 = ttk.Button(frame_middle)
+        btn_img_1 = ttk.Button(frame_middle, command = self.click_btn_img_1)
         self.btns_imgs.append(btn_img_1)
-        btn_img_2 = ttk.Button(frame_middle)
+        btn_img_2 = ttk.Button(frame_middle, command = self.click_btn_img_2)
         self.btns_imgs.append(btn_img_2)
-        btn_img_3 = ttk.Button(frame_middle)
+        btn_img_3 = ttk.Button(frame_middle, command = self.click_btn_img_3)
         self.btns_imgs.append(btn_img_3)
-        btn_img_4 = ttk.Button(frame_middle)
+        btn_img_4 = ttk.Button(frame_middle, command = self.click_btn_img_4)
         self.btns_imgs.append(btn_img_4)
-        btn_img_5 = ttk.Button(frame_middle)
+        btn_img_5 = ttk.Button(frame_middle, command = self.click_btn_img_5)
         self.btns_imgs.append(btn_img_5)
-        btn_img_6 = ttk.Button(frame_middle)
+        btn_img_6 = ttk.Button(frame_middle, command = self.click_btn_img_6)
         self.btns_imgs.append(btn_img_6)
-        btn_img_7 = ttk.Button(frame_middle)
+        btn_img_7 = ttk.Button(frame_middle, command = self.click_btn_img_7)
         self.btns_imgs.append(btn_img_7)
-        btn_img_8 = ttk.Button(frame_middle)
+        btn_img_8 = ttk.Button(frame_middle, command = self.click_btn_img_8)
         self.btns_imgs.append(btn_img_8)
-        btn_img_9 = ttk.Button(frame_middle)
+        btn_img_9 = ttk.Button(frame_middle, command = self.click_btn_img_9)
         self.btns_imgs.append(btn_img_9)
-        btn_img_10 = ttk.Button(frame_middle)
+        btn_img_10 = ttk.Button(frame_middle, command = self.click_btn_img_10)
         self.btns_imgs.append(btn_img_10)
-        btn_img_11 = ttk.Button(frame_middle)
+        btn_img_11 = ttk.Button(frame_middle, command = self.click_btn_img_11)
         self.btns_imgs.append(btn_img_11)
-        btn_img_12 = ttk.Button(frame_middle)
+        btn_img_12 = ttk.Button(frame_middle, command = self.click_btn_img_12)
         self.btns_imgs.append(btn_img_12)
         l_img_1 = ttk.Label(frame_middle, text = "Img 1")
         self.l_imgs.append(l_img_1)
@@ -221,6 +223,7 @@ class GuiGallery(ttk.Frame):
                             relwidth=0.1875)
 
     def set_images(self, images: List[Img]):
+        self.imgs = images
         i = 0
         for self.btn_img in self.btns_imgs:
             if(i < len(images)):
@@ -253,21 +256,27 @@ class GuiGallery(ttk.Frame):
 
     def click_btn_back(self):
         print("click btn back")
+        self.select_img = None
 
     def click_btn_next(self):
         print("click btn next")
+        self.select_img = None
     
     def click_btn_update(self):
         print("click btn update")
+        self.select_img = None
 
     def click_btn_camera(self):
         print("click btn camera")
+        self.select_img = None
 
     def click_rb_internal(self):
         print("internal")
+        self.select_img = None
 
     def click_rb_external(self):
         print("extenal")
+        self.select_img = None
 
     def click_btn_open(self):
         print("open")
@@ -280,3 +289,63 @@ class GuiGallery(ttk.Frame):
 
     def click_btn_recognize(self):
         print("recognize")
+    
+    def click_btn_img_1(self):
+        print("btn_img_1")#quit
+        if(len(self.imgs) >= 1):
+            self.select_img = self.imgs[0]
+    
+    def click_btn_img_2(self):
+        print("btn_img_2")#quit
+        if(len(self.imgs) >= 2):
+            self.select_img = self.imgs[1]
+
+    def click_btn_img_3(self):
+        print("btn_img_3")#quit
+        if(len(self.imgs) >= 3):
+            self.select_img = self.imgs[2]
+
+    def click_btn_img_4(self):
+        print("btn_img_4")#quit
+        if(len(self.imgs) >= 4):
+            self.select_img = self.imgs[3]
+    
+    def click_btn_img_5(self):
+        print("btn_img_5")#quit
+        if(len(self.imgs) >= 5):
+            self.select_img = self.imgs[4]
+
+    def click_btn_img_6(self):
+        print("btn_img_6")#quit
+        if(len(self.imgs) >= 6):
+            self.select_img = self.imgs[5]
+
+    def click_btn_img_7(self):
+        print("btn_img_7")#quit
+        if(len(self.imgs) >= 7):
+            self.select_img = self.imgs[6]
+    
+    def click_btn_img_8(self):
+        print("btn_img_8")#quit
+        if(len(self.imgs) >= 8):
+            self.select_img = self.imgs[7]
+
+    def click_btn_img_9(self):
+        print("btn_img_9")#quit
+        if(len(self.imgs) >= 9):
+            self.select_img = self.imgs[8]
+
+    def click_btn_img_10(self):
+        print("btn_img_10")#quit
+        if(len(self.imgs) >= 10):
+            self.select_img = self.imgs[9]
+    
+    def click_btn_img_11(self):
+        print("btn_img_11")#quit
+        if(len(self.imgs) >= 11):
+            self.select_img = self.imgs[10]
+
+    def click_btn_img_12(self):
+        print("btn_img_12")#quit
+        if(len(self.imgs) >= 12):
+            self.select_img = self.imgs[11]
