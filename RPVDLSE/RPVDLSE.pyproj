@@ -23,7 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Code\application_logic\ApplicationLogic.py" />
     <Compile Include="Code\props\Img.py" />
+    <Compile Include="Code\props\Props.py" />
     <Compile Include="Code\views\Gui.py">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Code\" />
+    <Folder Include="Code\application_logic\" />
     <Folder Include="Code\props\" />
     <Folder Include="Code\views\" />
     <Folder Include="Code\views\main_frames\" />
