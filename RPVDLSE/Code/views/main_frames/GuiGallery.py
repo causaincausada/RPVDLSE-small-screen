@@ -4,7 +4,7 @@ from tkinter import DISABLED, NORMAL, ttk
 from typing import List
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
-from Code.props.Img import Img#quitar
+#from Code.props.Img import Img#quitar
 from PIL import Image, ImageTk #quitar
 
 DEFAULT_SIZE_RADIO_BUTTON = 15
@@ -206,21 +206,21 @@ class GuiGallery(ttk.Frame):
         btn_rename.place(relx=0.525, rely=0.0, relheight=1, relwidth=0.1875)
         btn_recognize.place(relx=0.7625, rely=0.0, relheight=1, relwidth=0.1875)
 
-    def set_images(self, images: List[Img]):
-        i = 0
-        for self.btn_img in self.btns_imgs:
-            if(i < len(images)):
-                self.btn_img.config(state = NORMAL)
-                self.t_image = images[i].python_image
-                self.btn_img.config(image = self.t_image)
-            else:
-                self.btn_img.config(state = DISABLED)
-            i += 1
+    #def set_images(self, images: List[Img]):
+    #    i = 0
+    #    for self.btn_img in self.btns_imgs:
+    #        if(i < len(images)):
+    #            self.btn_img.config(state = NORMAL)
+    #            self.t_image = images[i].python_image
+    #            self.btn_img.config(image = self.t_image)
+    #        else:
+    #            self.btn_img.config(state = DISABLED)
+    #        i += 1
 
-        i = 0
-        for l_img in self.l_imgs:
-            if(i < len(images)):
-                l_img.config(text = images[i].name)
-            else:
-                l_img.config(text = "")
-            i += 1
+    #    i = 0
+    #    for l_img in self.l_imgs:
+    #        if(i < len(images)):
+    #            l_img.config(text = images[i].name)
+    #        else:
+    #            l_img.config(text = "")
+    #        i += 1

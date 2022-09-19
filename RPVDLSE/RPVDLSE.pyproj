@@ -36,6 +36,9 @@
     </Compile>
     <Compile Include="Code\views\others\Language.py" />
     <Compile Include="Code\views\others\Messages.py" />
+    <Compile Include="Code\views\others\GuiCamera.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RPVDLSE.py" />
   </ItemGroup>
   <ItemGroup>

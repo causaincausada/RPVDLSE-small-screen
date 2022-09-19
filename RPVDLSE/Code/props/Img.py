@@ -31,4 +31,4 @@ class Img():
     def rename_image(self, new_name):
         new_file = os.path.join(self.path, new_name + self.extension)
         os.rename(self.path_and_name, new_file) #Catch exception 
-        #Check this error in Windows and linux [WinError 32] El proceso no tiene acceso al archivo porque está siendo utilizado por otro proceso
+        #Check this error in Windows and linux [WinError 32] El proceso no tiene acceso al archivo porque estï¿½ siendo utilizado por otro proceso

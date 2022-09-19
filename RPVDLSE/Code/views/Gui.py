@@ -47,9 +47,9 @@ class Gui(ThemedTk):
         
 
         ####tests
-        i = Img("C:/Users/carlo/Downloads/hola2.jpg")
-        list_img = [i, i, i, i]
-        self.frame_tab_gallery.set_images(list_img)
+        #i = Img("C:/Users/carlo/Downloads/hola2.jpg")
+        #list_img = [i, i, i, i]
+        #self.frame_tab_gallery.set_images(list_img)
 
         try:
             #Configuration to Windows OS
