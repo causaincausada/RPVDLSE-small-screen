@@ -4,6 +4,7 @@ from tkinter import DISABLED, NORMAL, ttk
 from typing import List
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
+from Code.views.others.GuiCamera import GuiCamera
 from Code.props.Img import Img
 
 DEFAULT_SIZE_RADIO_BUTTON = 15
@@ -262,6 +263,11 @@ class GuiGallery(ttk.Frame):
 
     def click_btn_camera(self):
         self.root.appLogic.select_image(-1)
+        self.btn_camera.config(state=DISABLED)
+        self.camera = GuiCamera(self)
+        self.camera.initialize()
+        self.camera.mainloop()
+        
 
     def click_rb_internal(self):
         self.root.appLogic.select_image(-1)

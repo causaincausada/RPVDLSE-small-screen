@@ -9,7 +9,7 @@ from Code.views.others.Messages import Messages
 from Code.application_logic.ApplicationLogic import ApplicationLogic
 
 
-DEFAULT_THEME = 'adapta'
+DEFAULT_THEME = 'plastik'
 DEFAULT_WINDOW_TITLE = 'RPVDLSE'
 GEOMETRY = '1050x750+0+0'
 MINSIZE_WINDOW_X = 1050
