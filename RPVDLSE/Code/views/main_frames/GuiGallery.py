@@ -263,7 +263,7 @@ class GuiGallery(ttk.Frame):
     
     def click_btn_update(self):
         self.root.appLogic.select_image(-1)
-        self.root.appLogic.update()
+        self.root.appLogic.update_gallery()
 
     def click_btn_camera(self):
         self.root.appLogic.select_image(-1)
@@ -276,13 +276,13 @@ class GuiGallery(ttk.Frame):
     def click_rb_internal(self):
         self.root.appLogic.select_image(-1)
         self.root.appLogic.set_int_mode()
-        self.root.appLogic.update()
+        self.root.appLogic.update_gallery()
 
 
     def click_rb_external(self):
         self.root.appLogic.select_image(-1)
         self.root.appLogic.set_ext_mode()
-        self.root.appLogic.update()
+        self.root.appLogic.update_gallery()
 
     def click_btn_open(self):
         print("open")

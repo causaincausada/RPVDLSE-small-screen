@@ -80,7 +80,7 @@ class ApplicationLogic():
     def set_int_mode(self):
         self.status_int_ext = INTERNAL
 
-    def update(self):
+    def update_gallery(self):
         self.lists_imgs = None #List of list // Each list is a page of gallery
         self.page = 0 #Page of gallery
         self.calculate_lists_imgs()#Calculate lists_imgs
