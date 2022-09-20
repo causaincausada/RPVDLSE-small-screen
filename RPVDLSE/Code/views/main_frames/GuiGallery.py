@@ -1,4 +1,6 @@
+from ctypes import sizeof
 import os
+import sys
 import tkinter as tk 
 from tkinter import DISABLED, NORMAL, ttk
 from typing import List
@@ -221,15 +223,14 @@ class GuiGallery(ttk.Frame):
                             relwidth=0.1875)
 
     def set_images(self, images: List[Img]):
-        self.imgs = images
         i = 0
-        for self.btn_img in self.btns_imgs:
+        for btn_img in self.btns_imgs:
             if(i < len(images)):
-                self.btn_img.config(state = NORMAL)
-                self.t_image = images[i].python_image
-                self.btn_img.config(image = self.t_image)
+                btn_img.config(image = images[i].python_image)
+                btn_img.config(state = NORMAL)
             else:
-                self.btn_img.config(state = DISABLED)
+                btn_img.config(image = '')
+                btn_img.config(state = DISABLED)
             i += 1
 
         i = 0
@@ -254,12 +255,15 @@ class GuiGallery(ttk.Frame):
 
     def click_btn_back(self):
         self.root.appLogic.select_image(-1)
+        self.root.appLogic.return_page()
 
     def click_btn_next(self):
         self.root.appLogic.select_image(-1)
+        self.root.appLogic.turn_page()
     
     def click_btn_update(self):
         self.root.appLogic.select_image(-1)
+        self.root.appLogic.update()
 
     def click_btn_camera(self):
         self.root.appLogic.select_image(-1)
@@ -271,9 +275,14 @@ class GuiGallery(ttk.Frame):
 
     def click_rb_internal(self):
         self.root.appLogic.select_image(-1)
+        self.root.appLogic.set_int_mode()
+        self.root.appLogic.update()
+
 
     def click_rb_external(self):
         self.root.appLogic.select_image(-1)
+        self.root.appLogic.set_ext_mode()
+        self.root.appLogic.update()
 
     def click_btn_open(self):
         print("open")

@@ -2,7 +2,7 @@ import os
 from PIL import Image, ImageTk
 
 
-MAX_SIZE = (200, 200)
+MAX_SIZE = (160, 160)
 
 
 class Img():
