@@ -2,11 +2,14 @@ import os
 from PIL import Image, ImageTk
 
 
-MAX_SIZE = (160, 160)
+MAX_SIZE_INT = (160, 160)
+MAX_SIZE_EXT = (215, 150)
+INTERNAL = 0
+EXTERNAL = 1
 
 
 class Img():
-    def __init__(self, image_path):
+    def __init__(self, image_path, int_or_ext):
         super().__init__()
         
         self.path_and_name = image_path
@@ -17,7 +20,12 @@ class Img():
         temp_image = Image.open(image_path)
         self.image = temp_image.copy()
         temp_image.close()
-        self.image.thumbnail(MAX_SIZE) 
+        
+        if(int_or_ext == INTERNAL):
+            self.image.thumbnail(MAX_SIZE_INT)
+        else:
+            self.image = self.image.resize(MAX_SIZE_EXT)
+        
         self.python_image = ImageTk.PhotoImage(self.image)
         self.height = self.image.height
         self.width = self.image.width

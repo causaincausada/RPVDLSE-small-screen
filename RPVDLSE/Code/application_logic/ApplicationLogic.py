@@ -1,6 +1,5 @@
 from Code.props.Props import Props
 from Code.props.Img import Img
-from tkinter import DISABLED, NORMAL
 
 
 INTERNAL = 0
@@ -59,8 +58,7 @@ class ApplicationLogic():
         self.imgs_tk.clear()
         if(len(self.lists_imgs) > 0):
             for img in self.lists_imgs[self.page]:
-                self.imgs_tk.append(Img(img))
-
+                self.imgs_tk.append(Img(img, self.status_int_ext))
 
     def status_next_back_btn(self):
         if(self.page == 0):
@@ -89,6 +87,9 @@ class ApplicationLogic():
     def repaint(self):
         self.set_images_gui()
         self.status_next_back_btn()
+
+    def get_empty_img(self):
+        return self.props.get_empty(self.status_int_ext)
 
     #Results methods
 

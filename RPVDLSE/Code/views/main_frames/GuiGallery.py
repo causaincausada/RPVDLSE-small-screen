@@ -1,7 +1,6 @@
-from ctypes import sizeof
 import os
-import sys
 import tkinter as tk 
+from PIL import ImageTk
 from tkinter import DISABLED, NORMAL, ttk
 from typing import List
 from Code.views.others.Language import Language
@@ -10,6 +9,7 @@ from Code.views.others.GuiCamera import GuiCamera
 from Code.props.Img import Img
 
 DEFAULT_SIZE_RADIO_BUTTON = 15
+NUM_IMGS_GALLERY = 12
 
 class GuiGallery(ttk.Frame):
     def __init__(self, root):
@@ -42,7 +42,7 @@ class GuiGallery(ttk.Frame):
         #Frame Up
         #Layout Management: Place
         frame_up = ttk.Frame(self)
-        frame_up.grid(column=0, row=0, sticky='NEWS')
+        frame_up.grid(column=0, row=0, sticky='NEWS', pady = 6)
 
         #Buttons Frame Up: Control of Gallery
         path = os.path.dirname(__file__)
@@ -71,7 +71,8 @@ class GuiGallery(ttk.Frame):
         frame_radio_button_ie.place(relx=0.75, 
                                     rely=0.0, 
                                     relheight=1, 
-                                    relwidth=0.20)
+                                    relwidth=0.20
+                                    )
         
         rb_internals = ttk.Radiobutton(frame_radio_button_ie, 
                                       text=self.language.internals,
@@ -171,18 +172,18 @@ class GuiGallery(ttk.Frame):
         self.l_imgs.append(l_img_12)
         
         #Lacation elements (Buttons (images) and in Frame middle)
-        btn_img_1.grid(column = 0, row = 0, sticky='NEWS')
-        btn_img_2.grid(column = 1, row = 0, sticky='NEWS')
-        btn_img_3.grid(column = 2, row = 0, sticky='NEWS')
-        btn_img_4.grid(column = 3, row = 0, sticky='NEWS')
-        btn_img_5.grid(column = 0, row = 2, sticky='NEWS')
-        btn_img_6.grid(column = 1, row = 2, sticky='NEWS')
-        btn_img_7.grid(column = 2, row = 2, sticky='NEWS')
-        btn_img_8.grid(column = 3, row = 2, sticky='NEWS')
-        btn_img_9.grid(column = 0, row = 4, sticky='NEWS')
-        btn_img_10.grid(column = 1, row = 4, sticky='NEWS')
-        btn_img_11.grid(column = 2, row = 4, sticky='NEWS')
-        btn_img_12.grid(column = 3, row = 4, sticky='NEWS')
+        btn_img_1.grid(column = 0, row = 0, sticky='NEWS', padx = 5)
+        btn_img_2.grid(column = 1, row = 0, sticky='NEWS', padx = 5)
+        btn_img_3.grid(column = 2, row = 0, sticky='NEWS', padx = 5)
+        btn_img_4.grid(column = 3, row = 0, sticky='NEWS', padx = 5)
+        btn_img_5.grid(column = 0, row = 2, sticky='NEWS', padx = 5)
+        btn_img_6.grid(column = 1, row = 2, sticky='NEWS', padx = 5)
+        btn_img_7.grid(column = 2, row = 2, sticky='NEWS', padx = 5)
+        btn_img_8.grid(column = 3, row = 2, sticky='NEWS', padx = 5)
+        btn_img_9.grid(column = 0, row = 4, sticky='NEWS', padx = 5)
+        btn_img_10.grid(column = 1, row = 4, sticky='NEWS', padx = 5)
+        btn_img_11.grid(column = 2, row = 4, sticky='NEWS', padx = 5)
+        btn_img_12.grid(column = 3, row = 4, sticky='NEWS', padx = 5)
         l_img_1.grid(column = 0, row = 1)
         l_img_2.grid(column = 1, row = 1)
         l_img_3.grid(column = 2, row = 1)
@@ -200,7 +201,7 @@ class GuiGallery(ttk.Frame):
         #Layout Management: Place
         frame_down = ttk.Frame(self)
         #Location (Frame Down in Gallery Frame)
-        frame_down.grid(column=0, row=2, sticky='NEWS')
+        frame_down.grid(column=0, row=2, sticky='NEWS', pady=6)
 
         #Buttons Frame Down: Gallery Images Options
         btn_open = ttk.Button(frame_down, text=self.language.open, 
@@ -223,19 +224,27 @@ class GuiGallery(ttk.Frame):
                             relwidth=0.1875)
 
     def set_images(self, images: List[Img]):
+        self.empty_imgs = []
+        num_imgs = len(images)
+        num_imgs_empty = NUM_IMGS_GALLERY - num_imgs
+        for _ in range(num_imgs_empty):
+            self.empty_imgs.append(ImageTk.PhotoImage(
+                self.root.appLogic.get_empty_img()))
+        
         i = 0
         for btn_img in self.btns_imgs:
-            if(i < len(images)):
+            if(i < num_imgs):
                 btn_img.config(image = images[i].python_image)
                 btn_img.config(state = NORMAL)
             else:
-                btn_img.config(image = '')
+                self.empty_img = self.empty_imgs[num_imgs - i]
+                btn_img.config(image = self.empty_img)
                 btn_img.config(state = DISABLED)
             i += 1
 
         i = 0
         for l_img in self.l_imgs:
-            if(i < len(images)):
+            if(i < num_imgs):
                 l_img.config(text = images[i].name)
             else:
                 l_img.config(text = "")
