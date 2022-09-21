@@ -1,4 +1,5 @@
 import os
+import cv2
 from PIL import Image, ImageTk
 
 
@@ -31,7 +32,8 @@ class Img():
         self.width = self.image.width
 
     def open_image(self):
-        self.image.show()
+        t_img = cv2.imread(self.path_and_name)
+        cv2.imshow(self.name, t_img)
 
     def delete_image(self):
         os.remove(self.path_and_name) #Catch exception

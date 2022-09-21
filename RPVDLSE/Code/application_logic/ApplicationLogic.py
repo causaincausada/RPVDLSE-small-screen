@@ -91,6 +91,13 @@ class ApplicationLogic():
     def get_empty_img(self):
         return self.props.get_empty(self.status_int_ext)
 
+    def open_select_img(self):
+        if(self.select_img != None):
+            self.select_img.open_image()
+        else:
+            print("Mensaje alert, falta poner")
+            pass #Mensaje "selecionnar imagen"
+
     #Results methods
 
     #other methods

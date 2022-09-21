@@ -294,7 +294,7 @@ class GuiGallery(ttk.Frame):
         self.root.appLogic.update_gallery()
 
     def click_btn_open(self):
-        print("open")
+        self.root.appLogic.open_select_img()
 
     def click_btn_delete(self):
         self.root.appLogic.select_image(-1)
