@@ -6,6 +6,7 @@ from Code.views.main_frames.GuiResults import GuiResults
 from Code.views.others.GuiMenuBar import GuiMenuBar
 from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
+from Code.views.others.Result import Result
 from Code.application_logic.ApplicationLogic import ApplicationLogic
 
 

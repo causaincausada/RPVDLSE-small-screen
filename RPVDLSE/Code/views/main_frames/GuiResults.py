@@ -8,7 +8,6 @@ from Code.views.others.Language import Language
 from Code.views.others.Messages import Messages
 from Code.views.others.Result import Result
 
-
 class GuiResults(ttk.Frame):
     def __init__(self, root):
         super().__init__(root.tab_control)

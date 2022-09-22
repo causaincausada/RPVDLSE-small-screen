@@ -4,7 +4,8 @@ class Result():
         self.date = date
         self.hour = hour
         self.result = result
-    def crear_results():
+
+    def crear_results(self):
         array_results = []
         for i in range(15):
             result = Result("img.jpg", "17/07/2022", "13:00", "ABC123")
