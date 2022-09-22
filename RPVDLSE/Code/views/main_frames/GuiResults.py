@@ -1,8 +1,5 @@
-from array import array
-from msilib import Table
 import tkinter as tk
 from tkinter import ttk
-from tracemalloc import Statistic
 from tkcalendar import DateEntry 
 from Code.views.others.language import Language
 from Code.views.others.messages import Messages
@@ -98,12 +95,12 @@ class GuiResults(ttk.Frame):
         #Frame results table
         self.frame_results = ttk.Frame(self)
         self.frame_results.columnconfigure(0, weight=1)
-        self.frame_results.columnconfigure(1, weight=10)
+        self.frame_results.rowconfigure(0, weight=1)
         table_results = ttk.Treeview(self.frame_results, selectmode='browse')
-        table_results.grid(column=0, row=0, sticky="news")
+        table_results.grid(column=0, row=0, sticky="news", pady=20, padx=20)
 
-        scrollbar_table_results = ttk.Scrollbar(self.frame_results, orient="vertical", command=table_results)
-        scrollbar_table_results.grid(column=1, row=0, sticky="news")
+        scrollbar_table_results = ttk.Scrollbar(self.frame_results, orient="vertical", command=table_results.yview)
+        scrollbar_table_results.grid(column=0, row=0, sticky="nes", pady=20, padx=20)
 
         table_results.configure(yscrollcommand=scrollbar_table_results.set)
 

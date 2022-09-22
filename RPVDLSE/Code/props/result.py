@@ -7,7 +7,7 @@ class Result():
 
     def crear_results(self):
         array_results = []
-        for i in range(15):
+        for i in range(100):
             name = "img{}.jpg".format(i)
             result = Result(name, "17/07/2022", "13:00", "ABC123")
             array_results.append(result)       
