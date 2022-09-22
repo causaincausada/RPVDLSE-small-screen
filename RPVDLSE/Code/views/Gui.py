@@ -41,7 +41,7 @@ class Gui(ThemedTk):
         self.frame_tab_gallery = GuiGallery(self) #Frame gallery
         self.frame_tab_results = GuiResults(self) #Frame results
         #Poner aqui #Frame Results
-        self.tab_control.add(self.frame_tab_gallery, text = self.language.galery)
+        self.tab_control.add(self.frame_tab_gallery, text = self.language.gallery)
         self.tab_control.add(self.frame_tab_results, text = self.language.results)
         self.tab_control.pack(expand = 1, fill ="both") #!!!!!!!!!!!!!!!!!!!!!! Ver si pack, grid o place
         
@@ -62,7 +62,7 @@ class Gui(ThemedTk):
         self.tab_control = ttk.Notebook(self)
         self.frame_tab_gallery= GuiGallery(self)
         self.frame_tab_results = GuiResults(self)
-        self.tab_control.add(self.frame_tab_gallery, text=self.language.galery)
+        self.tab_control.add(self.frame_tab_gallery, text=self.language.gallery)
         self.tab_control.add(self.frame_tab_results, text = self.language.results)
         self.tab_control.pack(expand = 1, fill ="both")
 

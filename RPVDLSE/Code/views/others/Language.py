@@ -3,7 +3,7 @@ class Language():
         # Spanish Language default
         # words and texts in the tabs
         self.results = "Resultados"
-        self.galery = "Galería"
+        self.gallery = "Galería"
 
         # words and texts in the menu bar
         self.menubar_results_label = 'Resultados'
@@ -26,7 +26,7 @@ class Language():
 
         # words and texts in the result window
         self.result = "Resultado"
-        self.filters_title = "Filtros para los resultados"
+        self.filters_title = "Filtros de búsqueda"
         self.date = "Fecha"
         self.hour = "Hora"
         self.begin = "Inicio"
@@ -34,8 +34,12 @@ class Language():
         self.name = "Nombre"
         self.name_image = "Nombre de la imagen"
         self.num_results = "Núm resultados"
-        self.plate_result = "Placa\n(Resultados de el analisis)"
-            
+        self.plate = "Placa" 
+        self.plate_results = "(Resultados de el analisis)"
+        
+        # words ant texts in the camara module
+        self.title_camera = "Camara"
+        
         # Messages Alerts
         # Messages Backup
         self.message_confirm_backup_title = "Confirmación de respaldo"
@@ -59,7 +63,7 @@ class Language():
             # English Lenguage
             # words and texts in the tabs
             self.results = "Results"
-            self.galery = "Galery"
+            self.gallery = "Gallery"
 
             # words and texts in the menu bar
             self.menubar_results_label = 'Results'
@@ -82,7 +86,7 @@ class Language():
 
             # words and texts in the result window
             self.result = "Result"
-            self.filters_title = "Filters for the results"
+            self.filters_title = "Search filters"
             self.date = "Date"
             self.hour = "Hour"
             self.begin = "Begin"
@@ -90,7 +94,11 @@ class Language():
             self.name = "Name"
             self.name_image = "Image name"
             self.num_results = "Num of results"
-            self.plate_result = "Plate\n(Analysts results)"
+            self.plate = "Plate" 
+            self.plate_results = "(Analysts results)"
+            
+            # words ant texts in the camara module
+            self.title_camera = "Camera"
 
             # Messages Alerts
             # Messages Backup
@@ -113,7 +121,7 @@ class Language():
             # Spanish Language
             # words and texts in the tabs
             self.results = "Resultados"
-            self.galery = "Galería"
+            self.gallery = "Galería"
 
             # words and texts in the menu bar
             self.menubar_results_label = 'Resultados'
@@ -136,7 +144,7 @@ class Language():
 
             # words and texts in the result window
             self.result = "Resultado"
-            self.filters_title = "Filtros para los resultados"
+            self.filters_title = "Filtros de búsqueda"
             self.date = "Fecha"
             self.hour = "Hora"
             self.begin = "Inicio"
@@ -144,7 +152,11 @@ class Language():
             self.name = "Nombre"
             self.name_image = "Nombre de la imagen"
             self.num_results = "Núm resultados"
-            self.plate_result = "Placa\n(Resultados de el analisis)"
+            self.plate = "Placa" 
+            self.plate_results = "(Resultados de el analisis)"
+            
+            # words ant texts in the camara module
+            self.title_camera = "Camara"
             
             # Messages Alerts
             # Messages Backup
