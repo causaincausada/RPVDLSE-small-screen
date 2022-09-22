@@ -1,6 +1,6 @@
-from Code.views.Gui import Gui
-from Code.props.Props import Props
-from Code.application_logic.ApplicationLogic import ApplicationLogic
+from Code.views.gui import Gui
+from Code.props.props import Props
+from Code.application_logic.applicationLogic import ApplicationLogic
 
 
 class RPVDLSE():

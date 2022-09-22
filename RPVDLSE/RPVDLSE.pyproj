@@ -23,23 +23,23 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Code\application_logic\ApplicationLogic.py" />
-    <Compile Include="Code\props\Img.py" />
-    <Compile Include="Code\props\Props.py" />
-    <Compile Include="Code\views\Gui.py">
+    <Compile Include="Code\application_logic\applicationLogic.py" />
+    <Compile Include="Code\props\img.py" />
+    <Compile Include="Code\props\props.py" />
+    <Compile Include="Code\views\gui.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Code\views\main_frames\GuiGallery.py">
+    <Compile Include="Code\views\main_frames\guiGallery.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Code\views\main_frames\GuiResults.py" />
-    <Compile Include="Code\views\others\Result.py" />
-    <Compile Include="Code\views\others\GuiMenuBar.py">
+    <Compile Include="Code\views\main_frames\guiResults.py" />
+    <Compile Include="Code\views\others\result.py" />
+    <Compile Include="Code\views\others\guiMenuBar.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Code\views\others\Language.py" />
-    <Compile Include="Code\views\others\Messages.py" />
-    <Compile Include="Code\views\others\GuiCamera.py">
+    <Compile Include="Code\views\others\language.py" />
+    <Compile Include="Code\views\others\messages.py" />
+    <Compile Include="Code\views\others\guiCamera.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RPVDLSE.py" />
