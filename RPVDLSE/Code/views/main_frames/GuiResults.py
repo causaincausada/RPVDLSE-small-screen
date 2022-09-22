@@ -6,7 +6,7 @@ from tracemalloc import Statistic
 from tkcalendar import DateEntry 
 from Code.views.others.language import Language
 from Code.views.others.messages import Messages
-from Code.views.others.result import Result
+from Code.props.result import Result
 
 class GuiResults(ttk.Frame):
     def __init__(self, root):

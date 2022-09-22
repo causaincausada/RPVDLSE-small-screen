@@ -12,6 +12,3 @@ class Result():
             result = Result(name, "17/07/2022", "13:00", "ABC123")
             array_results.append(result)       
         return array_results
-
-
-
