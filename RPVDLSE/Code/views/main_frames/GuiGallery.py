@@ -10,6 +10,7 @@ from Code.props.Img import Img
 
 DEFAULT_SIZE_RADIO_BUTTON = 15
 NUM_IMGS_GALLERY = 12
+NO_SELECT = -1
 
 class GuiGallery(ttk.Frame):
     def __init__(self, root):
@@ -204,23 +205,23 @@ class GuiGallery(ttk.Frame):
         frame_down.grid(column=0, row=2, sticky='NEWS', pady=6)
 
         #Buttons Frame Down: Gallery Images Options
-        btn_open = ttk.Button(frame_down, text=self.language.open, 
+        self.btn_open = ttk.Button(frame_down, text=self.language.open, 
                               command = self.click_btn_open)
-        btn_delete = ttk.Button(frame_down, text=self.language.delet,
+        self.btn_delete = ttk.Button(frame_down, text=self.language.delet,
                                 command = self.click_btn_delete)
-        btn_rename = ttk.Button(frame_down, text=self.language.rename,
+        self.btn_rename = ttk.Button(frame_down, text=self.language.rename,
                                 command = self.click_btn_rename)
-        btn_recognize = ttk.Button(frame_down, text=self.language.recognize,
+        self.btn_recognize = ttk.Button(frame_down, text=self.language.recognize,
                                    command = self.click_btn_recognize)
 
         #Lacation elements (Buttons in Frame Down)
-        btn_open.place(relx=0.05, rely=0.0, relheight=1, 
+        self.btn_open.place(relx=0.05, rely=0.0, relheight=1, 
                        relwidth=0.1875)
-        btn_delete.place(relx=0.2875, rely=0.0, relheight=1, 
+        self.btn_delete.place(relx=0.2875, rely=0.0, relheight=1, 
                          relwidth=0.1875)
-        btn_rename.place(relx=0.525, rely=0.0, relheight=1, 
+        self.btn_rename.place(relx=0.525, rely=0.0, relheight=1, 
                          relwidth=0.1875)
-        btn_recognize.place(relx=0.7625, rely=0.0, relheight=1, 
+        self.btn_recognize.place(relx=0.7625, rely=0.0, relheight=1, 
                             relwidth=0.1875)
 
     def set_images(self, images: List[Img]):
@@ -262,20 +263,44 @@ class GuiGallery(ttk.Frame):
     def enable_btn_next(self):
         self.btn_next.config(state = NORMAL)
 
+    def disabled_btn_open(self):
+       self.btn_open.config(state = DISABLED)
+
+    def enable_btn_open(self):
+        self.btn_open.config(state = NORMAL)
+
+    def disabled_btn_delete(self):
+        self.btn_delete.config(state = DISABLED)
+
+    def enable_btn_delete(self):
+        self.btn_delete.config(state=NORMAL)
+
+    def disabled_btn_rename(self):
+        self.btn_rename.config(state=DISABLED)
+
+    def enable_btn_rename(self):
+        self.btn_rename.config(state=NORMAL)
+
+    def disabled_btn_recognize(self):
+        self.btn_recognize.config(state=DISABLED)
+
+    def enable_btn_recognize(self):
+        self.btn_recognize.config(state=NORMAL)
+
     def click_btn_back(self):
-        self.root.appLogic.select_image(-1)
+        self.root.appLogic.select_image(NO_SELECT)
         self.root.appLogic.return_page()
 
     def click_btn_next(self):
-        self.root.appLogic.select_image(-1)
+        self.root.appLogic.select_image(NO_SELECT)
         self.root.appLogic.turn_page()
     
     def click_btn_update(self):
-        self.root.appLogic.select_image(-1)
+        self.root.appLogic.select_image(NO_SELECT)
         self.root.appLogic.update_gallery()
 
     def click_btn_camera(self):
-        self.root.appLogic.select_image(-1)
+        self.root.appLogic.select_image(NO_SELECT)
         self.btn_camera.config(state=DISABLED)
         self.camera = GuiCamera(self)
         self.camera.initialize()
@@ -283,13 +308,13 @@ class GuiGallery(ttk.Frame):
         
 
     def click_rb_internal(self):
-        self.root.appLogic.select_image(-1)
+        self.root.appLogic.select_image(NO_SELECT)
         self.root.appLogic.set_int_mode()
         self.root.appLogic.update_gallery()
 
 
     def click_rb_external(self):
-        self.root.appLogic.select_image(-1)
+        self.root.appLogic.select_image(NO_SELECT)
         self.root.appLogic.set_ext_mode()
         self.root.appLogic.update_gallery()
 
@@ -297,10 +322,21 @@ class GuiGallery(ttk.Frame):
         self.root.appLogic.open_select_img()
 
     def click_btn_delete(self):
-        self.root.appLogic.select_image(-1)
+        name = self.root.appLogic.get_name_select_img()
+        delete = self.root.messages.ask_confirm_delete(name)
+        if(delete):
+            page = self.root.appLogic.page
+            self.root.appLogic.delete_img_select()
+            self.root.appLogic.update_gallery_page(page)
+            self.root.appLogic.select_image(NO_SELECT)
 
     def click_btn_rename(self):
-        print("rename")
+        new_name = self.root.messages.rename()
+        if new_name is not None:
+            self.root.appLogic.change_name_select_img(new_name)
+            page = self.root.appLogic.page
+            self.root.appLogic.update_gallery_page(page)
+            self.root.appLogic.select_image(NO_SELECT)
 
     def click_btn_recognize(self):
         print("recognize")

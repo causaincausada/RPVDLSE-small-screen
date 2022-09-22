@@ -1,4 +1,5 @@
 import tkinter.messagebox
+import tkinter.simpledialog
 from Code.views.others.Language import Language
 
 
@@ -28,3 +29,9 @@ class Messages():
 
     def message_Error_restore(self):
         tkinter.messagebox.showerror(self.language.Message_error_restore_title, self.language.Message_error_restore_text)
+
+    def ask_confirm_delete(self, name):
+        return tkinter.messagebox.askyesno(self.language.message_confirm_delete_img_title, self.language.message_confirm_delete_img.format(name))
+
+    def rename(self):
+        return tkinter.simpledialog.askstring(self.language.message_rename_title, self.language.message_rename)

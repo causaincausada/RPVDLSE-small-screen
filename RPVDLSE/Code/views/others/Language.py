@@ -41,13 +41,19 @@ class Language():
         self.title_camera = "Camara"
         
         # Messages Alerts
+        #Delete image
+        self.message_confirm_delete_img = "¿Desea eliminar la imagen: {}?"
+        self.message_confirm_delete_img_title = "Eliminar imagen"
+        #Rename image
+        self.message_rename = "Introduce un nuevo nombre para la imagen. (Solo letras y números)."
+        self.message_rename_title = "Renombrar imagen"
         # Messages Backup
         self.message_confirm_backup_title = "Confirmación de respaldo"
         self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
         self.message_error_backup_title = "Error al realizar respaldo"
         self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el respaldo de los resultados.\n\nVuelva intentar, si el problema persiste restaure el archivo\n resulrados, desde el menú Resultados en la barra de nenú"
         self.ask_confirm_backup_title = "Confirmación respaldar"
-        self.ask_confirm_backup_text1 = "¿Desa respaldar el estado actual de resultados?\nResutlados:"
+        self.ask_confirm_backup_text1 = "¿Desea respaldar el estado actual de resultados?\nResutlados:"
         self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de *ResManualResultadosAAMMDD_hh-mm-ss.txt"
 
         # Messages Restore
@@ -101,6 +107,12 @@ class Language():
             self.title_camera = "Camera"
 
             # Messages Alerts
+            #Delete image
+            self.message_confirm_delete_img = "Do you want to delete the image: {}?"
+            self.message_confirm_delete_img_title = "Delete image"
+            #Rename image
+            self.message_rename = "Enter a new name for the image. (Only letters and numbers)."
+            self.message_rename_title = "Rename image"
             # Messages Backup
             self.message_confirm_backup_title = "Confirmación de respaldo"
             self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"

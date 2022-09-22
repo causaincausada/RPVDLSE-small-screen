@@ -24,15 +24,20 @@ class ApplicationLogic():
         self.calculate_lists_imgs()#Calculate lists_imgs
         self.set_images_gui()
         self.status_next_back_btn()
+        self.disabled_bottom_btns()
     
     #Gallery methods
     def select_image(self, img_num: int):
         if(img_num == -1):
             self.select_img = None
+            self.disabled_bottom_btns()
         elif(len(self.imgs_tk) >= img_num):
             self.select_img = self.imgs_tk[img_num-1]
+            self.enable_bottom_btns()
         else:
             self.select_img = None
+            self.disabled_bottom_btns()
+            print("Error") #catch error / no deberia pasar
 
     def turn_page(self):
         self.page += 1
@@ -56,6 +61,9 @@ class ApplicationLogic():
     
     def list_tk(self):
         self.imgs_tk.clear()
+        if(self.page > (len(self.lists_imgs) - 1)):#Delete last image in page
+                self.page = len(self.lists_imgs) - 1
+
         if(len(self.lists_imgs) > 0):
             for img in self.lists_imgs[self.page]:
                 self.imgs_tk.append(Img(img, self.status_int_ext))
@@ -97,6 +105,33 @@ class ApplicationLogic():
         else:
             print("Mensaje alert, falta poner")
             pass #Mensaje "selecionnar imagen"
+
+    def disabled_bottom_btns(self):
+        self.gui.frame_tab_gallery.disabled_btn_open()
+        self.gui.frame_tab_gallery.disabled_btn_delete()
+        self.gui.frame_tab_gallery.disabled_btn_rename()
+        self.gui.frame_tab_gallery.disabled_btn_recognize()
+
+    def enable_bottom_btns(self):
+        self.gui.frame_tab_gallery.enable_btn_open()
+        self.gui.frame_tab_gallery.enable_btn_delete()
+        self.gui.frame_tab_gallery.enable_btn_rename()
+        self.gui.frame_tab_gallery.enable_btn_recognize()
+
+    def delete_img_select(self):
+        self.select_img.delete_image()
+
+    def update_gallery_page(self, page):
+        self.lists_imgs = None #List of list // Each list is a page of gallery
+        self.page = page #Page of gallery
+        self.calculate_lists_imgs()#Calculate lists_imgs
+        self.repaint()
+
+    def get_name_select_img(self):
+        return self.select_img.name
+
+    def change_name_select_img(self, new_name):
+        self.select_img.rename_image(new_name)
 
     #Results methods
 
