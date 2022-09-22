@@ -1,5 +1,5 @@
-from Code.props.Props import Props
-from Code.props.Img import Img
+from Code.props.props import Props
+from Code.props.img import Img
 
 
 INTERNAL = 0
