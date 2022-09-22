@@ -4,9 +4,9 @@ import tkinter as tk
 from tkinter import ttk
 from tracemalloc import Statistic
 from tkcalendar import DateEntry 
-from Code.views.others.Language import Language
-from Code.views.others.Messages import Messages
-from Code.views.others.Result import Result
+from Code.views.others.language import Language
+from Code.views.others.messages import Messages
+from Code.views.others.result import Result
 
 class GuiResults(ttk.Frame):
     def __init__(self, root):

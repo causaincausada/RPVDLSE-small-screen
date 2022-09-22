@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import Menu
-from Code.views.others.Language import Language
-from Code.views.others.Messages import Messages
+from Code.views.others.language import Language
+from Code.views.others.messages import Messages
 
 
 class GuiMenuBar(Menu):

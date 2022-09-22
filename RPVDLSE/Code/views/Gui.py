@@ -1,13 +1,12 @@
 from tkinter import ttk
 from ttkthemes import ThemedTk
 from ctypes import windll
-from Code.views.main_frames.GuiGallery import GuiGallery
-from Code.views.main_frames.GuiResults import GuiResults
-from Code.views.others.GuiMenuBar import GuiMenuBar
-from Code.views.others.Language import Language
-from Code.views.others.Messages import Messages
-from Code.views.others.Result import Result
-from Code.application_logic.ApplicationLogic import ApplicationLogic
+from Code.views.main_frames.guiGallery import GuiGallery
+from Code.views.main_frames.guiResults import GuiResults
+from Code.views.others.guiMenuBar import GuiMenuBar
+from Code.views.others.language import Language
+from Code.views.others.messages import Messages
+from Code.application_logic.applicationLogic import ApplicationLogic
 
 
 DEFAULT_THEME = 'plastik'

@@ -1,6 +1,6 @@
 import tkinter.messagebox
 import tkinter.simpledialog
-from Code.views.others.Language import Language
+from Code.views.others.language import language
 
 
 class Messages():

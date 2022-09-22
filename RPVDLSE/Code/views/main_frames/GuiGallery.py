@@ -3,10 +3,10 @@ import tkinter as tk
 from PIL import ImageTk
 from tkinter import DISABLED, NORMAL, ttk
 from typing import List
-from Code.views.others.Language import Language
-from Code.views.others.Messages import Messages
-from Code.views.others.GuiCamera import GuiCamera
-from Code.props.Img import Img
+from Code.views.others.language import Language
+from Code.views.others.messages import Messages
+from Code.views.others.guiCamera import GuiCamera
+from Code.props.img import Img
 
 DEFAULT_SIZE_RADIO_BUTTON = 15
 NUM_IMGS_GALLERY = 12
