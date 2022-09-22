@@ -33,7 +33,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\views\main_frames\guiResults.py" />
-    <Compile Include="Code\views\others\result.py" />
+    <Compile Include="Code\props\result.py" />
     <Compile Include="Code\views\others\guiMenuBar.py">
       <SubType>Code</SubType>
     </Compile>
