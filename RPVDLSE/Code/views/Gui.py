@@ -65,6 +65,7 @@ class Gui(ThemedTk):
         self.tab_control.add(self.frame_tab_gallery, text=self.language.gallery)
         self.tab_control.add(self.frame_tab_results, text = self.language.results)
         self.tab_control.pack(expand = 1, fill ="both")
+        self.appLogic.update_gallery()
 
     def set_controller(self, appLogic: ApplicationLogic):
         self.appLogic = appLogic
