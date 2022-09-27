@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 from tkinter import DISABLED, NORMAL, ttk
 from PIL import Image, ImageTk
-
+from Code.views.others.messages import Messages
 
 class GuiCamera(tk.Toplevel):
     def __init__(self, root, master=None):
@@ -15,34 +15,40 @@ class GuiCamera(tk.Toplevel):
         self.root = root
         self.protocol("WM_DELETE_WINDOW", self.click_button_back)
         self.resizable(False, False)
+        self.messages = Messages(root.root.numlanguage)
     def initialize(self):
         global cap
-        cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-        # frame to camera
-        self.title = "Camera"# add to pack language
-        self.cam_video = tk.Label(self)
-        self.cam_video.grid(column=0, row= 0, columnspan=3)
+        cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            self.messages.message_error_camera()
+            self.click_button_back()
+        else:
+            #frame to camera
+            self.title = "Camera"# add to pack language
+            self.cam_video = tk.Label(self)
+            self.cam_video.grid(column=0, row= 0, columnspan=3)
 
-        # button snapshot
-        path = os.path.dirname(__file__)
-        filename = os.path.join(path, '../../../media/camera.png')
-        self.img_cam = tk.PhotoImage(file=filename)
-        self.button_snapshot = tk.Button(self, image=self.img_cam, command=self.click_button_snapshot)
-        self.button_snapshot.image = self.img_cam
-        self.button_snapshot.grid(column=0, row= 1, columnspan=3, padx = 15, pady = 5)
-        
+            # button snapshot
+            path = os.path.dirname(__file__)
+            filename = os.path.join(path, '../../../media/camera.png')
+            self.img_cam = tk.PhotoImage(file=filename)
+            self.button_snapshot = tk.Button(self, image=self.img_cam, command=self.click_button_snapshot)
+            self.button_snapshot.image = self.img_cam
+            self.button_snapshot.grid(column=0, row= 1, columnspan=3, padx = 15, pady = 5)
 
-        # button to back
-        path = os.path.dirname(__file__)
-        filename = os.path.join(path, '../../../media/return1.png')
-        self.img_back = tk.PhotoImage(file=filename)
-        self.button_back = tk.Button(self, image= self.img_back, command=self.click_button_back)
-        self.button_back.image= self.img_back
-        self.button_back.grid(column=2, row=1, sticky= "e", padx = 5, pady = 5)
 
-        # layout pack
-        
-        self.visualize()
+            # button to back
+            path = os.path.dirname(__file__)
+            filename = os.path.join(path, '../../../media/return1.png')
+            self.img_back = tk.PhotoImage(file=filename)
+            self.button_back = tk.Button(self, image= self.img_back, command=self.click_button_back)
+            self.button_back.image= self.img_back
+            self.button_back.grid(column=2, row=1, sticky= "e", padx = 5, pady = 5)
+
+            # layout pack
+
+            self.visualize()
+
 
     def visualize(self):
         global cap
@@ -57,8 +63,8 @@ class GuiCamera(tk.Toplevel):
                 self.cam_video.image = img
                 self.cam_video.after(100, self.visualize)
             else:
-                self.cam_video.image = ""
-                cap.release()
+                self.messages.message_error_camera()
+                self.click_button_back()
     def finalizar(self):
         global cap
         cap.release()

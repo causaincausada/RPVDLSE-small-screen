@@ -69,7 +69,9 @@ class Language():
         self.Message_confirm_restore_text = "Se ha realizado correctamente la\nrestauración de resultados"
         self.Message_error_restore_title = "Error al restaurar"
         self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la restauración de los\nresultados.\n\nVuelva intentar, si el problema persiste restaure otro\n archivo de resultados, o restaure a estado inicial."
-    
+        # Messages Camera
+        self.message_error_camera_title = "Error en modulo de camara"
+        self.message_error_camera_text = "Fallo en la conexión con la camara"
     def languageChange(self, numLenguage):
         if numLenguage == 0:
             # English Lenguage
@@ -141,6 +143,9 @@ class Language():
             self.Message_confirm_restore_text = "Se ha realizado correctamente la\nrestauración de resultados"
             self.Message_error_restore_title = "Error al restaurar"
             self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la restauración de los\nresultados.\n\nVuelva intentar, si el problema persiste restaure otro\n archivo de resultados, o restaure a estado inicial."
+            # Messages Camera
+            self.message_error_camera_title = "Error in camera module"
+            self.message_error_camera_text = "Unsuccessful attempt to connect the camera"
         elif numLenguage == 1:
             # Spanish Language
             # words and texts in the tabs
@@ -211,6 +216,8 @@ class Language():
             self.Message_confirm_restore_text = "Se ha realizado correctamente la\nrestauración de resultados"
             self.Message_error_restore_title = "Error al restaurar"
             self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la restauración de los\nresultados.\n\nVuelva intentar, si el problema persiste restaure otro\n archivo de resultados, o restaure a estado inicial."
-        else:####Se ocupa???????????
-            pass
+            # Messages Camera
+            self.message_error_camera_title = "Error en modulo de camara"
+            self.message_error_camera_text = "Fallo en la conexión con la camara"
+
         

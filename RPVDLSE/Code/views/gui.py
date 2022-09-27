@@ -1,6 +1,5 @@
 from tkinter import ttk
 from ttkthemes import ThemedTk
-from ctypes import windll
 from Code.views.main_frames.guiGallery import GuiGallery
 from Code.views.main_frames.guiResults import GuiResults
 from Code.views.others.guiMenuBar import GuiMenuBar
@@ -45,11 +44,7 @@ class Gui(ThemedTk):
         self.tab_control.add(self.frame_tab_results, text = self.language.results)
         self.tab_control.pack(expand = 1, fill ="both") #!!!!!!!!!!!!!!!!!!!!!! Ver si pack, grid o place
         
-        try:
-            #Configuration to Windows OS
-            windll.shcore.SetProcessDpiAwareness(1)
-        finally:
-            pass;
+
     
     #fuction to change language
     def change_language(self, numlanguage):

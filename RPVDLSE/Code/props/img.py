@@ -1,6 +1,9 @@
 import os
+import threading
+
 import cv2
 from PIL import Image, ImageTk
+
 
 
 MAX_SIZE_INT = (160, 160)
@@ -36,13 +39,20 @@ class Img():
 
     def open_image(self):
         try:
-            t_img = cv2.imread(self.path_and_name)
-            cv2.imshow(self.name, t_img)
+            self.t_img = cv2.imread(self.path_and_name)
+            thread= threading.Thread(target=self.thread_showimage)
+            thread.start()
             return True
         except cv2.error as e:
             print(e)
             return False
-
+    def thread_showimage(self):
+        cv2.imshow(self.name, self.t_img)
+        while (1):
+            cv2.waitKey()
+            if cv2.getWindowProperty(self.name, cv2.WND_PROP_AUTOSIZE) < 1:
+                break
+        cv2.destroyAllWindows()
     def delete_image(self):
         try:
             os.remove(self.path_and_name)

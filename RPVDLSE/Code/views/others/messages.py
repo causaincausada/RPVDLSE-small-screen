@@ -30,6 +30,7 @@ class Messages():
     def message_Error_restore(self):
         tkinter.messagebox.showerror(self.language.Message_error_restore_title, self.language.Message_error_restore_text)
 
+    # messages gallery
     def ask_confirm_delete(self, name):
         return tkinter.messagebox.askyesno(self.language.message_confirm_delete_img_title, self.language.message_confirm_delete_img.format(name))
 
@@ -47,3 +48,5 @@ class Messages():
 
     def no_valid_name(self):
         tkinter.messagebox.showerror(self.language.message_rename_title, self.language.no_valid_name)
+    def message_error_camera(self):
+        tkinter.messagebox.showerror(self.language.message_error_camera_title, self.language.message_error_camera_text)

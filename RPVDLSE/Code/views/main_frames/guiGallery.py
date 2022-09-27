@@ -16,6 +16,7 @@ class GuiGallery(ttk.Frame):
     def __init__(self, root):
         super().__init__(root.tab_control)
         #radio_button select var 
+        self.camera = None
         self.selected_radio_button = tk.StringVar()
         #gui elements list
         self.btns_imgs = []
