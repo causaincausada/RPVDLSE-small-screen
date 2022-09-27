@@ -119,7 +119,8 @@ class ApplicationLogic():
         self.gui.frame_tab_gallery.enable_btn_recognize()
 
     def delete_img_select(self):
-        self.select_img.delete_image()
+        successfull = self.select_img.delete_image()
+        return successfull
 
     def update_gallery_page(self, page):
         self.lists_imgs = None #List of list // Each list is a page of gallery

@@ -45,17 +45,20 @@ class GuiGallery(ttk.Frame):
         frame_up = ttk.Frame(self)
         frame_up.grid(column=0, row=0, sticky='NEWS', pady = 6)
 
-        #Buttons Frame Up: Control of Gallery
-        path = os.path.dirname(__file__)
-        filename = os.path.join(path, '../../../media/back.png')
-        #icons
-        self.back_icon = tk.PhotoImage(file=filename)
-        filename = os.path.join(path, '../../../media/next.png')
-        self.next_icon = tk.PhotoImage(file=filename)
-        filename = os.path.join(path, '../../../media/update.png')
-        self.update_icon = tk.PhotoImage(file=filename)
-        filename = os.path.join(path, '../../../media/camera.png')
-        self.camera_icon = tk.PhotoImage(file=filename)
+        try:
+            #Buttons Frame Up: Control of Gallery
+            path = os.path.dirname(__file__)
+            filename = os.path.join(path, '../../../media/back.png')
+            #icons
+            self.back_icon = tk.PhotoImage(file=filename)
+            filename = os.path.join(path, '../../../media/next.png')
+            self.next_icon = tk.PhotoImage(file=filename)
+            filename = os.path.join(path, '../../../media/update.png')
+            self.update_icon = tk.PhotoImage(file=filename)
+            filename = os.path.join(path, '../../../media/camera.png')
+            self.camera_icon = tk.PhotoImage(file=filename)
+        except (OSError, IOError) as e:
+            print(e)
 
         self.btn_back = ttk.Button(frame_up, image=self.back_icon, 
                                    command = self.click_btn_back)
@@ -326,9 +329,15 @@ class GuiGallery(ttk.Frame):
         delete = self.root.messages.ask_confirm_delete(name)
         if(delete):
             page = self.root.appLogic.page
-            self.root.appLogic.delete_img_select()
+            successfull = self.root.appLogic.delete_img_select()
+            if(successfull):
+                self.root.messages.delete_image_ok()
+            else:
+                self.root.messages.delete_image_error()
+            
             self.root.appLogic.update_gallery_page(page)
             self.root.appLogic.select_image(NO_SELECT)
+
 
     def click_btn_rename(self):
         new_name = self.root.messages.rename()

@@ -35,3 +35,9 @@ class Messages():
 
     def rename(self):
         return tkinter.simpledialog.askstring(self.language.message_rename_title, self.language.message_rename)
+
+    def delete_image_ok(self):
+        tkinter.messagebox.showinfo(self.language.message_ok_delete_title, self.language.message_ok_delete)
+
+    def delete_image_error(self):
+        tkinter.messagebox.showerror(self.language.message_error_delete_title, self.language.message_error_delete)
