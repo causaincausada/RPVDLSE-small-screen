@@ -39,5 +39,11 @@ class Messages():
     def delete_image_ok(self):
         tkinter.messagebox.showinfo(self.language.message_ok_delete_title, self.language.message_ok_delete)
 
-    def delete_image_error(self):
-        tkinter.messagebox.showerror(self.language.message_error_delete_title, self.language.message_error_delete)
+    def image_error_location(self):
+        tkinter.messagebox.showerror(self.language.message_error_img_location_title, self.language.message_error_img_location)
+
+    def rename_image_ok(self):
+        tkinter.messagebox.showinfo(self.language.message_rename_title, self.language.rename_ok)
+
+    def no_valid_name(self):
+        tkinter.messagebox.showerror(self.language.message_rename_title, self.language.no_valid_name)

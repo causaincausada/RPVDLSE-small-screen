@@ -1,5 +1,6 @@
 from Code.props.props import Props
 from Code.props.img import Img
+import re
 
 
 INTERNAL = 0
@@ -41,10 +42,12 @@ class ApplicationLogic():
 
     def turn_page(self):
         self.page += 1
+        self.calculate_lists_imgs()
         self.repaint()
 
     def return_page(self):
         self.page -= 1
+        self.calculate_lists_imgs()
         self.repaint()
 
     def set_images_gui(self):
@@ -100,11 +103,8 @@ class ApplicationLogic():
         return self.props.get_empty(self.status_int_ext)
 
     def open_select_img(self):
-        if(self.select_img != None):
-            self.select_img.open_image()
-        else:
-            print("Mensaje alert, falta poner")
-            pass #Mensaje "selecionnar imagen"
+        successfull = self.select_img.open_image()
+        return successfull
 
     def disabled_bottom_btns(self):
         self.gui.frame_tab_gallery.disabled_btn_open()
@@ -132,7 +132,14 @@ class ApplicationLogic():
         return self.select_img.name
 
     def change_name_select_img(self, new_name):
-        self.select_img.rename_image(new_name)
+        successfull = self.select_img.rename_image(new_name)
+        return successfull
+
+    def is_raname_valid(self, new_name):
+        if(re.match("^[A-Za-z0-9_-]+$", new_name)):
+            return True
+        else:
+            return False
 
     #Results methods
 

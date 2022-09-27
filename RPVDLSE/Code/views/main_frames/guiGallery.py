@@ -315,14 +315,18 @@ class GuiGallery(ttk.Frame):
         self.root.appLogic.set_int_mode()
         self.root.appLogic.update_gallery()
 
-
     def click_rb_external(self):
         self.root.appLogic.select_image(NO_SELECT)
         self.root.appLogic.set_ext_mode()
         self.root.appLogic.update_gallery()
 
     def click_btn_open(self):
-        self.root.appLogic.open_select_img()
+        page = self.root.appLogic.page
+        successfull = self.root.appLogic.open_select_img()
+        if(not successfull):
+            self.root.messages.image_error_location()
+            self.root.appLogic.update_gallery_page(page)
+        self.root.appLogic.select_image(NO_SELECT)
 
     def click_btn_delete(self):
         name = self.root.appLogic.get_name_select_img()
@@ -333,22 +337,31 @@ class GuiGallery(ttk.Frame):
             if(successfull):
                 self.root.messages.delete_image_ok()
             else:
-                self.root.messages.delete_image_error()
+                self.root.messages.image_error_location()
             
             self.root.appLogic.update_gallery_page(page)
-            self.root.appLogic.select_image(NO_SELECT)
-
+        self.root.appLogic.select_image(NO_SELECT)
 
     def click_btn_rename(self):
         new_name = self.root.messages.rename()
         if new_name is not None:
-            self.root.appLogic.change_name_select_img(new_name)
-            page = self.root.appLogic.page
-            self.root.appLogic.update_gallery_page(page)
-            self.root.appLogic.select_image(NO_SELECT)
+            #Comprobar nombre 
+            if(self.root.appLogic.is_raname_valid(new_name)):
+                successfull = self.root.appLogic.change_name_select_img(
+                    new_name)
+                if(successfull):
+                    self.root.messages.rename_image_ok()
+                else:
+                    self.root.messages.image_error_location()
+                page = self.root.appLogic.page
+                self.root.appLogic.update_gallery_page(page)
+            else:
+                self.root.messages.no_valid_name()
+        self.root.appLogic.select_image(NO_SELECT)
 
     def click_btn_recognize(self):
         print("recognize")
+        self.root.appLogic.select_image(NO_SELECT)
     
     def click_btn_img_1(self):
         self.root.appLogic.select_image(1)

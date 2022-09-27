@@ -38,6 +38,7 @@ class Img():
         try:
             t_img = cv2.imread(self.path_and_name)
             cv2.imshow(self.name, t_img)
+            return True
         except cv2.error as e:
             print(e)
             return False
@@ -51,6 +52,10 @@ class Img():
             return False
 
     def rename_image(self, new_name):
-        new_file = os.path.join(self.path, new_name + self.extension)
-        os.rename(self.path_and_name, new_file) #Catch exception 
-        #Check this error in Windows and linux [WinError 32] El proceso no tiene acceso al archivo porque est� siendo utilizado por otro proceso
+        try:
+            new_file = os.path.join(self.path, new_name + self.extension)
+            os.rename(self.path_and_name, new_file)
+            return True
+        except (OSError, IOError) as e:
+            print(e)
+            return False

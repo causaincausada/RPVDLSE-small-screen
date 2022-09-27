@@ -41,16 +41,18 @@ class Language():
         self.title_camera = "Camara"
         
         # Messages Alerts
+        self.message_error_img_location = "La imagen ya no se encuentra en la ubicación, el sistema va a refrescar la galería."
+        self.message_error_img_location_title = "Error: ubicación de la imagen"
         #Delete image
         self.message_confirm_delete_img = "¿Desea eliminar la imagen: {}?"
         self.message_confirm_delete_img_title = "Eliminar imagen"
         self.message_ok_delete = "La imagen se eliminó correctamente."
         self.message_ok_delete_title = "Imagen eliminada"
-        self.message_error_delete = "La imagen ya no se encuentra en la ubicación, el sistema va a refrescar la galería."
-        self.message_error_delete_title = "Error: eliminar imagen"
         #Rename image
         self.message_rename = "Introduce un nuevo nombre para la imagen. (Solo letras y números)."
         self.message_rename_title = "Renombrar imagen"
+        self.rename_ok = "El nombre se ha cambiado correctamente."
+        self.no_valid_name = "El nombre ingresado no es válido."
         # Messages Backup
         self.message_confirm_backup_title = "Confirmación de respaldo"
         self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
@@ -111,16 +113,18 @@ class Language():
             self.title_camera = "Camera"
 
             # Messages Alerts
+            self.message_error_img_location = "The image is no longer in the location, the system will refresh the gallery."
+            self.message_error_img_location_title = "Error: image location"
             #Delete image
             self.message_confirm_delete_img = "Do you want to delete the image: {}?"
             self.message_confirm_delete_img_title = "Delete image"
             self.message_ok_delete = "The image was deleted successfully."
             self.message_ok_delete_title = "Image deleted"
-            self.message_error_delete = "The image is no longer in the location, the system will refresh the gallery."
-            self.message_error_delete_title = "Error: Delete image"
             #Rename image
             self.message_rename = "Enter a new name for the image. (Only letters and numbers)."
             self.message_rename_title = "Rename image"
+            self.rename_ok = "The name has been changed successfully."
+            self.no_valid_name = "The name entered is not valid."
             # Messages Backup
             self.message_confirm_backup_title = "Confirmación de respaldo"
             self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
@@ -179,16 +183,18 @@ class Language():
             self.title_camera = "Camara"
             
             # Messages Alerts
+            self.message_error_img_location = "La imagen ya no se encuentra en la ubicación, el sistema va a refrescar la galería."
+            self.message_error_img_location_title = "Error: ubicación de la imagen"
             #Delete image
             self.message_confirm_delete_img = "¿Desea eliminar la imagen: {}?"
             self.message_confirm_delete_img_title = "Eliminar imagen"
             self.message_ok_delete = "La imagen se eliminó correctamente."
             self.message_ok_delete_title = "Imagen eliminada"
-            self.message_error_delete = "La imagen ya no se encuentra en la ubicación, el sistema va a refrescar la galería."
-            self.message_error_delete_title = "Error: eliminar imagen"
             #Rename image
             self.message_rename = "Introduce un nuevo nombre para la imagen. (Solo letras y números)."
             self.message_rename_title = "Renombrar imagen"
+            self.rename_ok = "El nombre se ha cambiado correctamente."
+            self.no_valid_name = "El nombre ingresado no es válido."
             # Messages Backup
             self.message_confirm_backup_title = "Confirmación de respaldo"
             self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
