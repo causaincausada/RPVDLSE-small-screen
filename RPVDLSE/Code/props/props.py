@@ -8,7 +8,7 @@ INTERNAL = 0
 EXTERNAL = 1
 
 
-class Props():
+class Props:
     def __init__(self):
         try:            
             path_project = os.path.dirname(__file__)
@@ -21,7 +21,7 @@ class Props():
         paths_imgs = []
         try:
             for x in os.listdir(self.path_internal):
-                if x.endswith(".jpg") or x.endswith(".png"): #or x.endswith(".png")#Quitar el png en la version final
+                if x.endswith(".jpg") or x.endswith(".png"):  # or x.endswith(".png")#Quitar el png en la version final
                     paths_imgs.append(self.path_internal + "/" + x)
             paths_imgs.reverse()
         except (OSError, IOError) as e:
@@ -40,7 +40,8 @@ class Props():
 
         return paths_imgs
 
-    def get_empty(self, int_or_ext):
+    @staticmethod
+    def get_empty(int_or_ext):
         try:        
             path = os.path.dirname(__file__)
             filename = os.path.join(path, '../../media/Empty.png')
@@ -48,7 +49,7 @@ class Props():
             image = temp_image.copy()
             temp_image.close()
         
-            if(int_or_ext == INTERNAL):
+            if int_or_ext == INTERNAL:
                 image.thumbnail(MAX_SIZE_INT)
             else:
                 image = image.resize(MAX_SIZE_EXT)

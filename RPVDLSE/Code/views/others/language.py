@@ -1,4 +1,4 @@
-class Language():
+class Language:
     def __init__(self):
         # Spanish Language default
         # words and texts in the tabs
@@ -14,7 +14,7 @@ class Language():
         self.english = "Ingles"
         self.language = "Lenguage"
         self.restore_menu_file_label = 'Restaurar desde un archivo'
-        self.restore_menu_initiate_label= 'Restaurar a estado inicial'
+        self.restore_menu_initiate_label = 'Restaurar a estado inicial'
             
         # word and texts in the galery window
         self.open = "Abrir"
@@ -41,14 +41,15 @@ class Language():
         self.title_camera = "Camara"
         
         # Messages Alerts
-        self.message_error_img_location = "La imagen ya no se encuentra en la ubicación, el sistema va a refrescar la galería."
+        self.message_error_img_location = "La imagen ya no se encuentra en la ubicación, el sistema va a refrescar" \
+                                          " la galería."
         self.message_error_img_location_title = "Error: ubicación de la imagen"
-        #Delete image
+        # Delete image
         self.message_confirm_delete_img = "¿Desea eliminar la imagen: {}?"
         self.message_confirm_delete_img_title = "Eliminar imagen"
         self.message_ok_delete = "La imagen se eliminó correctamente."
         self.message_ok_delete_title = "Imagen eliminada"
-        #Rename image
+        # Rename image
         self.message_rename = "Introduce un nuevo nombre para la imagen. (Solo letras y números)."
         self.message_rename_title = "Renombrar imagen"
         self.rename_ok = "El nombre se ha cambiado correctamente."
@@ -57,24 +58,36 @@ class Language():
         self.message_confirm_backup_title = "Confirmación de respaldo"
         self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
         self.message_error_backup_title = "Error al realizar respaldo"
-        self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el respaldo de los resultados.\n\nVuelva intentar, si el problema persiste restaure el archivo\n resulrados, desde el menú Resultados en la barra de nenú"
+        self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el respaldo de" \
+                                         " los resultados.\n\nVuelva intentar, si el problema persiste restaure el" \
+                                         " archivo\n resulrados, desde el menú Resultados en la barra de nenú"
         self.ask_confirm_backup_title = "Confirmación respaldar"
         self.ask_confirm_backup_text1 = "¿Desea respaldar el estado actual de resultados?\nResutlados:"
-        self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de *ResManualResultadosAAMMDD_hh-mm-ss.txt"
+        self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de " \
+                                        "*ResManualResultadosAAMMDD_hh-mm-ss.txt"
 
         # Messages Restore
         self.ask_confirm_restore_title = "Confirmación resturar"
-        self.ask_confirm_restore_text = "¿Desea continuar?\nAl restaurar este archivo se perderán todos los\nresultados que no hayan sido respaldados\ncon anterioridad"
+        self.ask_confirm_restore_text = "¿Desea continuar?\nAl restaurar este archivo se perderán todos los\n" \
+                                        "resultados que no hayan sido respaldados\ncon anterioridad"
         self.Message_confirm_restore_title = "Confirmación de restauración"
         self.Message_confirm_restore_text = "Se ha realizado correctamente la\nrestauración de resultados"
         self.Message_error_restore_title = "Error al restaurar"
-        self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la restauración de los\nresultados.\n\nVuelva intentar, si el problema persiste restaure otro\n archivo de resultados, o restaure a estado inicial."
+        self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la " \
+                                          "restauración de los\nresultados.\n\nVuelva intentar, si el problema " \
+                                          "persiste restaure otro\n archivo de resultados, o restaure a estado inicial."
+
         # Messages Camera
         self.message_error_camera_title = "Error en modulo de camara"
         self.message_error_camera_text = "Fallo en la conexión con la camara"
-    def languageChange(self, numLenguage):
-        if numLenguage == 0:
-            # English Lenguage
+
+        # Messages Data Base
+        self.mes_error_connect_db_title = "Fallo conexión BD"
+        self.mes_error_connect_db_text = "Fallo en la conexión con la base de datos"
+
+    def language_change(self, num_lenguage):
+        if num_lenguage == 0:
+            # English Language
             # words and texts in the tabs
             self.results = "Results"
             self.gallery = "Gallery"
@@ -88,9 +101,9 @@ class Language():
             self.english = "English"
             self.language = "Language"
             self.restore_menu_file_label = 'Restaurar desde un archivo'
-            self.restore_menu_initiate_label= 'Restaurar a estado inicial'
+            self.restore_menu_initiate_label = 'Restaurar a estado inicial'
             
-            # word and texts in the galery window
+            # word and texts in the gallery window
             self.open = "Open"
             self.delet = "Delete"
             self.rename = "Rename"
@@ -115,14 +128,15 @@ class Language():
             self.title_camera = "Camera"
 
             # Messages Alerts
-            self.message_error_img_location = "The image is no longer in the location, the system will refresh the gallery."
+            self.message_error_img_location = "The image is no longer in the location, the system will " \
+                                              "refresh the gallery."
             self.message_error_img_location_title = "Error: image location"
-            #Delete image
+            # Delete image
             self.message_confirm_delete_img = "Do you want to delete the image: {}?"
             self.message_confirm_delete_img_title = "Delete image"
             self.message_ok_delete = "The image was deleted successfully."
             self.message_ok_delete_title = "Image deleted"
-            #Rename image
+            # Rename image
             self.message_rename = "Enter a new name for the image. (Only letters and numbers)."
             self.message_rename_title = "Rename image"
             self.rename_ok = "The name has been changed successfully."
@@ -131,22 +145,34 @@ class Language():
             self.message_confirm_backup_title = "Confirmación de respaldo"
             self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
             self.message_error_backup_title = "Error al realizar respaldo"
-            self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el respaldo de los resultados.\n\nVuelva intentar, si el problema persiste restaure el archivo\n resulrados, desde el menú Resultados en la barra de nenú"
+            self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el respaldo"\
+                                             " de los resultados.\n\nVuelva intentar, si el problema persiste restaure"\
+                                             " el archivo\n resulrados, desde el menú Resultados en la barra de nenú"
             self.ask_confirm_backup_title = "Confirmación respaldar"
             self.ask_confirm_backup_text1 = "¿Desa respaldar el estado actual de resultados?\nResutlados:"
-            self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de *ResManualResultadosAAMMDD_hh-mm-ss.txt"
+            self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de " \
+                                            "*ResManualResultadosAAMMDD_hh-mm-ss.txt"
 
             # Messages Restore
             self.ask_confirm_restore_title = "Confirmación resturar"
-            self.ask_confirm_restore_text = "¿Desea continuar?\nAl restaurar este archivo se perderán todos los\nresultados que no hayan sido respaldados\ncon anterioridad"
+            self.ask_confirm_restore_text = "¿Desea continuar?\nAl restaurar este archivo se perderán todos los\n" \
+                                            "resultados que no hayan sido respaldados\ncon anterioridad"
             self.Message_confirm_restore_title = "Confirmación de restauración"
             self.Message_confirm_restore_text = "Se ha realizado correctamente la\nrestauración de resultados"
             self.Message_error_restore_title = "Error al restaurar"
-            self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la restauración de los\nresultados.\n\nVuelva intentar, si el problema persiste restaure otro\n archivo de resultados, o restaure a estado inicial."
+            self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la " \
+                                              "restauración de los\nresultados.\n\nVuelva intentar, si el problema " \
+                                              "persiste restaure otro\n archivo de resultados, o restaure a estado " \
+                                              "inicial."
             # Messages Camera
             self.message_error_camera_title = "Error in camera module"
             self.message_error_camera_text = "Unsuccessful attempt to connect the camera"
-        elif numLenguage == 1:
+
+            # Messages Data Base
+            self.mes_error_connect_db_title = "Database connection error"
+            self.mes_error_connect_db_text = "Failed to connect to the database"
+
+        elif num_lenguage == 1:
             # Spanish Language
             # words and texts in the tabs
             self.results = "Resultados"
@@ -161,7 +187,7 @@ class Language():
             self.english = "Ingles"
             self.language = "Lenguage"
             self.restore_menu_file_label = 'Restaurar desde un archivo'
-            self.restore_menu_initiate_label= 'Restaurar a estado inicial'
+            self.restore_menu_initiate_label = 'Restaurar a estado inicial'
             
             # word and texts in the galery window
             self.open = "Abrir"
@@ -188,36 +214,50 @@ class Language():
             self.title_camera = "Camara"
             
             # Messages Alerts
-            self.message_error_img_location = "La imagen ya no se encuentra en la ubicación, el sistema va a refrescar la galería."
+            self.message_error_img_location = "La imagen ya no se encuentra en la ubicación, el sistema va a refrescar"\
+                                              " la galería."
             self.message_error_img_location_title = "Error: ubicación de la imagen"
-            #Delete image
+            # Delete image
             self.message_confirm_delete_img = "¿Desea eliminar la imagen: {}?"
             self.message_confirm_delete_img_title = "Eliminar imagen"
             self.message_ok_delete = "La imagen se eliminó correctamente."
             self.message_ok_delete_title = "Imagen eliminada"
-            #Rename image
+            # Rename image
             self.message_rename = "Introduce un nuevo nombre para la imagen. (Solo letras y números)."
             self.message_rename_title = "Renombrar imagen"
             self.rename_ok = "El nombre se ha cambiado correctamente."
             self.no_valid_name = "El nombre ingresado no es válido."
+
             # Messages Backup
             self.message_confirm_backup_title = "Confirmación de respaldo"
             self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
             self.message_error_backup_title = "Error al realizar respaldo"
-            self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el respaldo de los resultados.\n\nVuelva intentar, si el problema persiste restaure el archivo\n resulrados, desde el menú Resultados en la barra de nenú"
+            self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el " \
+                                             "respaldo de los resultados.\n\nVuelva intentar, si el problema persiste "\
+                                             "restaure el archivo\n resulrados, desde el menú Resultados en la barra " \
+                                             "de nenú"
             self.ask_confirm_backup_title = "Confirmación respaldar"
             self.ask_confirm_backup_text1 = "¿Desa respaldar el estado actual de resultados?\nResutlados:"
-            self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de *ResManualResultadosAAMMDD_hh-mm-ss.txt"
+            self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de " \
+                                            "*ResManualResultadosAAMMDD_hh-mm-ss.txt"
 
             # Messages Restore
             self.ask_confirm_restore_title = "Confirmación resturar"
-            self.ask_confirm_restore_text = "¿Desea continuar?\nAl restaurar este archivo se perderán todos los\nresultados que no hayan sido respaldados\ncon anterioridad"
+            self.ask_confirm_restore_text = "¿Desea continuar?\nAl restaurar este archivo se perderán todos los\n" \
+                                            "resultados que no hayan sido respaldados\ncon anterioridad"
             self.Message_confirm_restore_title = "Confirmación de restauración"
             self.Message_confirm_restore_text = "Se ha realizado correctamente la\nrestauración de resultados"
             self.Message_error_restore_title = "Error al restaurar"
-            self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la restauración de los\nresultados.\n\nVuelva intentar, si el problema persiste restaure otro\n archivo de resultados, o restaure a estado inicial."
+            self.Message_error_restore_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar la " \
+                                              "restauración de los\nresultados.\n\nVuelva intentar, si el problema " \
+                                              "persiste restaure otro\n archivo de resultados, o restaure a estado " \
+                                              "inicial."
             # Messages Camera
             self.message_error_camera_title = "Error en modulo de camara"
             self.message_error_camera_text = "Fallo en la conexión con la camara"
+
+            # Messages Data Base
+            self.mes_error_connect_db_title = "Fallo conexión BD"
+            self.mes_error_connect_db_text = "Fallo en la conexión con la base de datos"
 
         
