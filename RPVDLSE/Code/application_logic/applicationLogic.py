@@ -1,4 +1,6 @@
 import datetime
+import subprocess
+import pymongo.errors
 from Code.props.props import Props
 from Code.props.img import Img
 from Code.views.gui import Gui
@@ -20,7 +22,10 @@ class ApplicationLogic:
     def __init__(self, props: Props, gui: Gui):
         self.props = props
         self.gui = gui
+        subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"])
         self.dataBaseR = DataBaseR(MONGO_HOST, MONGO_PORT, MONGO_TIMEOUT)
+        # warnings in filters
+        self.warnings = [[], [], [], []]
 
         # image data
         self.imgs_tk = []  # Display images
@@ -113,8 +118,7 @@ class ApplicationLogic:
         return self.props.get_empty(self.status_int_ext)
 
     def open_select_img(self):
-        successfull = self.select_img.open_image()
-        return successfull
+        return self.select_img.open_image()
 
     def disabled_bottom_btns(self):
         self.gui.frame_tab_gallery.disabled_btn_open()
@@ -142,11 +146,11 @@ class ApplicationLogic:
         return self.select_img.name
 
     def change_name_select_img(self, new_name):
-        successfull = self.select_img.rename_image(new_name)
-        return successfull
+        successful = self.select_img.rename_image(new_name)
+        return successful
 
     @staticmethod
-    def is_raname_valid(new_name):
+    def is_rename_valid(new_name):
         if re.match("^[A-Za-z0-9_-]+$", new_name):
             return True
         else:
@@ -156,8 +160,12 @@ class ApplicationLogic:
         try:
             self.dataBaseR = DataBaseR(MONGO_HOST, MONGO_PORT, MONGO_TIMEOUT)
             return self.dataBaseR.on_connect()
-        except ConnectionError:
-            return false
+        except pymongo.errors.ServerSelectionTimeoutError:
+            cb = subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"], stdout=subprocess.PIPE,
+                                  stderr=subprocess.STDOUT)
+            if len(cb.stdout.readlines()) == 0:
+                return True
+            return False
 
     # Results methods
     def on_connect_mongodb(self):
@@ -165,13 +173,80 @@ class ApplicationLogic:
             return self.dataBaseR.on_connect()
         except TypeError:
             return False
+        except AttributeError:
+            return False
+
+    def disconnect_mongodb(self):
+        self.dataBaseR.disconnect()
+        cb = subprocess.Popen(["/usr/bin/systemctl", "stop", "mongod.service"], stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT)
+        if len(cb.stdout.readlines()) == 0:
+            return True
+        return False
+
+    def get_size_mongodb(self):
+        return self.dataBaseR.get_size()
+
+    def create_backup(self, path):
+        cb = subprocess.Popen(["/usr/bin/mongoexport", '--uri="mongodb://localhost:27017"', "--collection=results",
+                               "--db=RPVDLSE", "--out="+path], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        res = cb.stdout.readlines()
+        try:
+            connect = res[0].decode('utf-8')
+            correct = connect.find("connected to:")
+            if correct != -1:
+                size_check = res[1].decode('utf-8')
+                correct = size_check.find("exported {0} records".format(self.get_size_mongodb()))
+                if correct != -1:
+                    return True
+            return False
+        except TypeError:
+            return False
+        except IndexError:
+            return False
 
     def get_results(self, gui_date_begin=datetime.datetime, gui_date_end=datetime.datetime,
                     gui_time_begin=datetime.datetime, gui_time_end=datetime.datetime, gui_plate="", gui_name=""):
+        # plates = self.seg_plate(gui_plate)
+        response = self.dataBaseR.get_results(date_begin=gui_date_begin, date_end=gui_date_end,
+                                              hour_begin=gui_time_begin, hour_end=gui_time_end,
+                                              plate=gui_plate, name=gui_name)
+        return response, self.warnings
 
-        response = self.dataBaseR.get_results(date_begin=gui_date_begin, date_end=gui_date_end, hour_begin=gui_time_begin,
-                                   hour_end=gui_time_end, plate=gui_plate, name=gui_name)
-        return response
+    @staticmethod
+    def seg_plate(plate):
+        array_plates = []
+        if plate != "":
+            tam = len(plate)
+            while tam != 0:
+                separate = plate.find(",")
+                if separate != -1:
+                    sub_plate = plate[0:int(separate)]
+                    n = 1
+                    try:
+                        for i in range(1, len(plate)-int(separate)):
+                            if plate[int(separate)+i] == " ":
+                                n += 1
+                            else:
+                                break
+                        plate = plate[int(separate)+n: len(plate)]
+                    except IndexError:
+                        plate = plate[int(separate)+n: len(plate)]
+                    if sub_plate != "" or sub_plate != " ":
+                        if sub_plate != "":
+                            array_plates.append(sub_plate)
+                        tam = len(plate)
+                else:
+                    if plate != "":
+                        array_plates.append(plate)
+                    break
+        return array_plates
+
+    @staticmethod
+    def is_dates_valid(date_begin, date_end):
+        if date_end < date_begin:
+            return false
+        return true
 
     @staticmethod
     def is_hour_valid(hour):
@@ -186,14 +261,13 @@ class ApplicationLogic:
                         return True, time
             time = datetime.datetime(year=1970, month=1, day=1, hour=0, minute=0)
             return False, time
-        except ValueError as ve:
-            # print(ve)
+        except ValueError:
             time = datetime.datetime(year=1970, month=1, day=1, hour=0, minute=0)
             return False, time
 
     @staticmethod
     def is_name_plate_valid(name_plate: str):
-        if re.match("^[A-Za-z0-9_-]+$", name_plate):
+        if re.match("^[A-Za-z0-9_ ,-]+$", name_plate):
             return True
         else:
             return False

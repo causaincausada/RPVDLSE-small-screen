@@ -1,9 +1,12 @@
 import datetime
+import os
+import subprocess
 import tkinter as tk
-from tkinter import ttk
+from tkinter import DISABLED, NORMAL, ttk
 from tkcalendar import DateEntry
 from Code.views.others.language import Language
 from Code.views.others.messages import Messages
+from Code.props.tooltip import ToolTip
 
 
 class GuiResults(ttk.Frame):
@@ -46,9 +49,12 @@ class GuiResults(ttk.Frame):
         # configure grid
         self.frame_filters_date_hour = ttk.Frame(self.frame_filters)
         self.frame_filters_date_hour.columnconfigure(0, weight=1)
-        self.frame_filters_date_hour.columnconfigure(1, weight=3)
-        self.frame_filters_date_hour.columnconfigure(2, weight=3)
-        self.frame_filters_date_hour.columnconfigure(3, weight=3)
+        self.frame_filters_date_hour.columnconfigure(1, weight=2)
+        self.frame_filters_date_hour.columnconfigure(2, weight=1)
+        self.frame_filters_date_hour.columnconfigure(3, weight=2)
+        self.frame_filters_date_hour.columnconfigure(4, weight=1)
+        self.frame_filters_date_hour.columnconfigure(5, weight=2)
+        self.frame_filters_date_hour.columnconfigure(6, weight=1)
         self.frame_filters_date_hour.rowconfigure(0, weight=1)
         self.frame_filters_date_hour.rowconfigure(1, weight=1)
         self.frame_filters_date_hour.rowconfigure(2, weight=1)
@@ -69,39 +75,17 @@ class GuiResults(ttk.Frame):
                                         text=self.language.plate,
                                         font=("", size_font_labels))
 
-        label_filters_date.grid(column=1, row=0, sticky="news", pady=5, padx=5)
-        label_filters_hour.grid(column=2, row=0, sticky="news", pady=5, padx=5)
+        label_filters_date.grid(column=1, row=0,  sticky="news", pady=5, padx=5)
+        label_filters_hour.grid(column=3, row=0, sticky="news", pady=5, padx=5)
         label_filters_begin.grid(column=0, row=1, sticky="news", pady=5, padx=5)
         label_filters_end.grid(column=0, row=2, sticky="news", pady=5, padx=5)
-        label_filters_plate.grid(column=3, row=1, sticky="news", pady=5, padx=25)
+        label_filters_plate.grid(column=5, row=1, sticky="news", pady=5, padx=25)
 
         self.date_entry_begin_text = tk.StringVar()
-        self.date_entry_begin_text.trace(
-            "w", lambda name, index, mode,
-            sv=self.date_entry_begin_text: self.ch_date_entry_begin()
-        )
         self.date_entry_end_text = tk.StringVar()
-        self.date_entry_end_text.trace(
-            "w", lambda name, index, mode,
-            sv=self.date_entry_end_text: self.ch_date_entry_end()
-        )
         self.hour_entry_begin_text = tk.StringVar()
-        self.hour_entry_begin_text.trace(
-            "w", lambda name, index, mode,
-            sv=self.hour_entry_begin_text: self.ch_hour_entry_begin()
-        )
         self.hour_entry_end_text = tk.StringVar()
-        self.hour_entry_end_text.trace(
-            "w", lambda name, index, mode,
-            sv=self.hour_entry_end_text: self.ch_hour_entry_end()
-        )
-
         self.entry_plate_text = tk.StringVar()
-        self.entry_plate_text.trace(
-            "w", lambda name, index, mode,
-            sv=self.entry_plate_text: self.ch_entry_plate()
-        )
-
         self.date_entry_begin = DateEntry(self.frame_filters_date_hour,
                                           selectmode='day',
                                           date_pattern='dd/mm/y',
@@ -114,17 +98,50 @@ class GuiResults(ttk.Frame):
                                         textvariable=self.date_entry_end_text)
         self.date_entry_begin.set_date(datetime.datetime(2000, 1, 1, 0, 0, 0))
         self.date_entry_end.set_date(datetime.datetime.now())
+        self.date_entry_begin_text.trace(
+            "w", lambda name, index, mode,
+            sv=self.date_entry_begin_text: self.ch_date_entry_begin()
+        )
+        self.date_entry_end_text.trace(
+            "w", lambda name, index, mode,
+            sv=self.date_entry_end_text: self.ch_date_entry_end()
+        )
+        self.hour_entry_begin_text.trace(
+            "w", lambda name, index, mode,
+            sv=self.hour_entry_begin_text: self.ch_hour_entry_begin()
+        )
+        self.hour_entry_end_text.trace(
+            "w", lambda name, index, mode,
+            sv=self.hour_entry_end_text: self.ch_hour_entry_end()
+        )
+        self.entry_plate_text.trace(
+            "w", lambda name, index, mode,
+            sv=self.entry_plate_text: self.ch_entry_plate()
+        )
         self.hour_entry_begin = ttk.Entry(self.frame_filters_date_hour,
                                           textvariable=self.hour_entry_begin_text)
         self.hour_entry_end = ttk.Entry(self.frame_filters_date_hour,
                                         textvariable=self.hour_entry_end_text)
         self.entry_plate = ttk.Entry(self.frame_filters_date_hour,
                                      textvariable=self.entry_plate_text)
-        self.date_entry_begin.grid(column=1, row=1, sticky="news", pady=5, padx=5)
-        self.date_entry_end.grid(column=1, row=2, sticky="news", pady=5, padx=5)
-        self.hour_entry_begin.grid(column=2, row=1, sticky="news", pady=5, padx=5)
-        self.hour_entry_end.grid(column=2, row=2, sticky="news", pady=5, padx=5)
-        self.entry_plate.grid(column=3, row=2, sticky="news", pady=5, padx=25)
+        self.date_entry_begin.grid(column=1, row=1, columnspan=2, sticky="news", pady=5, padx=5)
+        self.date_entry_end.grid(column=1, row=2, columnspan=2, sticky="news", pady=5, padx=5)
+        self.hour_entry_begin.grid(column=3, row=1, columnspan=2, sticky="news", pady=5, padx=5)
+        self.hour_entry_end.grid(column=3, row=2, columnspan=2, sticky="news", pady=5, padx=5)
+        self.entry_plate.grid(column=5, row=2, columnspan=2, sticky="news", pady=5, padx=25)
+        # Warnings in filters
+        # icon
+        path = os.path.dirname(__file__)
+        filename = os.path.join(path, '../../../media/warning.png')
+        self.warning_icon = tk.PhotoImage(file=filename)
+        self.warning_icon_hour = ttk.Label(self.frame_filters_date_hour, image=self.warning_icon)
+        self.warning_icon_date = ttk.Label(self.frame_filters_date_hour, image=self.warning_icon)
+        self.warning_icon_plate = ttk.Label(self.frame_filters_date_hour, image=self.warning_icon)
+
+        self.warning_icon_date.grid(column=2, row=0, sticky="nes", pady=5, padx=5)
+        self.warning_icon_hour.grid(column=4, row=0, sticky="nes", pady=5, padx=5)
+        self.warning_icon_plate.grid(column=6, row=1, sticky="nes", pady=5, padx=25)
+
         # Frame filters name
         # layout pack
         self.frame_filters_name = ttk.Frame(self.frame_filters)
@@ -207,6 +224,9 @@ class GuiResults(ttk.Frame):
             self.gui_date_end = datetime.datetime.now()
             self.get_results_gui()
 
+    def ch_dates(self):
+        self.root.app_logic.is_dates_valid(self.gui_date_begin, self.gui_date_end)
+
     def ch_hour_entry_begin(self):
         try:
             val, self.gui_hour_begin = self.root.app_logic.is_hour_valid(self.hour_entry_begin_text.get())
@@ -260,28 +280,66 @@ class GuiResults(ttk.Frame):
     def get_results_gui(self):
         try:
             if self.root.app_logic.on_connect_mongodb():
-                array_results = self.root.app_logic.get_results(gui_date_begin=self.gui_date_begin,
-                                                                gui_date_end=self.gui_date_end,
-                                                                gui_time_begin=self.gui_hour_begin,
-                                                                gui_time_end=self.gui_hour_end,
-                                                                gui_plate=self.gui_plate, gui_name=self.gui_name)
+                array_results, array_warnings = self.root.app_logic.get_results(gui_date_begin=self.gui_date_begin,
+                                                                                gui_date_end=self.gui_date_end,
+                                                                                gui_time_begin=self.gui_hour_begin,
+                                                                                gui_time_end=self.gui_hour_end,
+                                                                                gui_plate=self.gui_plate, gui_name=self.gui_name)
                 self.table_results.delete(*self.table_results.get_children())
 
                 for a in array_results:
                     date_in = a["date"]
                     hour_in = a["hour"]
                     date_text = ""+str(date_in.day)+"-"+str(date_in.month)+"-"+str(date_in.year)
+                    if date_in.day < 10:
+                        if date_in.month < 10:
+                            date_text = "0"+str(date_in.day)+"-0"+str(date_in.month)+"-"+str(date_in.year)
+                        else:
+                            date_text = "0"+str(date_in.day)+"-"+str(date_in.month)+"-"+str(date_in.year)
+                    elif date_in.month < 10:
+                        date_text = ""+str(date_in.day)+"-0"+str(date_in.month)+"-"+str(date_in.year)
+                    else:
+                        date_text = ""+str(date_in.day)+"-"+str(date_in.month)+"-"+str(date_in.year)
+                    if hour_in.hour < 10:
+                        if hour_in.minute < 10:
+                            hour_text = "0"+str(hour_in.hour)+":0"+str(hour_in.minute)
+                        else:
+                            hour_text = "0"+str(hour_in.hour)+":"+str(hour_in.minute)
+                    elif hour_in.minute < 10:
+                        hour_text = ""+str(hour_in.hour)+":0"+str(hour_in.minute)
+                    else:
+                        hour_text = ""+str(hour_in.hour)+":"+str(hour_in.minute)
+
                     self.table_results.insert("", 'end', text="L1", values=(a["name"],
-                                              date_text, hour_in.time(), a["result"]))
+                                              date_text, hour_text, a["result"]))
+                self.update_warnings(array_warnings)
             else:
                 if self.root.app_logic.try_connect_mongodb():
                     self.get_results_gui()
                 else:
                     self.messages.lost_connection_db()
-
+                    subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"])
         except TypeError as te:
             print(te)
             print("Error en get result gui")
         except AttributeError as ae:
-            print(ae)
-            print("Error ae get result gui")
+            if ae.name == "on_connect_mongodb":
+                pass
+            else:
+                print(ae.name)
+                print("Error ae get result gui")
+
+
+
+    def update_warnings(self, warnings):
+        warnings1 = ToolTip(self.warning_icon_date, self.language.date_tip)
+        self.warning_icon_date.configure(state=DISABLED)
+        #warnings1.set_active(False)
+        #warnings = []
+        #warnings1 = ["a", "b"]
+        #warnings.append(warnings1)
+        #for a in warnings:
+        #    for b in warnings1:
+        #        print(b)
+
+

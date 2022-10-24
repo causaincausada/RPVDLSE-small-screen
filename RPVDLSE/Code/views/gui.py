@@ -30,6 +30,7 @@ class Gui(ThemedTk):
         self.minsize(MINSIZE_WINDOW_X, MINSIZE_WINDOW_Y)
         self.title(DEFAULT_WINDOW_TITLE)
         self.resizable(False, False)
+        self.protocol("WM_DELETE_WINDOW", self.on_close)
         # self.state('zoomed') #quitar?
 
         # Menu bar
@@ -37,6 +38,7 @@ class Gui(ThemedTk):
         self.config(menu=self.menubar)
         # Tabs GUI: i.e. Gallery and Results
         self.tab_control = ttk.Notebook(self)
+        self.tab_control.bind("<ButtonRelease-1>", self.change_tab)
         self.frame_tab_gallery = GuiGallery(self)  # Frame gallery
         self.frame_tab_results = GuiResults(self)  # Frame results
         self.tab_control.add(self.frame_tab_gallery, text=self.language.gallery)
@@ -52,6 +54,7 @@ class Gui(ThemedTk):
         self.config(menu=self.menubar)
         self.tab_control.destroy()
         self.tab_control = ttk.Notebook(self)
+        self.tab_control.bind("<ButtonRelease-1>", self.change_tab)
         self.frame_tab_gallery = GuiGallery(self)
         self.frame_tab_results = GuiResults(self)
         self.tab_control.add(self.frame_tab_gallery, text=self.language.gallery)
@@ -61,4 +64,12 @@ class Gui(ThemedTk):
 
     def set_controller(self, app_logic):
         self.app_logic = app_logic
-        
+
+    def change_tab(self, event=None):
+        if self.tab_control.tab(self.tab_control.select(), "text") == self.language.results:
+            self.frame_tab_results.get_results_gui()
+
+    def on_close(self):
+        if self.messages.ask_confirm_close_main():
+            self.app_logic.disconnect_mongodb()
+            self.after(10, self.destroy())

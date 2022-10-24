@@ -18,9 +18,10 @@ class Messages:
         tkinter.messagebox.showerror(self.language.message_error_backup_title,
                                      self.language.message_error_backup_text)
 
-    def ask_confirm_backup(self, num):
-        text = str(self.language.ask_confirm_backup_text1)+str(num)+str(self.language.ask_confirm_backup_text2)
-        tkinter.messagebox.askokcancel(self.language.ask_confirm_backup_title, text)
+    def ask_confirm_backup(self, num, name):
+        text = str(self.language.ask_confirm_backup_text1) + \
+               str(num)+str(self.language.ask_confirm_backup_text2) + str(name)
+        return tkinter.messagebox.askokcancel(self.language.ask_confirm_backup_title, text)
 
     # messages Restore
     def ask_confirm_restore(self):
@@ -61,3 +62,7 @@ class Messages:
     # messages results
     def lost_connection_db(self):
         tkinter.messagebox.showerror(self.language.mes_error_connect_db_title, self.language.mes_error_connect_db_text)
+
+    def ask_confirm_close_main(self):
+        return tkinter.messagebox.askokcancel(self.language.ask_confirm_close_main_title,
+                                              self.language.ask_confirm_close_main_text)

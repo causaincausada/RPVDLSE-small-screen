@@ -343,7 +343,7 @@ class GuiGallery(ttk.Frame):
         new_name = self.root.messages.rename()
         if new_name is not None:
             # Comprobar nombre
-            if self.root.app_logic.is_raname_valid(new_name):
+            if self.root.app_logic.is_rename_valid(new_name):
                 successfull = self.root.app_logic.change_name_select_img(
                     new_name)
                 if successfull:

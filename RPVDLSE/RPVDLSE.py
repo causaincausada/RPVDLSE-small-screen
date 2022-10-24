@@ -16,11 +16,11 @@ class RPVDLSE:
         gui.set_controller(app_logic)
 
         # set results
-        gui.frame_tab_results.get_results_gui()
+        # gui.frame_tab_results.get_results_gui()
 
         # initialize window
         gui.mainloop()
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     app = RPVDLSE()

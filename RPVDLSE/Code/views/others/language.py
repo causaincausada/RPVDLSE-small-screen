@@ -36,6 +36,9 @@ class Language:
         self.num_results = "Núm resultados"
         self.plate = "Placa" 
         self.plate_results = "(Resultados de el analisis)"
+
+        # hovertip warnings
+        self.date_tip = "La fecha inicial  supera la fecha final"
         
         # words ant texts in the camara module
         self.title_camera = "Camara"
@@ -56,15 +59,14 @@ class Language:
         self.no_valid_name = "El nombre ingresado no es válido."
         # Messages Backup
         self.message_confirm_backup_title = "Confirmación de respaldo"
-        self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
+        self.message_confirm_backup_text = "Se ha realizado correctamente \nel respaldo de resultados"
         self.message_error_backup_title = "Error al realizar respaldo"
-        self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el respaldo de" \
-                                         " los resultados.\n\nVuelva intentar, si el problema persiste restaure el" \
-                                         " archivo\n resulrados, desde el menú Resultados en la barra de nenú"
-        self.ask_confirm_backup_title = "Confirmación respaldar"
+        self.message_error_backup_text = "Error en la base de datos\nEl sistema no logro realizar el " \
+                                         "respaldo de los resultados.\n\nVuelva intentar, si el problema persiste " \
+                                         "intente iniciar la base de datos nuevamente\n " \
+                                         "en el apartado de ajustes del nenú bar"
         self.ask_confirm_backup_text1 = "¿Desea respaldar el estado actual de resultados?\nResutlados:"
-        self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de " \
-                                        "*ResManualResultadosAAMMDD_hh-mm-ss.txt"
+        self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de: \n"
 
         # Messages Restore
         self.ask_confirm_restore_title = "Confirmación resturar"
@@ -85,8 +87,12 @@ class Language:
         self.mes_error_connect_db_title = "Fallo conexión BD"
         self.mes_error_connect_db_text = "Fallo en la conexión con la base de datos"
 
-    def language_change(self, num_lenguage):
-        if num_lenguage == 0:
+        # Messages main Window
+        self.ask_confirm_close_main_title = "Cerrar ventana principal"
+        self.ask_confirm_close_main_text = "Esta por cerrar la ventana principal, ¿desea continuar?"
+
+    def language_change(self, num_language):
+        if num_language == 0:
             # English Language
             # words and texts in the tabs
             self.results = "Results"
@@ -143,15 +149,15 @@ class Language:
             self.no_valid_name = "The name entered is not valid."
             # Messages Backup
             self.message_confirm_backup_title = "Confirmación de respaldo"
-            self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
+            self.message_confirm_backup_text = "Se ha realizado correctamente \nel respaldo de resultados"
             self.message_error_backup_title = "Error al realizar respaldo"
-            self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el respaldo"\
-                                             " de los resultados.\n\nVuelva intentar, si el problema persiste restaure"\
-                                             " el archivo\n resulrados, desde el menú Resultados en la barra de nenú"
+            self.message_error_backup_text = "Error en la base de datos\nEl sistema no logro realizar el " \
+                                             "respaldo de los resultados.\n\nVuelva intentar, si el problema" \
+                                             "persiste intente iniciar la base de datos nuevamente\n " \
+                                             "en el apartado de ajustes del nenú bar"
             self.ask_confirm_backup_title = "Confirmación respaldar"
             self.ask_confirm_backup_text1 = "¿Desa respaldar el estado actual de resultados?\nResutlados:"
-            self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de " \
-                                            "*ResManualResultadosAAMMDD_hh-mm-ss.txt"
+            self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de: \n"
 
             # Messages Restore
             self.ask_confirm_restore_title = "Confirmación resturar"
@@ -172,7 +178,12 @@ class Language:
             self.mes_error_connect_db_title = "Database connection error"
             self.mes_error_connect_db_text = "Failed to connect to the database"
 
-        elif num_lenguage == 1:
+            # Messages main Window
+            self.ask_confirm_close_main_title = "Cerrar ventana principal"
+            self.ask_confirm_close_main_text = "Esta por cerrar la ventana principal, ¿desea continuar?"
+
+
+        elif num_language == 1:
             # Spanish Language
             # words and texts in the tabs
             self.results = "Resultados"
@@ -230,16 +241,15 @@ class Language:
 
             # Messages Backup
             self.message_confirm_backup_title = "Confirmación de respaldo"
-            self.message_confirm_backup_text = "Se ha realizado correctamente el \nrespaldo de resultados"
+            self.message_confirm_backup_text = "Se ha realizado correctamente \nel respaldo de resultados"
             self.message_error_backup_title = "Error al realizar respaldo"
-            self.message_error_backup_text = "ARCHIVO CORRUPTO O INEXISTENTE\nEl sistema no logro realizar el " \
+            self.message_error_backup_text = "Error en la base de datos\nEl sistema no logro realizar el " \
                                              "respaldo de los resultados.\n\nVuelva intentar, si el problema persiste "\
-                                             "restaure el archivo\n resulrados, desde el menú Resultados en la barra " \
-                                             "de nenú"
+                                             "intente iniciar la base de datos nuevamente\n " \
+                                             "en el apartado de ajustes del nenú bar"
             self.ask_confirm_backup_title = "Confirmación respaldar"
             self.ask_confirm_backup_text1 = "¿Desa respaldar el estado actual de resultados?\nResutlados:"
-            self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de " \
-                                            "*ResManualResultadosAAMMDD_hh-mm-ss.txt"
+            self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de: \n"
 
             # Messages Restore
             self.ask_confirm_restore_title = "Confirmación resturar"
@@ -260,4 +270,6 @@ class Language:
             self.mes_error_connect_db_title = "Fallo conexión BD"
             self.mes_error_connect_db_text = "Fallo en la conexión con la base de datos"
 
-        
+            # Messages main Window
+            self.ask_confirm_close_main_title = "Cerrar ventana principal"
+            self.ask_confirm_close_main_text = "Esta por cerrar la ventana principal, ¿desea continuar?"

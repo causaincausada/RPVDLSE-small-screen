@@ -13,28 +13,27 @@ class DataBaseR:
             self.client.server_info()
             self.db = self.client.RPVDLSE
             self.collection_results = self.db.results
-        except pymongo.errors.ServerSelectionTimeoutError as timeout_error:
-            print(timeout_error)
-        except pymongo.errors.InvalidURI as invalid_uri:
-            print(invalid_uri)
-        except pymongo.errors.ConnectionFailure as connection_error:
-            print(connection_error)
+        except pymongo.errors.PyMongoError:
+            pass
 
     def on_connect(self):
         try:
             self.collection_results.find_one()
             return True
-        except pymongo.errors.ServerSelectionTimeoutError as timeout_error:
-            print(timeout_error)
-            return False
-        except pymongo.errors.InvalidURI as invalid_uri:
-            print(invalid_uri)
-            return False
-        except pymongo.errors.ConnectionFailure as connection_error:
-            print(connection_error)
+        except pymongo.errors.PyMongoError:
             return False
         except AttributeError:
             return False
+
+    def disconnect(self):
+        try:
+            self.client.close()
+            return True
+        except pymongo.errors.PyMongoError as mr:
+            print(mr)
+            return False
+        except AttributeError:
+            return True
 
     def get_result(self):
         pass
@@ -45,7 +44,7 @@ class DataBaseR:
                     hour_begin: datetime.datetime,
                     hour_end: datetime.datetime,
                     plate: str,
-                    name: str):
+                    name: []):
         if plate == "" and name == "":
             query_filters = {"$and": [{
                                 "$and": [{
@@ -70,7 +69,7 @@ class DataBaseR:
                                     "hour": {"$lte": hour_end}}
                                 ]
                             }, {
-                                "name": name
+                                "name": {"$regex": '^'+name}
                             }]}
         elif name == "":
             query_filters = {"$and": [{
@@ -84,7 +83,7 @@ class DataBaseR:
                                     "hour": {"$lte": hour_end}}
                                 ]
                             }, {
-                                "result": plate
+                                "result": {"$regex": '^'+plate}
                             }]}
         else:
             query_filters = {"$and": [{
@@ -98,12 +97,22 @@ class DataBaseR:
                                     "hour": {"$lte": hour_end}}
                                 ]
                             }, {
-                            "name": name
+                            "name": {"$regex": '^'+name}
                             }, {
-                            "result": plate
+                            "result": {"$regex": '^'+plate}
                             }]}
         response = self.collection_results.find(query_filters)
         return response
+
+    def get_size(self):
+        try:
+            cursor = self.collection_results.find()
+            tam = 0
+            for a in cursor:
+                tam += 1
+            return tam
+        except pymongo.errors.PyMongoError:
+            return -1
 
     def push_result(self, result=Result()):
         push = {
