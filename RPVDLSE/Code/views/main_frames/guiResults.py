@@ -1,4 +1,5 @@
 import datetime
+from fileinput import fileno
 import os
 import subprocess
 import tkinter as tk
@@ -318,7 +319,10 @@ class GuiResults(ttk.Frame):
                     self.get_results_gui()
                 else:
                     self.messages.lost_connection_db()
-                    subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"])
+                    try:
+                        subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"])
+                    except FileNotFoundError as a:
+                        print(a)
         except TypeError as te:
             print(te)
             print("Error en get result gui")

@@ -22,7 +22,10 @@ class ApplicationLogic:
     def __init__(self, props: Props, gui: Gui):
         self.props = props
         self.gui = gui
-        subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"])
+        try:
+            subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"])
+        except FileNotFoundError as a:
+            print(a)
         self.dataBaseR = DataBaseR(MONGO_HOST, MONGO_PORT, MONGO_TIMEOUT)
         # warnings in filters
         self.warnings = [[], [], [], []]
@@ -161,11 +164,16 @@ class ApplicationLogic:
             self.dataBaseR = DataBaseR(MONGO_HOST, MONGO_PORT, MONGO_TIMEOUT)
             return self.dataBaseR.on_connect()
         except pymongo.errors.ServerSelectionTimeoutError:
-            cb = subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"], stdout=subprocess.PIPE,
-                                  stderr=subprocess.STDOUT)
-            if len(cb.stdout.readlines()) == 0:
-                return True
-            return False
+            try:
+                cb = subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"], stdout=subprocess.PIPE,
+                                      stderr=subprocess.STDOUT)
+                if len(cb.stdout.readlines()) == 0:
+                    return True
+                return False
+            except FileNotFoundError as a:
+                print(a)
+                return False
+            
 
     # Results methods
     def on_connect_mongodb(self):
@@ -177,12 +185,17 @@ class ApplicationLogic:
             return False
 
     def disconnect_mongodb(self):
-        self.dataBaseR.disconnect()
-        cb = subprocess.Popen(["/usr/bin/systemctl", "stop", "mongod.service"], stdout=subprocess.PIPE,
-                              stderr=subprocess.STDOUT)
-        if len(cb.stdout.readlines()) == 0:
-            return True
-        return False
+        try:
+            self.dataBaseR.disconnect()
+            cb = subprocess.Popen(["/usr/bin/systemctl", "stop", "mongod.service"], stdout=subprocess.PIPE,
+                                  stderr=subprocess.STDOUT)
+            if len(cb.stdout.readlines()) == 0:
+                return True
+            return False
+        except FileNotFoundError as a:
+            print(a)
+            return False
+
 
     def drop_results(self):
         self.dataBaseR.drop()
@@ -191,41 +204,49 @@ class ApplicationLogic:
         return self.dataBaseR.get_size()
 
     def create_backup(self, path):
-        cb = subprocess.Popen(["/usr/bin/mongoexport", "--jsonFormat=canonical", '--uri="mongodb://localhost:27017"',
-                               "--collection=results", "--db=RPVDLSE", "--out="+path], stdout=subprocess.PIPE,
-                              stderr=subprocess.STDOUT)
-        res = cb.stdout.readlines()
         try:
-            connect = res[0].decode('utf-8')
-            correct = connect.find("connected to:")
-            if correct != -1:
-                size_check = res[1].decode('utf-8')
-                correct = size_check.find("exported {0} records".format(self.get_size_mongodb()))
+            cb = subprocess.Popen(["/usr/bin/mongoexport", "--jsonFormat=canonical", '--uri="mongodb://localhost:27017"',
+                                   "--collection=results", "--db=RPVDLSE", "--out="+path], stdout=subprocess.PIPE,
+                                  stderr=subprocess.STDOUT)
+            res = cb.stdout.readlines()
+            try:
+                connect = res[0].decode('utf-8')
+                correct = connect.find("connected to:")
                 if correct != -1:
-                    return True
-            return False
-        except TypeError:
-            return False
-        except IndexError:
+                    size_check = res[1].decode('utf-8')
+                    correct = size_check.find("exported {0} records".format(self.get_size_mongodb()))
+                    if correct != -1:
+                        return True
+                return False
+            except TypeError:
+                return False
+            except IndexError:
+                return False
+        except FileNotFoundError as a:
+            print(a)
             return False
 
     @staticmethod
     def update_restore_mongodb(path):
-        cb = subprocess.Popen(["/usr/bin/mongoimport", '--uri="mongodb://localhost:27017"', "--collection=results",
-                               "--db=RPVDLSE", "--file="+path], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        res = cb.stdout.readlines()
         try:
-            connect = res[0].decode('utf-8')
-            correct = connect.find("connected to:")
-            if correct != -1:
-                size_check = res[1].decode('utf-8')
-                correct = size_check.find("imported successfully")
+            cb = subprocess.Popen(["/usr/bin/mongoimport", '--uri="mongodb://localhost:27017"', "--collection=results",
+                                   "--db=RPVDLSE", "--file="+path], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            res = cb.stdout.readlines()
+            try:
+                connect = res[0].decode('utf-8')
+                correct = connect.find("connected to:")
                 if correct != -1:
-                    return True
-            return False
-        except TypeError:
-            return False
-        except IndexError:
+                    size_check = res[1].decode('utf-8')
+                    correct = size_check.find("imported successfully")
+                    if correct != -1:
+                        return True
+                return False
+            except TypeError:
+                return False
+            except IndexError:
+                return False
+        except FileNotFoundError as a:
+            print(a)
             return False
 
     def get_results(self, gui_date_begin=datetime.datetime, gui_date_end=datetime.datetime,

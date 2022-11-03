@@ -64,7 +64,7 @@ class Language:
         self.message_error_backup_text = "Error en la base de datos\nEl sistema no logro realizar el " \
                                          "respaldo de los resultados.\n\nVuelva intentar, si el problema persiste " \
                                          "intente iniciar la base de datos nuevamente\n " \
-                                         "en el apartado de ajustes del nenú bar"
+                                         "en el apartado de ajustes del menú bar"
         self.ask_confirm_backup_text1 = "¿Desea respaldar el estado actual de resultados?\nResutlados:"
         self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de: \n"
 
@@ -154,7 +154,7 @@ class Language:
             self.message_error_backup_text = "Error en la base de datos\nEl sistema no logro realizar el " \
                                              "respaldo de los resultados.\n\nVuelva intentar, si el problema" \
                                              "persiste intente iniciar la base de datos nuevamente\n " \
-                                             "en el apartado de ajustes del nenú bar"
+                                             "en el apartado de ajustes del menú bar"
             self.ask_confirm_backup_title = "Confirmación respaldar"
             self.ask_confirm_backup_text1 = "¿Desa respaldar el estado actual de resultados?\nResutlados:"
             self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de: \n"
@@ -246,7 +246,7 @@ class Language:
             self.message_error_backup_text = "Error en la base de datos\nEl sistema no logro realizar el " \
                                              "respaldo de los resultados.\n\nVuelva intentar, si el problema persiste "\
                                              "intente iniciar la base de datos nuevamente\n " \
-                                             "en el apartado de ajustes del nenú bar"
+                                             "en el apartado de ajustes del menú bar"
             self.ask_confirm_backup_title = "Confirmación respaldar"
             self.ask_confirm_backup_text1 = "¿Desa respaldar el estado actual de resultados?\nResutlados:"
             self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de: \n"
