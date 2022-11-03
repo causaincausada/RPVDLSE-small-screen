@@ -25,7 +25,8 @@ class Messages:
 
     # messages Restore
     def ask_confirm_restore(self):
-        tkinter.messagebox.askokcancel(self.language.ask_confirm_restore_title, self.language.ask_confirm_restore_text)
+        return tkinter.messagebox.askokcancel(self.language.ask_confirm_restore_title,
+                                              self.language.ask_confirm_restore_text)
 
     def message_confirm_restore(self):
         tkinter.messagebox.showinfo(self.language.Message_confirm_restore_title,

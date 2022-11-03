@@ -34,7 +34,7 @@ class GuiMenuBar(Menu):
         restore_menu.add_command(
             label=self.language.restore,
             font=("", size_font_menu_item),
-            command=self.messages.ask_confirm_restore
+            command=self.act_restore_all
         )
         # add items in menu language
         self.variable_language = tk.IntVar()
@@ -51,7 +51,7 @@ class GuiMenuBar(Menu):
             variable=self.variable_language,
             command=self.act_rb_change
         )
-        
+
         # add menu radiobuttons Language in settings menu
         settings_menu.add_cascade(
             label=self.language.language,
@@ -118,8 +118,27 @@ class GuiMenuBar(Menu):
             self.messages.message_error_backup()
 
     def act_select_backup(self):
-        filename = askopenfilename()
-        print(filename)
+        path = os.path.dirname(__file__)
+        initialdir = os.path.join(path, '../../../persistence/')
+        filename = askopenfilename(initialdir=initialdir)
+        if len(filename) != 0:
+            if self.messages.ask_confirm_restore():
+                if not self.root.app_logic.on_connect_mongodb():
+                    if self.root.app_logic.try_connect_mongodb():
+                        if self.root.app_logic.drop_results():
+                            self.restore_backup_event(filename)
+                        else:
+                            self.messages.message_error_restore()
+                    else:
+                        self.messages.message_error_restore()
+                else:
+                    self.root.app_logic.drop_results()
+                    self.restore_backup_event(filename)
+
+    def act_restore_all(self):
+        if self.messages.ask_confirm_restore():
+            self.root.app_logic.drop_results()
+            self.root.frame_tab_results.get_results_gui()
 
     def create_backup_event(self, auto=True, name=""):
         path = os.path.dirname(__file__)
@@ -147,12 +166,18 @@ class GuiMenuBar(Menu):
             else:
                 second = now.second
             filename = os.path.join(path, '../../../persistence/ResAutoResults{0}{1}{2}_{3}-{4}-{5}.json'.format(
-                                        year, month, day, hour, minute, second))
+                year, month, day, hour, minute, second))
         else:
             filename = os.path.join(path, '../../../persistence/{0}'.format(name))
         if self.root.app_logic.create_backup(filename):
             self.messages.message_confirm_backup()
         else:
             self.messages.message_error_backup()
-    def restore_backup_event(self):
-        pass
+
+    def restore_backup_event(self, path):
+        if self.root.app_logic.update_restore_mongodb(path=path):
+            self.messages.message_confirm_restore()
+            self.root.frame_tab_results.get_results_gui()
+        else:
+            self.messages.message_error_restore()
+            self.root.frame_tab_results.get_results_gui()

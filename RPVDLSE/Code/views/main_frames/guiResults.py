@@ -333,7 +333,7 @@ class GuiResults(ttk.Frame):
 
     def update_warnings(self, warnings):
         warnings1 = ToolTip(self.warning_icon_date, self.language.date_tip)
-        self.warning_icon_date.configure(state=DISABLED)
+        #self.warning_icon_date.configure(state=DISABLED)
         #warnings1.set_active(False)
         #warnings = []
         #warnings1 = ["a", "b"]
@@ -341,5 +341,4 @@ class GuiResults(ttk.Frame):
         #for a in warnings:
         #    for b in warnings1:
         #        print(b)
-
 

@@ -184,12 +184,16 @@ class ApplicationLogic:
             return True
         return False
 
+    def drop_results(self):
+        self.dataBaseR.drop()
+
     def get_size_mongodb(self):
         return self.dataBaseR.get_size()
 
     def create_backup(self, path):
-        cb = subprocess.Popen(["/usr/bin/mongoexport", '--uri="mongodb://localhost:27017"', "--collection=results",
-                               "--db=RPVDLSE", "--out="+path], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        cb = subprocess.Popen(["/usr/bin/mongoexport", "--jsonFormat=canonical", '--uri="mongodb://localhost:27017"',
+                               "--collection=results", "--db=RPVDLSE", "--out="+path], stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT)
         res = cb.stdout.readlines()
         try:
             connect = res[0].decode('utf-8')
@@ -197,6 +201,25 @@ class ApplicationLogic:
             if correct != -1:
                 size_check = res[1].decode('utf-8')
                 correct = size_check.find("exported {0} records".format(self.get_size_mongodb()))
+                if correct != -1:
+                    return True
+            return False
+        except TypeError:
+            return False
+        except IndexError:
+            return False
+
+    @staticmethod
+    def update_restore_mongodb(path):
+        cb = subprocess.Popen(["/usr/bin/mongoimport", '--uri="mongodb://localhost:27017"', "--collection=results",
+                               "--db=RPVDLSE", "--file="+path], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        res = cb.stdout.readlines()
+        try:
+            connect = res[0].decode('utf-8')
+            correct = connect.find("connected to:")
+            if correct != -1:
+                size_check = res[1].decode('utf-8')
+                correct = size_check.find("imported successfully")
                 if correct != -1:
                     return True
             return False

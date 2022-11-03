@@ -4,3 +4,5 @@ class Result:
         self.date = date
         self.hour = hour
         self.result = result
+
+

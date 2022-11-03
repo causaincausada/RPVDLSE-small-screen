@@ -128,5 +128,8 @@ class DataBaseR:
             print(write_error)
             return False
 
+    def drop(self):
+        self.collection_results.drop()
+
     def connection_close(self):
         self.client.close()
