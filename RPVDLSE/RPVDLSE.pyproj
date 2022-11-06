@@ -24,6 +24,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Code\application_logic\applicationLogic.py" />
+    <Compile Include="Code\props\recognition.py" />
     <Compile Include="Code\props\img.py" />
     <Compile Include="Code\props\props.py" />
     <Compile Include="Code\views\gui.py">
