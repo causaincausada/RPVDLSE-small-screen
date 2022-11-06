@@ -1,10 +1,12 @@
 import datetime
 import subprocess
+import cv2
 import pymongo.errors
 from Code.props.props import Props
 from Code.props.img import Img
 from Code.views.gui import Gui
 from Code.props.dataBaseR import DataBaseR
+from Code.props.recognition import Recognition
 import re
 
 
@@ -44,6 +46,9 @@ class ApplicationLogic:
         self.set_images_gui()
         self.status_next_back_btn()
         self.disabled_bottom_btns()
+
+        # init recognition class
+        self.r = Recognition()
 
     # Gallery methods
     def select_image(self, img_num: int):
@@ -158,6 +163,12 @@ class ApplicationLogic:
             return True
         else:
             return False
+
+    def recognition_plate(self):
+        img = cv2.imread(self.select_img.path_and_name)
+        results = self.r.yolo_predictions(img)
+        print(results)
+
 
     def try_connect_mongodb(self):
         try:

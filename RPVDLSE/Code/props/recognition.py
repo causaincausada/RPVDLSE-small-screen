@@ -16,10 +16,11 @@ class Recognition:
         # LOAD YOLO MODEL
         try:            
             path_project = os.path.dirname(__file__)
-            path = os.path.join(path_project, '/best.onnx')
+            path = os.path.join(path_project, 'best.onnx')
         except (OSError, IOError) as e:
             print(e)
 
+        #print(path, path_project)
         self.net = cv2.dnn.readNetFromONNX(path)
         self.net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
         self.net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
@@ -84,7 +85,7 @@ class Recognition:
         print("tam: ", len(index))
 
         if(len(index) == 0):
-            print("No se encontró la placa vehicular.")
+            print("No se encontro la placa vehicular.")
             return '0'
         for ind in index:
             x,y,w,h =  boxes_np[ind]
@@ -100,8 +101,8 @@ class Recognition:
         ## step-1: detections
         input_image, detections = self.get_detections(img)
         ## step-2: NMS
-        boxes_np, confidences_np, index = 
-        self.non_maximum_supression(input_image, detections)
+        boxes_np, confidences_np, index = self.non_maximum_supression(input_image, 
+                                                                      detections)
         ## step-3: getRecognition
         result = self.get_recognition(img,boxes_np,confidences_np,index)
         return result
@@ -118,7 +119,7 @@ class Recognition:
         plate_binary = self.binary(plate_img)
 
         detections = self.reader.readtext(plate_img, 
-                                          allowlist='-0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', 
+                                          allowlist='-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 
                                           min_size=150)
         if len(detections) == 0:
             print("No se pueden leer los caracteres de la placa vehicular.")
@@ -132,6 +133,7 @@ class Recognition:
             for detection in detections: 
                 print(detection)
                 if(detection[2] > max):
+                    max = detection[2]
                     text = detection[1].strip()
                     print("placa:", text)#Quitar
             return text   
@@ -140,7 +142,7 @@ class Recognition:
         x,y,w,h = bbox
         yh=0
         xw=0
-        height, width, __ = img.shape
+        height, width, __ = image.shape
         if(x<0): x=0
         if(y<0): y=0
         if(w<0): w=0

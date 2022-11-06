@@ -358,6 +358,7 @@ class GuiGallery(ttk.Frame):
 
     def click_btn_recognize(self):
         print("recognize")
+        print(self.root.app_logic.recognition_plate())
         self.root.app_logic.select_image(NO_SELECT)
     
     def click_btn_img_1(self):
