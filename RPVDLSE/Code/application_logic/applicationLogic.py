@@ -2,11 +2,13 @@ import datetime
 import subprocess
 import cv2
 import pymongo.errors
+import os
 from Code.props.props import Props
 from Code.props.img import Img
 from Code.views.gui import Gui
 from Code.props.dataBaseR import DataBaseR
 from Code.props.recognition import Recognition
+from Code.props.result import Result
 import re
 
 
@@ -167,6 +169,12 @@ class ApplicationLogic:
     def recognition_plate(self):
         img = cv2.imread(self.select_img.path_and_name)
         results = self.r.yolo_predictions(img)
+        r_db = Result(
+                self.select_img.name,
+                os.system('date +"%Y-%m-%d"'),#Only Linux
+                os.system('date +"%H:%M:%S"'),#Only Linux
+                results
+            )
         print(results)
 
 

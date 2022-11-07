@@ -20,7 +20,6 @@ class Recognition:
         except (OSError, IOError) as e:
             print(e)
 
-        #print(path, path_project)
         self.net = cv2.dnn.readNetFromONNX(path)
         self.net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
         self.net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
@@ -82,11 +81,10 @@ class Recognition:
 
     def get_recognition(self,image,boxes_np,confidences_np,index):
         r = ""
-        print("tam: ", len(index))
 
         if(len(index) == 0):
-            print("No se encontro la placa vehicular.")
-            return '0'
+            print("No license plate found.")
+            return 'No license plate found'
         for ind in index:
             x,y,w,h =  boxes_np[ind]
             bb_conf = confidences_np[ind]
@@ -114,7 +112,8 @@ class Recognition:
         plate_img = roi[y:y+h, x:x+w]
 
         if 0 in plate_img.shape:
-            return '0'
+            print("No license plate found.")
+            return 'No license plate found'
 
         plate_binary = self.binary(plate_img)
 
@@ -122,14 +121,12 @@ class Recognition:
                                           allowlist='-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 
                                           min_size=150)
         if len(detections) == 0:
-            print("No se pueden leer los caracteres de la placa vehicular.")
-            return '1'
+            print("The characters on the license plate cannot be read.")
+            return 'The characters on the license plate cannot be read'
         else:
             text = ""
             max = 0.0
             print(len(detections))
-            if(len(detections)>1):
-                print("####")
             for detection in detections: 
                 print(detection)
                 if(detection[2] > max):
