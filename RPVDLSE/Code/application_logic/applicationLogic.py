@@ -45,12 +45,14 @@ class ApplicationLogic:
 
         # init gallery
         self.calculate_lists_imgs()  # Calculate lists_imgs
+        # init recognition class
+        self.r = Recognition()
+    
+    def after_init(self):
+        # init gallery
         self.set_images_gui()
         self.status_next_back_btn()
         self.disabled_bottom_btns()
-
-        # init recognition class
-        self.r = Recognition()
 
     # Gallery methods
     def select_image(self, img_num: int):
@@ -123,6 +125,7 @@ class ApplicationLogic:
     def repaint(self):
         self.set_images_gui()
         self.status_next_back_btn()
+        self.disabled_bottom_btns()
 
     def get_empty_img(self):
         return self.props.get_empty(self.status_int_ext)

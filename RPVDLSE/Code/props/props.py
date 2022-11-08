@@ -14,6 +14,10 @@ class Props:
             path_project = os.path.dirname(__file__)
             self.path_internal = os.path.join(path_project, '../../ImagesSIS')
             self.path_external = os.path.join(path_project, '../../ImagesEXT')
+            if(not os.path.isdir(self.path_internal)):
+                os.makedirs(self.path_internal)
+            if(not os.path.isdir(self.path_external)):
+                os.makedirs(self.path_external)
         except (OSError, IOError) as e:
             print(e)
 
