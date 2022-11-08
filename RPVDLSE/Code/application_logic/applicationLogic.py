@@ -171,11 +171,12 @@ class ApplicationLogic:
         results = self.r.yolo_predictions(img)
         r_db = Result(
                 self.select_img.name,
-                os.system('date +"%Y-%m-%d"'),#Only Linux
-                os.system('date +"%H:%M:%S"'),#Only Linux
+                datetime.datetime.now(),#Only Linux
+                datetime.datetime.now(),#Only Linux
                 results
             )
         print(results)
+        print(datetime.datetime.now())
 
 
     def try_connect_mongodb(self):
