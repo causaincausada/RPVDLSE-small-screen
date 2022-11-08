@@ -117,9 +117,13 @@ class Recognition:
 
         plate_binary = self.binary(plate_img)
 
-        detections = self.reader.readtext(plate_img, 
-                                          allowlist='-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 
-                                          min_size=150)
+        try:        
+            detections = self.reader.readtext(plate_img, 
+                                    allowlist='-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 
+                                    min_size=150)
+        except:
+              print("An exception occurred")
+
         if len(detections) == 0:
             print("The characters on the license plate cannot be read.")
             return 'The characters on the license plate cannot be read'
