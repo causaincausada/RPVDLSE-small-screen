@@ -247,7 +247,7 @@ class GuiGallery(ttk.Frame):
         i = 0
         for l_img in self.l_imgs:
             if i < num_imgs:
-                l_img.config(text=images[i].name)
+                l_img.config(text=images[i].name[-25:])
             else:
                 l_img.config(text="")
             i += 1
