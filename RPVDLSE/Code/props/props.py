@@ -31,7 +31,7 @@ class Props:
         except (OSError, IOError) as e:
             print(e)
         
-        return paths_imgs
+        return sorted(paths_imgs, key=str.lower, reverse = True)
 
     def get_imgs_external(self):
         paths_imgs = []
@@ -42,7 +42,7 @@ class Props:
         except (OSError, IOError) as e:
             print(e)
 
-        return paths_imgs
+        return sorted(paths_imgs, key=str.lower)
 
     @staticmethod
     def get_empty(int_or_ext):
