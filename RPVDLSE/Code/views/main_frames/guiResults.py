@@ -147,7 +147,8 @@ class GuiResults(ttk.Frame):
         # layout pack
         self.frame_filters_name = ttk.Frame(self.frame_filters)
         self.frame_filters_name.columnconfigure(0, weight=1)
-        self.frame_filters_name.columnconfigure(1, weight=10)
+        self.frame_filters_name.columnconfigure(1, weight=1)
+        self.frame_filters_name.columnconfigure(2, weight=10)
         label_filters_name = ttk.Label(self.frame_filters_name, 
                                        text=self.language.name_image,
                                        font=("", size_font_labels))
@@ -157,9 +158,11 @@ class GuiResults(ttk.Frame):
             sv=self.entry_name_text: self.ch_entry_name()
         )
         self.entry_name = ttk.Entry(self.frame_filters_name, textvariable=self.entry_name_text)
+        self.warning_icon_name = ttk.Label(self.frame_filters_name, image=self.warning_icon)
 
         label_filters_name.grid(column=0, row=0, sticky="news", pady=5, padx=5)
-        self.entry_name.grid(column=1, row=0, sticky="news", pady=5, padx=25)
+        self.warning_icon_name.grid(column=1, row=0, sticky="nes", pady=5, padx=5)
+        self.entry_name.grid(column=2, row=0, sticky="news", pady=5, padx=25)
         
         # Frame results table
         self.frame_results = ttk.Frame(self)
@@ -196,6 +199,12 @@ class GuiResults(ttk.Frame):
         self.frame_filters_date_hour.grid(column=0, row=1, columnspan=2, sticky="news", pady=2, padx=2)
         self.frame_filters_name.grid(column=0, row=2, sticky="news", pady=2, padx=2)
 
+        self.warnings = [None, None, None, None]
+        self.warnings[0] = ToolTip(self.warning_icon_date, self.language.warning_date, wraplength=300)
+        self.warnings[1] = ToolTip(self.warning_icon_hour, self.language.warning_hour_inversed, wraplength=300)
+        self.warnings[2] = ToolTip(self.warning_icon_plate, self.language.warning_invalid_plate_name, wraplength=300)
+        self.warnings[3] = ToolTip(self.warning_icon_name, self.language.warning_invalid_name, wraplength=300)
+
     # Functions tracing StringVars
     def ch_date_entry_begin(self):
         try:
@@ -203,12 +212,15 @@ class GuiResults(ttk.Frame):
                 self.gui_date_begin = datetime.datetime(year=self.date_entry_begin.get_date().year,
                                                         month=self.date_entry_begin.get_date().month,
                                                         day=self.date_entry_begin.get_date().day)
+                self.ch_dates()
                 self.get_results_gui()
             else:
                 self.gui_date_begin = datetime.datetime(2000, 1, 1, 0, 0, 0)
+                self.ch_dates()
                 self.get_results_gui()
         except AttributeError:
             self.gui_date_begin = datetime.datetime(2000, 1, 1, 0, 0, 0)
+            self.ch_dates()
             self.get_results_gui()
 
     def ch_date_entry_end(self):
@@ -217,12 +229,15 @@ class GuiResults(ttk.Frame):
                 self.gui_date_end = datetime.datetime(year=self.date_entry_end.get_date().year,
                                                       month=self.date_entry_end.get_date().month,
                                                       day=self.date_entry_end.get_date().day)
+                self.ch_dates()
                 self.get_results_gui()
             else:
                 self.gui_date_end = datetime.datetime.now()
+                self.ch_dates()
                 self.get_results_gui()
         except AttributeError:
             self.gui_date_end = datetime.datetime.now()
+            self.ch_dates()
             self.get_results_gui()
 
     def ch_dates(self):
@@ -232,25 +247,34 @@ class GuiResults(ttk.Frame):
         try:
             val, self.gui_hour_begin = self.root.app_logic.is_hour_valid(self.hour_entry_begin_text.get())
             if val:
+                self.ch_hours()
                 self.get_results_gui()
             else:
                 self.gui_hour_begin = datetime.datetime(year=1970, month=1, day=1, hour=0, minute=0, second=0)
+                self.ch_hours()
                 self.get_results_gui()
         except AttributeError:
             self.gui_hour_begin = datetime.datetime(year=1970, month=1, day=1, hour=0, minute=0, second=0)
+            self.ch_hours()
             self.get_results_gui()
 
     def ch_hour_entry_end(self):
         try:
             val, self.gui_hour_end = self.root.app_logic.is_hour_valid(self.hour_entry_end_text.get())
             if val:
+                self.ch_hours()
                 self.get_results_gui()
             else:
                 self.gui_hour_end = datetime.datetime(year=1970, month=1, day=1, hour=23, minute=59, second=59)
+                self.ch_hours()
                 self.get_results_gui()
         except AttributeError:
             self.gui_hour_end = datetime.datetime(year=1970, month=1, day=1, hour=23, minute=59, second=59)
+            self.ch_hours()
             self.get_results_gui()
+
+    def ch_hours(self):
+        self.root.app_logic.is_hour_inversed(self.gui_hour_begin, self.gui_hour_end)
 
     def ch_entry_plate(self):
         try:
@@ -267,7 +291,7 @@ class GuiResults(ttk.Frame):
 
     def ch_entry_name(self):
         try:
-            val = self.root.app_logic.is_name_plate_valid(self.entry_name_text.get())
+            val = self.root.app_logic.is_name_valid(self.entry_name_text.get())
             if val:
                 self.gui_name = self.entry_name_text.get()
                 self.get_results_gui()
@@ -286,6 +310,7 @@ class GuiResults(ttk.Frame):
                                                                                 gui_time_begin=self.gui_hour_begin,
                                                                                 gui_time_end=self.gui_hour_end,
                                                                                 gui_plate=self.gui_plate, gui_name=self.gui_name)
+                self.update_warnings(array_warnings)
                 self.table_results.delete(*self.table_results.get_children())
 
                 for a in array_results:
@@ -333,16 +358,39 @@ class GuiResults(ttk.Frame):
                 print(ae.name)
                 print("Error ae get result gui")
 
-
-
     def update_warnings(self, warnings):
-        warnings1 = ToolTip(self.warning_icon_date, self.language.date_tip)
-        #self.warning_icon_date.configure(state=DISABLED)
-        #warnings1.set_active(False)
-        #warnings = []
-        #warnings1 = ["a", "b"]
-        #warnings.append(warnings1)
-        #for a in warnings:
-        #    for b in warnings1:
-        #        print(b)
+        if warnings[0]:
+            self.warnings[0].set_active(False)
+            self.warning_icon_date.configure(state=DISABLED)
+        else:
+            self.warnings[0].set_active(True)
+            self.warning_icon_date.configure(state=NORMAL)
+        if warnings[1] and warnings[2]:
+            self.warnings[1].set_active(False)
+            self.warning_icon_hour.configure(state=DISABLED)
+        elif not warnings[1]:
+            self.warnings[1].set_text(self.language.warning_hour_inversed)
+            self.warnings[1].set_active(True)
+            self.warning_icon_hour.configure(state=NORMAL)
+        elif not warnings[2]:
+            self.warnings[1].set_text(self.language.warning_hour_invalid)
+            self.warnings[1].set_active(True)
+            self.warning_icon_hour.configure(state=NORMAL)
+        else:
+            self.warnings[1].set_text(self.language.warning_hour_invalid+"\n"+self.language.warning_hour_inversed)
+            self.warnings[1].set_active(True)
+            self.warning_icon_hour.configure(state=NORMAL)
+        if warnings[3]:
+            self.warnings[2].set_active(False)
+            self.warning_icon_plate.configure(state=DISABLED)
+        else:
+            self.warnings[2].set_active(True)
+            self.warning_icon_plate.configure(state=NORMAL)
+        if warnings[4]:
+            self.warnings[3].set_active(False)
+            self.warning_icon_name.configure(state=DISABLED)
+        else:
+            self.warnings[3].set_active(True)
+            self.warning_icon_name.configure(state=NORMAL)
+
 

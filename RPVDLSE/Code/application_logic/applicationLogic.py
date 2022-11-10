@@ -2,7 +2,6 @@ import datetime
 import subprocess
 import cv2
 import pymongo.errors
-import os
 from Code.props.props import Props
 from Code.props.img import Img
 from Code.views.gui import Gui
@@ -32,7 +31,7 @@ class ApplicationLogic:
             print(a)
         self.dataBaseR = DataBaseR(MONGO_HOST, MONGO_PORT, MONGO_TIMEOUT)
         # warnings in filters
-        self.warnings = [[], [], [], []]
+        self.warnings = [True, True, True, True, True]
 
         # image data
         self.imgs_tk = []  # Display images
@@ -171,13 +170,14 @@ class ApplicationLogic:
         results = self.r.yolo_predictions(img)
         r_db = Result(
                 self.select_img.name,
-                datetime.datetime.now(),#Only Linux
-                datetime.datetime.now(),#Only Linux
+                datetime.datetime(year=datetime.datetime.now().year, month=datetime.datetime.now().month,
+                                  day=datetime.datetime.now().day, hour=0, minute=0, second=0),
+                datetime.datetime(year=1970, month=1, day=1,
+                                  hour=datetime.datetime.now().hour, minute=datetime.datetime.now().minute,
+                                  second=datetime.datetime.now().second),
                 results
             )
-        print(results)
-        print(datetime.datetime.now())
-
+        self.dataBaseR.push_result(r_db)
 
     def try_connect_mongodb(self):
         try:
@@ -193,7 +193,6 @@ class ApplicationLogic:
             except FileNotFoundError as a:
                 print(a)
                 return False
-            
 
     # Results methods
     def on_connect_mongodb(self):
@@ -216,7 +215,6 @@ class ApplicationLogic:
             print(a)
             return False
 
-
     def drop_results(self):
         self.dataBaseR.drop()
 
@@ -225,9 +223,9 @@ class ApplicationLogic:
 
     def create_backup(self, path):
         try:
-            cb = subprocess.Popen(["/usr/bin/mongoexport", "--jsonFormat=canonical", '--uri="mongodb://localhost:27017"',
-                                   "--collection=results", "--db=RPVDLSE", "--out="+path], stdout=subprocess.PIPE,
-                                  stderr=subprocess.STDOUT)
+            cb = subprocess.Popen(["/usr/bin/mongoexport", "--jsonFormat=canonical",
+                                   '--uri="mongodb://localhost:27017"', "--collection=results", "--db=RPVDLSE",
+                                   "--out="+path], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             res = cb.stdout.readlines()
             try:
                 connect = res[0].decode('utf-8')
@@ -271,49 +269,26 @@ class ApplicationLogic:
 
     def get_results(self, gui_date_begin=datetime.datetime, gui_date_end=datetime.datetime,
                     gui_time_begin=datetime.datetime, gui_time_end=datetime.datetime, gui_plate="", gui_name=""):
-        # plates = self.seg_plate(gui_plate)
         response = self.dataBaseR.get_results(date_begin=gui_date_begin, date_end=gui_date_end,
                                               hour_begin=gui_time_begin, hour_end=gui_time_end,
                                               plate=gui_plate, name=gui_name)
         return response, self.warnings
 
-    @staticmethod
-    def seg_plate(plate):
-        array_plates = []
-        if plate != "":
-            tam = len(plate)
-            while tam != 0:
-                separate = plate.find(",")
-                if separate != -1:
-                    sub_plate = plate[0:int(separate)]
-                    n = 1
-                    try:
-                        for i in range(1, len(plate)-int(separate)):
-                            if plate[int(separate)+i] == " ":
-                                n += 1
-                            else:
-                                break
-                        plate = plate[int(separate)+n: len(plate)]
-                    except IndexError:
-                        plate = plate[int(separate)+n: len(plate)]
-                    if sub_plate != "" or sub_plate != " ":
-                        if sub_plate != "":
-                            array_plates.append(sub_plate)
-                        tam = len(plate)
-                else:
-                    if plate != "":
-                        array_plates.append(plate)
-                    break
-        return array_plates
-
-    @staticmethod
-    def is_dates_valid(date_begin, date_end):
+    def is_dates_valid(self, date_begin, date_end):
         if date_end < date_begin:
-            return false
-        return true
+            self.warnings[0] = False
+            return False
+        self.warnings[0] = True
+        return True
 
-    @staticmethod
-    def is_hour_valid(hour):
+    def is_hour_inversed(self, hour_begin, hour_end):
+        if hour_end < hour_begin:
+            self.warnings[1] = False
+            return False
+        self.warnings[1] = True
+        return True
+
+    def is_hour_valid(self, hour):
         try:
             if re.match("^[0-9:]+$", hour):
                 separate = hour.find(":")
@@ -322,18 +297,42 @@ class ApplicationLogic:
                     str_minute = hour[separate+1: len(hour)]
                     if int(str_hour) < 23 and int(str_minute) < 60:
                         time = datetime.datetime(year=1970, month=1, day=1, hour=int(str_hour), minute=int(str_minute))
+                        self.warnings[2] = True
                         return True, time
             time = datetime.datetime(year=1970, month=1, day=1, hour=0, minute=0)
+            if hour == "":
+                self.warnings[2] = True
+                return False, time
+            self.warnings[2] = False
             return False, time
         except ValueError:
             time = datetime.datetime(year=1970, month=1, day=1, hour=0, minute=0)
+            if hour == "":
+                self.warnings[2] = True
+                return False, time
+            self.warnings[2] = False
             return False, time
 
-    @staticmethod
-    def is_name_plate_valid(name_plate: str):
-        if re.match("^[A-Za-z0-9_ ,-]+$", name_plate):
+    def is_name_plate_valid(self, name_plate: str):
+        if re.match("^[A-Za-z0-9_ -]+$", name_plate):
+            self.warnings[3] = True
             return True
         else:
+            if name_plate == "":
+                self.warnings[3] = True
+                return False
+            self.warnings[3] = False
+            return False
+
+    def is_name_valid(self, name: str):
+        if re.match("^[A-Za-z0-9_ -]+$", name):
+            self.warnings[4] = True
+            return True
+        else:
+            if name == "":
+                self.warnings[4] = True
+                return False
+            self.warnings[4] = False
             return False
 
     # other methods

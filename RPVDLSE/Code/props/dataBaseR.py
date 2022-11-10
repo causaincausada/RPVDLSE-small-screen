@@ -115,11 +115,12 @@ class DataBaseR:
             return -1
 
     def push_result(self, result=Result()):
+        print("")
         push = {
-            "name": result.name,
+            "name": str(result.name),
             "date": result.date,
             "hour": result.hour,
-            "result": result.result
+            "result": str(result.result)
         }
         try:
             self.collection_results.insert_one(push)

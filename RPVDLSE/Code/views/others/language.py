@@ -91,6 +91,13 @@ class Language:
         self.ask_confirm_close_main_title = "Cerrar ventana principal"
         self.ask_confirm_close_main_text = "Esta por cerrar la ventana principal, ¿desea continuar?"
 
+        # Warnings messages
+        self.warning_date = "La fecha de inicio supera la fecha de fin"
+        self.warning_hour_inversed = "La hora de inicio supera la hora de fin"
+        self.warning_hour_invalid = "El formato de una fecha es incorrecto\n Formato ejemplo: 13:00 "
+        self.warning_invalid_plate_name = "El formato de la placa es incorrecto\n Caracteres permitidos: A-Za-z0-9_ -"
+        self.warning_invalid_name = "El formato de nombre es incorrecto\n Caracteres permitidos: A-Za-z0-9_ -"
+
     def language_change(self, num_language):
         if num_language == 0:
             # English Language
