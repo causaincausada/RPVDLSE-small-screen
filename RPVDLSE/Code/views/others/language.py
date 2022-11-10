@@ -113,7 +113,7 @@ class Language:
             self.spanish = "Spanish"
             self.english = "English"
             self.language = "Language"
-            self.restore_menu_file_label = 'Restaurar desde un archivo'
+            self.restore_menu_file_label = 'Restore from a file'
             self.restore_menu_initiate_label = 'Restaurar a estado inicial'
             
             # word and texts in the gallery window

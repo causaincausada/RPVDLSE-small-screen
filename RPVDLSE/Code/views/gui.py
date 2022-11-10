@@ -64,6 +64,7 @@ class Gui(ThemedTk):
 
     def set_controller(self, app_logic):
         self.app_logic = app_logic
+        self.app_logic.after_init()
 
     def change_tab(self, event=None):
         if self.tab_control.tab(self.tab_control.select(), "text") == self.language.results:

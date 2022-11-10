@@ -120,6 +120,8 @@ class GuiMenuBar(Menu):
     def act_select_backup(self):
         path = os.path.dirname(__file__)
         initialdir = os.path.join(path, '../../../persistence/')
+        if(not os.path.isdir(initialdir)):
+                os.makedirs(initialdir)
         filename = askopenfilename(initialdir=initialdir)
         if len(filename) != 0:
             if self.messages.ask_confirm_restore():
@@ -142,6 +144,9 @@ class GuiMenuBar(Menu):
 
     def create_backup_event(self, auto=True, name=""):
         path = os.path.dirname(__file__)
+        initialdir = os.path.join(path, '../../../persistence/')
+        if(not os.path.isdir(initialdir)):
+                os.makedirs(initialdir)
         if auto:
             now = datetime.datetime.now()
             year = str(now.year)[2:]

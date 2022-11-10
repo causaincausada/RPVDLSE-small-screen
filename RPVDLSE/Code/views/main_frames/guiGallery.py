@@ -7,6 +7,7 @@ from Code.views.others.language import Language
 from Code.views.others.messages import Messages
 from Code.views.others.guiCamera import GuiCamera
 from Code.props.img import Img
+from Code.props.tooltip import ToolTip
 
 DEFAULT_SIZE_RADIO_BUTTON = 15
 NUM_IMGS_GALLERY = 12
@@ -247,7 +248,11 @@ class GuiGallery(ttk.Frame):
         i = 0
         for l_img in self.l_imgs:
             if i < num_imgs:
-                l_img.config(text=images[i].name[-25:])
+                if len(images[i].name) > 20:
+                    l_img.config(text=images[i].name[0:20] + "...")
+                else:
+                    l_img.config(text=images[i].name)
+                l_tool_tip = ToolTip(l_img, images[i].name)
             else:
                 l_img.config(text="")
             i += 1

@@ -1,0 +1,3 @@
+{"_id":{"$oid":"633c680563d6404a099de396"},"name":"hola","date":{"$date":{"$numberLong":"963792000000"}},"hour":{"$date":{"$numberLong":"52560000"}},"result":["ARP-912"]}
+{"_id":{"$oid":"633c692bac14e09b04acdc53"},"name":"hola","date":{"$date":{"$numberLong":"963878400000"}},"hour":{"$date":{"$numberLong":"46800000"}},"result":["ARP-911","ARP-912"]}
+{"_id":{"$oid":"633c69b5bbba56f93c6d70e9"},"name":"hola","date":{"$date":{"$numberLong":"963705600000"}},"hour":{"$date":{"$numberLong":"54000000"}},"result":["APR"]}
