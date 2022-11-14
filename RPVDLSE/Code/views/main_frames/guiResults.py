@@ -178,10 +178,10 @@ class GuiResults(ttk.Frame):
 
         self.table_results["columns"] = ("1", "2", "3", "4")
         self.table_results['show'] = 'headings'
-        self.table_results.column("1", width=100, anchor='c')
-        self.table_results.column("2", width=100, anchor='c')
-        self.table_results.column("3", width=100, anchor='c')
-        self.table_results.column("4", width=100, anchor='c')
+        self.table_results.column("1", width=120, anchor='c')
+        self.table_results.column("2", width=35, anchor='c')
+        self.table_results.column("3", width=35, anchor='c')
+        self.table_results.column("4", width=210, anchor='c')
         self.table_results.heading("1", text=self.language.name)
         self.table_results.heading("2", text=self.language.date)
         self.table_results.heading("3", text=self.language.hour)

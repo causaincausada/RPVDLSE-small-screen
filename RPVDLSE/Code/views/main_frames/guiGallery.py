@@ -213,7 +213,7 @@ class GuiGallery(ttk.Frame):
         # Buttons Frame Down: Gallery Images Options
         self.btn_open = ttk.Button(frame_down, text=self.language.open, 
                                    command=self.click_btn_open)
-        self.btn_delete = ttk.Button(frame_down, text=self.language.delet,
+        self.btn_delete = ttk.Button(frame_down, text=self.language.delete,
                                      command=self.click_btn_delete)
         self.btn_rename = ttk.Button(frame_down, text=self.language.rename,
                                      command=self.click_btn_rename)
@@ -308,7 +308,7 @@ class GuiGallery(ttk.Frame):
     def click_btn_camera(self):
         self.root.app_logic.select_image(NO_SELECT)
         self.btn_camera.config(state=DISABLED)
-        self.camera = GuiCamera(self)
+        self.camera = GuiCamera(self, self.root.rute_cam)
         self.camera.initialize()
         self.camera.mainloop()
 
@@ -363,7 +363,11 @@ class GuiGallery(ttk.Frame):
 
     def click_btn_recognize(self):
         print("recognize")
-        print(self.root.app_logic.recognition_plate())
+        res, result = self.root.app_logic.recognition_plate()
+        if res:
+            self.messages.message_recognition_complete(result)
+        else:
+            self.messages.message_error_db(result)
         self.root.app_logic.select_image(NO_SELECT)
     
     def click_btn_img_1(self):

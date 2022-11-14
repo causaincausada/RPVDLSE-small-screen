@@ -180,17 +180,23 @@ class ApplicationLogic:
                                   second=datetime.datetime.now().second),
                 results
             )
-        self.dataBaseR.push_result(r_db)
+        if self.dataBaseR.push_result(r_db):
+            return True, results
+        else:
+            return False, results
 
     def try_connect_mongodb(self):
         try:
             self.dataBaseR = DataBaseR(MONGO_HOST, MONGO_PORT, MONGO_TIMEOUT)
+            if self.dataBaseR.on_connect():
+                self.gui.frame_tab_results.get_results_gui()
             return self.dataBaseR.on_connect()
         except pymongo.errors.ServerSelectionTimeoutError:
             try:
                 cb = subprocess.Popen(["/usr/bin/systemctl", "start", "mongod.service"], stdout=subprocess.PIPE,
                                       stderr=subprocess.STDOUT)
                 if len(cb.stdout.readlines()) == 0:
+                    self.gui.frame_tab_results.get_results_gui()
                     return True
                 return False
             except FileNotFoundError as a:
@@ -337,6 +343,9 @@ class ApplicationLogic:
                 return False
             self.warnings[4] = False
             return False
+
+    def ch_rute_camera(self, rute):
+        self.gui.ch_rute(rute)
 
     # other methods
     @staticmethod

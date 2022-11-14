@@ -128,6 +128,8 @@ class DataBaseR:
         except pymongo.errors.WriteError as write_error:
             print(write_error)
             return False
+        except AttributeError:
+            return False
 
     def drop(self):
         self.collection_results.drop()

@@ -20,6 +20,7 @@ class Gui(ThemedTk):
         # Language pack
         self.app_logic = None
         self.num_language = 0
+        self.rute_cam = 0
         self.language = Language()
         self.messages = Messages(self.num_language)
         self.language.language_change(self.num_language)
@@ -59,16 +60,21 @@ class Gui(ThemedTk):
         self.frame_tab_results = GuiResults(self)
         self.tab_control.add(self.frame_tab_gallery, text=self.language.gallery)
         self.tab_control.add(self.frame_tab_results, text=self.language.results)
-        self.tab_control.pack(expand=1, fill ="both")
+        self.tab_control.pack(expand=1, fill="both")
         self.app_logic.update_gallery()
+        self.app_logic.try_connect_mongodb()
 
     def set_controller(self, app_logic):
         self.app_logic = app_logic
         self.app_logic.after_init()
+        self.app_logic.try_connect_mongodb()
 
     def change_tab(self, event=None):
         if self.tab_control.tab(self.tab_control.select(), "text") == self.language.results:
             self.frame_tab_results.get_results_gui()
+
+    def ch_rute(self, n_rute):
+        self.rute_cam = n_rute
 
     def on_close(self):
         if self.messages.ask_confirm_close_main():

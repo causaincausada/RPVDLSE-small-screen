@@ -18,6 +18,7 @@ class GuiMenuBar(Menu):
         restore_menu = Menu(root, tearoff=0)
         settings_menu = Menu(root, tearoff=0)
         language_menu = Menu(root, tearoff=0)
+        cam_menu = Menu(root, tearoff=0)
         size_font_menu_item = 15
         # add a menu item to the menu --back up--
         results_menu.add_command(
@@ -51,12 +52,31 @@ class GuiMenuBar(Menu):
             variable=self.variable_language,
             command=self.act_rb_change
         )
+        self.variable_camera = tk.IntVar()
+        self.variable_camera.set(value=root.rute_cam)
+        cam_menu.add_radiobutton(
+            label=self.language.local_camera,
+            value=0,
+            variable=self.variable_camera,
+            command=self.act_ch_rute_local
+        )
+        cam_menu.add_radiobutton(
+            label=self.language.ip_camera,
+            value=1,
+            variable=self.variable_camera,
+            command=self.act_ch_rute_ip
+        )
 
         # add menu radiobuttons Language in settings menu
         settings_menu.add_cascade(
             label=self.language.language,
             font=("", size_font_menu_item),
             menu=language_menu
+        )
+        settings_menu.add_cascade(
+            label=self.language.camera,
+            font=("", size_font_menu_item),
+            menu=cam_menu
         )
         # add a menu item to the menu --restore--
         results_menu.add_cascade(
@@ -79,6 +99,18 @@ class GuiMenuBar(Menu):
 
     def act_rb_change(self):
         self.root.change_language(self.variable_language.get())
+
+    def act_ch_rute_local(self):
+        try:
+            self.root.app_logic.ch_rute_camera(0)
+        except AttributeError:
+            pass
+
+    def act_ch_rute_ip(self):
+        try:
+            self.root.app_logic.ch_rute_camera(self.messages.new_host_ip())
+        except AttributeError:
+            pass
 
     def act_ask_confirm_backup(self):
         try:
@@ -120,8 +152,8 @@ class GuiMenuBar(Menu):
     def act_select_backup(self):
         path = os.path.dirname(__file__)
         initialdir = os.path.join(path, '../../../persistence/')
-        if(not os.path.isdir(initialdir)):
-                os.makedirs(initialdir)
+        if not os.path.isdir(initialdir):
+            os.makedirs(initialdir)
         filename = askopenfilename(initialdir=initialdir)
         if len(filename) != 0:
             if self.messages.ask_confirm_restore():

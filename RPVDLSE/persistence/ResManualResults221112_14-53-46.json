@@ -1,0 +1,32 @@
+{"_id":{"$oid":"636d24b39b105192ec8a4d48"},"name":"IMG_20221012_114348.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"37203000"}},"result":"ADP-073-4 "}
+{"_id":{"$oid":"636d24e19b105192ec8a4d49"},"name":"IMG_20221012_114348.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"37249000"}},"result":"ADP-073-4 "}
+{"_id":{"$oid":"636d29bf9b105192ec8a4d4a"},"name":"Cars29.png","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38495000"}},"result":"No license plate found"}
+{"_id":{"$oid":"636d29cb9b105192ec8a4d4b"},"name":"Cars13.png","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38507000"}},"result":"The characters on the license plate cannot be read "}
+{"_id":{"$oid":"636d29e49b105192ec8a4d4c"},"name":"IMG_20221012_114435.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38532000"}},"result":"ZHV-610-C "}
+{"_id":{"$oid":"636d2a009b105192ec8a4d4d"},"name":"Cars10.png","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38560000"}},"result":"2765 "}
+{"_id":{"$oid":"636d2a099b105192ec8a4d4e"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38569000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a289b105192ec8a4d4f"},"name":"123456789012345678901234567890.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38600000"}},"result":"GPM-625-D "}
+{"_id":{"$oid":"636d2a2b9b105192ec8a4d50"},"name":"Cars21.png","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38603000"}},"result":"The characters on the license plate cannot be read "}
+{"_id":{"$oid":"636d2a379b105192ec8a4d51"},"name":"Cars6.png","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38615000"}},"result":"8021IN "}
+{"_id":{"$oid":"636d2a469b105192ec8a4d52"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38630000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a489b105192ec8a4d53"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38632000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a4b9b105192ec8a4d54"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38635000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a4d9b105192ec8a4d55"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38637000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a509b105192ec8a4d56"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38640000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a529b105192ec8a4d57"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38642000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a549b105192ec8a4d58"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38644000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a579b105192ec8a4d59"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38647000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a599b105192ec8a4d5a"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38649000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a5b9b105192ec8a4d5b"},"name":"IMG_20221012_114358.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38651000"}},"result":"ZHD-217-C "}
+{"_id":{"$oid":"636d2a639b105192ec8a4d5c"},"name":"IMG_20221012_114435.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38659000"}},"result":"ZHV-610-C "}
+{"_id":{"$oid":"636d2a659b105192ec8a4d5d"},"name":"IMG_20221012_114435.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38661000"}},"result":"ZHV-610-C "}
+{"_id":{"$oid":"636d2a699b105192ec8a4d5e"},"name":"IMG_20221012_114435.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38665000"}},"result":"ZHV-610-C "}
+{"_id":{"$oid":"636d2a6d9b105192ec8a4d5f"},"name":"IMG_20221012_114435.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38669000"}},"result":"ZHV-610-C "}
+{"_id":{"$oid":"636d2a739b105192ec8a4d60"},"name":"IMG_20221012_114435.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38675000"}},"result":"ZHV-610-C "}
+{"_id":{"$oid":"636d2a7f9b105192ec8a4d61"},"name":"IMG_20221012_114348.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"38687000"}},"result":"ADP-073-4 "}
+{"_id":{"$oid":"636db82cd88b695dc1056fde"},"name":"IMGSIS221110_20-46-32.jpg","date":{"$date":{"$numberLong":"1668038400000"}},"hour":{"$date":{"$numberLong":"74956000"}},"result":"No license plate found"}
+{"_id":{"$oid":"636e89759a69722af8252a08"},"name":"123456789012345678901234567890.jpg","date":{"$date":{"$numberLong":"1668124800000"}},"hour":{"$date":{"$numberLong":"42133000"}},"result":"GPM-625-D "}
+{"_id":{"$oid":"636e89849a69722af8252a09"},"name":"Cars16.png","date":{"$date":{"$numberLong":"1668124800000"}},"hour":{"$date":{"$numberLong":"42148000"}},"result":"The characters on the license plate cannot be read "}
+{"_id":{"$oid":"636e89ad9a69722af8252a0a"},"name":"Cars58.png","date":{"$date":{"$numberLong":"1668124800000"}},"hour":{"$date":{"$numberLong":"42189000"}},"result":"The characters on the license plate cannot be read "}
+{"_id":{"$oid":"636e89b69a69722af8252a0b"},"name":"Cars55.png","date":{"$date":{"$numberLong":"1668124800000"}},"hour":{"$date":{"$numberLong":"42198000"}},"result":"No license plate found"}
+{"_id":{"$oid":"636e8a83531c334b39f4b8df"},"name":"Cars54.png","date":{"$date":{"$numberLong":"1668124800000"}},"hour":{"$date":{"$numberLong":"42403000"}},"result":"The characters on the license plate cannot be read "}

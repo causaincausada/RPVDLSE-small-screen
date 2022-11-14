@@ -11,7 +11,7 @@ from Code.views.others.language import Language
 
 
 class GuiCamera(tk.Toplevel):
-    def __init__(self, root, master=None):
+    def __init__(self, root, rute, master=None):
         super().__init__(master=master)
         self.img_back = None
         self.button_snapshot = None
@@ -24,9 +24,12 @@ class GuiCamera(tk.Toplevel):
         self.resizable(False, False)
         self.messages = Messages(root.root.num_language)
         self.language = Language()
+        self.rute = rute
 
     def initialize(self):
-        self.cap = cv2.VideoCapture(0)
+        # self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture()
+        self.cap.open(self.rute)
         if not self.cap.isOpened():
             self.messages.message_error_camera()
             self.click_button_back()
@@ -110,3 +113,4 @@ class GuiCamera(tk.Toplevel):
         cv2.imwrite('ImagesSIS/{}'.format(photo_name), frame_save)
         time.sleep(.5)
         self.button_snapshot.config(state=NORMAL)
+        self.root.root.app_logic.update_gallery()

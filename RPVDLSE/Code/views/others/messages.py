@@ -60,6 +60,15 @@ class Messages:
     def message_error_camera(self):
         tkinter.messagebox.showerror(self.language.message_error_camera_title, self.language.message_error_camera_text)
 
+    # messages recognition
+    def message_recognition_complete(self, result):
+        tkinter.messagebox.showinfo(self.language.message_recognition_complete_title,
+                                    self.language.message_recognition_complete_text.format(str(result)))
+
+    def message_error_db(self, result):
+        tkinter.messagebox.showerror(self.language.error_database_title,
+                                     self.language.error_database_text.format(str(result)))
+
     # messages results
     def lost_connection_db(self):
         tkinter.messagebox.showerror(self.language.mes_error_connect_db_title, self.language.mes_error_connect_db_text)
@@ -67,3 +76,7 @@ class Messages:
     def ask_confirm_close_main(self):
         return tkinter.messagebox.askokcancel(self.language.ask_confirm_close_main_title,
                                               self.language.ask_confirm_close_main_text)
+
+    def new_host_ip(self):
+        return tkinter.simpledialog.askstring(self.language.message_ip_camera_title,
+                                              self.language.message_ip_camera_text)
