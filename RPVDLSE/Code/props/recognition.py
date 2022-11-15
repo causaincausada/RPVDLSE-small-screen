@@ -81,6 +81,7 @@ class Recognition:
 
     def get_recognition(self,image,boxes_np,confidences_np,index):
         r = ""
+        max = 0
 
         if(len(index) == 0):
             print("No license plate found.")
@@ -89,8 +90,10 @@ class Recognition:
             x,y,w,h =  boxes_np[ind]
             bb_conf = confidences_np[ind]
             conf_text = 'plate: {:.0f}%'.format(bb_conf*100)
-            license_text = self.extract_text(image,boxes_np[ind])
-            r+=license_text + " "
+            license_text, size = self.extract_text(image,boxes_np[ind])
+            if(size>=max):
+                r = license_text
+                max = size
 
         return r
 
@@ -111,9 +114,12 @@ class Recognition:
         x, y, w, h = self.roi_plate(roi)
         plate_img = roi[y:y+h, x:x+w]
 
+        hh, ww, __ = plate_img.shape
+        size = hh * ww
+
         if 0 in plate_img.shape:
             print("No license plate found.")
-            return 'No license plate found'
+            return ('No license plate found', 0)
 
         plate_binary = self.binary(plate_img)
 
@@ -126,7 +132,7 @@ class Recognition:
 
         if len(detections) == 0:
             print("The characters on the license plate cannot be read.")
-            return 'The characters on the license plate cannot be read'
+            return ('The characters on the license plate cannot be read', 0)
         else:
             text = ""
             max = 0.0
@@ -137,7 +143,7 @@ class Recognition:
                     max = detection[2]
                     text = detection[1].strip()
                     print("placa:", text)#Quitar
-            return text   
+            return (text, size)
 
     def check_bounds_roi(self,bbox, image):
         x,y,w,h = bbox
