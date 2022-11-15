@@ -28,8 +28,7 @@ class GuiCamera(tk.Toplevel):
 
     def initialize(self):
         # self.cap = cv2.VideoCapture(0)
-        self.cap = cv2.VideoCapture()
-        self.cap.open(self.rute)
+        self.cap = cv2.VideoCapture(self.rute)
         if not self.cap.isOpened():
             self.messages.message_error_camera()
             self.click_button_back()
@@ -71,8 +70,21 @@ class GuiCamera(tk.Toplevel):
                 self.cam_video.image = img
                 self.cam_video.after(100, self.visualize)
             else:
-                self.messages.message_error_camera()
-                self.click_button_back()
+                for a in range(15):
+                    ret, self.frame = self.cap.read()
+                    if ret:
+                        break
+                if ret:
+                    self.frame = imutils.resize(self.frame, width=640)
+                    self.frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
+                    im = Image.fromarray(self.frame)
+                    img = ImageTk.PhotoImage(image=im)
+                    self.cam_video.configure(image=img)
+                    self.cam_video.image = img
+                    self.cam_video.after(100, self.visualize)
+                else:
+                    self.messages.message_error_camera()
+                    self.click_button_back()
 
     def finalize(self):
         self.cap.release()
