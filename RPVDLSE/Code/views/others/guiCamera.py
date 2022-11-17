@@ -68,9 +68,9 @@ class GuiCamera(tk.Toplevel):
                 img = ImageTk.PhotoImage(image=im)
                 self.cam_video.configure(image=img)
                 self.cam_video.image = img
-                self.cam_video.after(100, self.visualize)
+                self.cam_video.after(1, self.visualize)
             else:
-                for a in range(15):
+                for a in range(5):
                     ret, self.frame = self.cap.read()
                     if ret:
                         break
@@ -81,7 +81,7 @@ class GuiCamera(tk.Toplevel):
                     img = ImageTk.PhotoImage(image=im)
                     self.cam_video.configure(image=img)
                     self.cam_video.image = img
-                    self.cam_video.after(100, self.visualize)
+                    self.cam_video.after(1, self.visualize)
                 else:
                     self.messages.message_error_camera()
                     self.click_button_back()

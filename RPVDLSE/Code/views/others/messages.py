@@ -77,6 +77,5 @@ class Messages:
         return tkinter.messagebox.askokcancel(self.language.ask_confirm_close_main_title,
                                               self.language.ask_confirm_close_main_text)
 
-    def new_host_ip(self):
-        return tkinter.simpledialog.askstring(self.language.message_ip_camera_title,
-                                              self.language.message_ip_camera_text)
+    def error_rute(self):
+        tkinter.messagebox.showerror(self.language.error_rute_title, self.language.error_rute_text)

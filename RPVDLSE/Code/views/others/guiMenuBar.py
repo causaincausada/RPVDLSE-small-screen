@@ -1,24 +1,27 @@
 import tkinter as tk
 import os
 import datetime
-from tkinter import Menu
+from tkinter import Menu, DISABLED, NORMAL
 from tkinter.filedialog import askopenfilename
 from Code.views.others.language import Language
 from Code.views.others.messages import Messages
+from Code.views.others.inputRute import InputRute
 
 
 class GuiMenuBar(Menu):
     def __init__(self, root):
         super().__init__(root)
+        self.rute = None
+        self.camera = None
         self.root = root
         self.language = Language()
         self.messages = Messages(root.num_language)
         self.language.language_change(root.num_language)
         results_menu = Menu(root, tearoff=0)
         restore_menu = Menu(root, tearoff=0)
-        settings_menu = Menu(root, tearoff=0)
+        self.settings_menu = Menu(root, tearoff=0)
         language_menu = Menu(root, tearoff=0)
-        cam_menu = Menu(root, tearoff=0)
+        self.cam_menu = Menu(root, tearoff=0)
         size_font_menu_item = 15
         # add a menu item to the menu --back up--
         results_menu.add_command(
@@ -54,13 +57,13 @@ class GuiMenuBar(Menu):
         )
         self.variable_camera = tk.IntVar()
         self.variable_camera.set(value=root.rute_cam)
-        cam_menu.add_radiobutton(
+        self.cam_menu.add_radiobutton(
             label=self.language.local_camera,
             value=0,
             variable=self.variable_camera,
             command=self.act_ch_rute_local
         )
-        cam_menu.add_radiobutton(
+        self.cam_menu.add_radiobutton(
             label=self.language.ip_camera,
             value=1,
             variable=self.variable_camera,
@@ -68,15 +71,20 @@ class GuiMenuBar(Menu):
         )
 
         # add menu radiobuttons Language in settings menu
-        settings_menu.add_cascade(
+        self.settings_menu.add_cascade(
             label=self.language.language,
             font=("", size_font_menu_item),
             menu=language_menu
         )
-        settings_menu.add_cascade(
+        self.settings_menu.add_cascade(
             label=self.language.camera,
             font=("", size_font_menu_item),
-            menu=cam_menu
+            menu=self.cam_menu
+        )
+        self.settings_menu.add_command(
+            label=self.language.try_connect,
+            font=("", size_font_menu_item),
+            command=self.try_connect_mongodb
         )
         # add a menu item to the menu --restore--
         results_menu.add_cascade(
@@ -94,8 +102,11 @@ class GuiMenuBar(Menu):
         self.add_cascade(
             label=self.language.settings,
             font=("", size_font_menu_item),
-            menu=settings_menu
+            menu=self.settings_menu
         )
+
+    def try_connect_mongodb(self):
+        self.root.app_logic.try_connect_mongodb
 
     def act_rb_change(self):
         self.root.change_language(self.variable_language.get())
@@ -107,10 +118,8 @@ class GuiMenuBar(Menu):
             pass
 
     def act_ch_rute_ip(self):
-        try:
-            self.root.app_logic.ch_rute_camera(self.messages.new_host_ip())
-        except AttributeError:
-            pass
+        self.rute = InputRute(self)
+        self.rute.initialize()
 
     def act_ask_confirm_backup(self):
         try:

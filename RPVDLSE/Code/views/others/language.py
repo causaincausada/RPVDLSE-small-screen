@@ -16,9 +16,21 @@ class Language:
         self.local_camera = "Camara local"
         self.ip_camera = "Ip camara"
         self.camera = "Camara"
+        self.try_connect = "Intentar conectar Base de datos"
         self.restore_menu_file_label = 'Restaurar desde un archivo'
         self.restore_menu_initiate_label = 'Restaurar a estado inicial'
-            
+
+        # words camera ip
+        self.protocol = "Protocolo"
+        self.user = "Usuario"
+        self.password = "Contraseña"
+        self.ip = "Ip"
+        self.port = "Puerto"
+        self.ext = "Extras"
+        self.protection = "Protegido"
+        self.confirm = "Confirmar"
+        self.cancel = "Cancelar"
+
         # word and texts in the galery window
         self.open = "Abrir"
         self.delete = "Eliminar"
@@ -107,9 +119,9 @@ class Language:
         self.warning_invalid_plate_name = "El formato de la placa es incorrecto\n Caracteres permitidos: A-Za-z0-9_ -"
         self.warning_invalid_name = "El formato de nombre es incorrecto\n Caracteres permitidos: A-Za-z0-9_ -"
 
-        # New Ip cam
-        self.message_ip_camera_title = "Set camera Ip"
-        self.message_ip_camera_text = "Introduzca el host de la camara ip:"
+        # New rute cam
+        self.error_rute_title = "Error en la ruta"
+        self.error_rute_text = "Faltan datos por ingresar "
 
     def language_change(self, num_language):
         if num_language == 0:
@@ -129,8 +141,20 @@ class Language:
             self.local_camera = "Local camera"
             self.ip_camera = "Ip camera"
             self.camera = "Camera"
+            self.try_connect = "Try to connect database"
             self.restore_menu_file_label = 'Restore from a file'
             self.restore_menu_initiate_label = 'Restore to initial state'
+
+            # words camera ip
+            self.protocol = "Protocol"
+            self.user = "User"
+            self.password = "Password"
+            self.ip = "Ip"
+            self.port = "Port"
+            self.ext = "Args"
+            self.protection = "Protection"
+            self.confirm = "Confirm"
+            self.cancel = "Cancel"
             
             # word and texts in the gallery window
             self.open = "Open"
@@ -217,9 +241,9 @@ class Language:
             self.warning_invalid_plate_name = "The plate format is incorrect\n Allowed characters: A-Za-z0-9_ -"
             self.warning_invalid_name = "The name format is incorrect\n Allowed characters: A-Za-z0-9_ -"
 
-            # New Ip cam
-            self.message_ip_camera_title = "Set camera Ip"
-            self.message_ip_camera_text = "Enter the IP camera host:"
+            # New rute cam
+            self.error_rute_title = "Route error"
+            self.error_rute_text = "Missing data to enter"
 
         elif num_language == 1:
             # Spanish Language
@@ -238,8 +262,20 @@ class Language:
             self.local_camera = "Camara local"
             self.ip_camera = "Ip camara"
             self.camera = "Camara"
+            self.try_connect = "Intentar conectar Base de datos"
             self.restore_menu_file_label = 'Restaurar desde un archivo'
             self.restore_menu_initiate_label = 'Restaurar a estado inicial'
+
+            # words camera ip
+            self.protocol = "Protocolo"
+            self.user = "Usuario"
+            self.password = "Contraseña"
+            self.ip = "Ip"
+            self.port = "Puerto"
+            self.ext = "Extras"
+            self.protection = "Protegido"
+            self.confirm = "Confirmar"
+            self.cancel = "Cancelar"
 
             # word and texts in the galery window
             self.open = "Abrir"
@@ -292,9 +328,10 @@ class Language:
             self.message_confirm_backup_text = "Se ha realizado correctamente \nel respaldo de resultados"
             self.message_error_backup_title = "Error al realizar respaldo"
             self.message_error_backup_text = "Error en la base de datos\nEl sistema no logró realizar el " \
-                                             "respaldo de los resultados.\n\nVuelva intentar, si el problema persiste "\
+                                             "respaldo de los resultados.\n\nVuelva intentar, si el problema persiste " \
                                              "intente iniciar la base de datos nuevamente\n " \
                                              "en el apartado de ajustes del menú bar"
+            self.ask_confirm_backup_title = "Confirmación respaldar"
             self.ask_confirm_backup_text1 = "¿Desea respaldar el estado actual de resultados?\nResutlados:"
             self.ask_confirm_backup_text2 = "\nEl archivo será guardado bajo el nombre de: \n"
 
@@ -325,10 +362,9 @@ class Language:
             self.warning_date = "La fecha de inicio supera la fecha de fin"
             self.warning_hour_inversed = "La hora de inicio supera la hora de fin"
             self.warning_hour_invalid = "El formato de una hora es incorrecto\n Formato ejemplo: 13:00 "
-            self.warning_invalid_plate_name = "El formato de la placa es incorrecto\n " \
-                                              "Caracteres permitidos: A-Za-z0-9_ -"
+            self.warning_invalid_plate_name = "El formato de la placa es incorrecto\n Caracteres permitidos: A-Za-z0-9_ -"
             self.warning_invalid_name = "El formato de nombre es incorrecto\n Caracteres permitidos: A-Za-z0-9_ -"
 
-            # New Ip cam
-            self.message_ip_camera_title = "Set camera Ip"
-            self.message_ip_camera_text = "Introduzca el host de la camara ip:"
+            # New rute cam
+            self.error_rute_title = "Error en la ruta"
+            self.error_rute_text = "Faltan datos por ingresar "

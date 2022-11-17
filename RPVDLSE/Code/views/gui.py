@@ -63,6 +63,7 @@ class Gui(ThemedTk):
         self.tab_control.pack(expand=1, fill="both")
         self.app_logic.update_gallery()
         self.app_logic.try_connect_mongodb()
+        self.app_logic.reset_warnings()
 
     def set_controller(self, app_logic):
         self.app_logic = app_logic

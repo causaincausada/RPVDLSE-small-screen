@@ -12,6 +12,7 @@ class DataBaseR:
             self.client = pymongo.MongoClient(self.mongo_uri, serverSelectionTimeoutMS=mongo_timeout)
             self.client.server_info()
             self.db = self.client.RPVDLSE
+            self.collection_ip_cam = self.db.ipcam
             self.collection_results = self.db.results
         except pymongo.errors.PyMongoError:
             pass
@@ -34,9 +35,6 @@ class DataBaseR:
             return False
         except AttributeError:
             return True
-
-    def get_result(self):
-        pass
 
     def get_results(self,
                     date_begin: datetime.datetime,
@@ -115,7 +113,6 @@ class DataBaseR:
             return -1
 
     def push_result(self, result=Result()):
-        print("")
         push = {
             "name": str(result.name),
             "date": result.date,
@@ -130,6 +127,36 @@ class DataBaseR:
             return False
         except AttributeError:
             return False
+
+    def set_ip_cam(self, protection, protocol, user, passw, ip, port, ext):
+        push = {
+            "protection": protection,
+            "protocol": protocol,
+            "user": user,
+            "pass": passw,
+            "ip": ip,
+            "port": port,
+            "ext": ext
+        }
+        try:
+            self.drop_ip_cam()
+            self.collection_ip_cam.insert_one(push)
+            return True
+        except pymongo.errors.WriteError as write_error:
+            print(write_error)
+            return False
+        except AttributeError:
+            return False
+
+    def get_ip_cam(self):
+        try:
+            cursor = self.collection_ip_cam.find()
+            return cursor
+        except pymongo.errors.PyMongoError:
+            return -1
+
+    def drop_ip_cam(self):
+        self.collection_ip_cam.drop()
 
     def drop(self):
         self.collection_results.drop()

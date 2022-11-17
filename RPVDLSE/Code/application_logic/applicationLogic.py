@@ -79,6 +79,9 @@ class ApplicationLogic:
     def set_images_gui(self):
         self.list_tk()
         self.gui.frame_tab_gallery.set_images(self.imgs_tk)
+
+    def reset_warnings(self):
+        self.warnings = [True, True, True, True, True]
     
     def calculate_lists_imgs(self):
         if self.status_int_ext == 0:
@@ -344,8 +347,16 @@ class ApplicationLogic:
             self.warnings[4] = False
             return False
 
-    def ch_rute_camera(self, rute):
+    def ch_rute_camera(self, protection, protocol, user, passw, ip, port, ext):
+        self.dataBaseR.set_ip_cam(protection, protocol, user, passw, ip, port, ext)
+        if protection:
+            rute = "{0}://{1}:{2}@{3}:{4}/{5}".format(protocol, user, passw, ip, port, ext)
+        else:
+            rute = "{0}://{1}:{2}/{3}".format(protocol, ip, port, ext)
         self.gui.ch_rute(rute)
+
+    def get_rute_camera(self):
+        return self.dataBaseR.get_ip_cam()
 
     # other methods
     @staticmethod
