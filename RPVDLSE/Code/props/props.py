@@ -2,8 +2,7 @@ import os
 from PIL import Image
 
 
-MAX_SIZE_INT = (160, 160)
-MAX_SIZE_EXT = (215, 150)
+MAX_SIZE = (210, 150)
 INTERNAL = 0
 EXTERNAL = 1
 
@@ -53,10 +52,7 @@ class Props:
             image = temp_image.copy()
             temp_image.close()
         
-            if int_or_ext == INTERNAL:
-                image.thumbnail(MAX_SIZE_INT)
-            else:
-                image = image.resize(MAX_SIZE_EXT)
+            image = image.resize(MAX_SIZE)
         
             return image.copy()
         except (OSError, IOError) as e:
