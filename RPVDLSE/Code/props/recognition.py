@@ -125,8 +125,8 @@ class Recognition:
 
         try:        
             detections = self.reader.readtext(plate_img, 
-                                    allowlist='-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 
-                                    min_size=150)
+                                    allowlist='-0123456789ABCDEFGHJKLMNPRSTUVWXYZ', 
+                                    min_size=int(size*0.007))
         except:
               print("An exception occurred")
 

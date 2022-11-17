@@ -5,8 +5,7 @@ import cv2
 from PIL import Image, ImageTk
 
 
-MAX_SIZE_INT = (160, 160)
-MAX_SIZE_EXT = (215, 150)
+MAX_SIZE = (210, 150)
 INTERNAL = 0
 EXTERNAL = 1
 
@@ -25,10 +24,7 @@ class Img:
             image = temp_image.copy()
             temp_image.close()
         
-            if int_or_ext == INTERNAL:
-                image.thumbnail(MAX_SIZE_INT)
-            else:
-                image = image.resize(MAX_SIZE_EXT)
+            image = image.resize(MAX_SIZE)
         
             self.python_image = ImageTk.PhotoImage(image)
             self.height = image.height
