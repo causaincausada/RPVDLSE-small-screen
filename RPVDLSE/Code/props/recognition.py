@@ -2,7 +2,47 @@ import cv2
 import numpy as np
 import os
 import easyocr
-import random
+import re
+
+
+numbers_to_characters = {
+    '0' : 'D',
+    '1' : 'L',
+    '2' : 'Z',
+    '3' : 'B',
+    '4' : 'A',
+    '5' : 'S',
+    '6' : 'G',
+    '7' : 'Z',
+    '8' : 'B',
+    '9' : 'B',
+}
+
+characters_to_numbers = {
+    'A' : '4',
+    'B' : '8',
+    'C' : '0',
+    'D' : '0',
+    'E' : '8',
+    'F' : '8',
+    'G' : '6',
+    'H' : '4',
+    'J' : '9',
+    'K' : '8',
+    'L' : '1',
+    'M' : '4',
+    'N' : '4',
+    'P' : '8',
+    'R' : '8',
+    'S' : '5',
+    'T' : '7',
+    'U' : '0',
+    'V' : '4',
+    'W' : '4',
+    'X' : '8',
+    'Y' : '9',
+    'Z' : '7'
+}
 
 class Recognition:
     def __init__(self):
@@ -125,8 +165,11 @@ class Recognition:
 
         try:        
             detections = self.reader.readtext(plate_img, 
-                                    allowlist='-0123456789ABCDEFGHJKLMNPRSTUVWXYZ', 
-                                    min_size=int(size*0.007))
+                                              mag_ratio = 2.2, 
+                                              link_threshold = 0.01, 
+                                              allowlist='-0123456789ABCDEFGHJKLMNPRSTUVWXYZ', 
+                                              min_size=int(size*0.007)
+                                              )
         except:
               print("An exception occurred")
 
@@ -143,7 +186,7 @@ class Recognition:
                     max = detection[2]
                     text = detection[1].strip()
                     print("placa:", text)#Quitar
-            return (text, size)
+            return (self.regular_expressions(text), size)
 
     def check_bounds_roi(self,bbox, image):
         x,y,w,h = bbox
@@ -189,3 +232,50 @@ class Recognition:
         erode = cv2.erode(thresh_gauss, kernel)
         return erode
 
+    def regular_expressions(self, string):
+        if re.search("([A-Z0-9]{3}-[A-Z0-9]{2}-[A-Z0-9]{2})", string):
+            g = string.split("-")
+            s1 = self.letters_group(''.join(g[0]))
+            s2 = self.numbers_group(''.join(g[1]))
+            s3 = self.numbers_group(''.join(g[2]))
+            string = s1 + '-' + s2 + '-' + s3
+        else:
+            hyphen = string.count('-')
+            if(hyphen == 2):
+                g = string.split("-")
+                grups = list(filter(None, g))
+                size = len(grups)
+            
+                if(size == 3):
+                    grups[1] = grups[1][-4:]
+                    if(len(grups[1]) == 4):
+                        grups[0] = grups[0][-2:]
+                    else: 
+                        grups[0] = grups[0][-3:]
+                    grups[2] = grups[2][:1]
+                
+                    s1 = self.letters_group(''.join(grups[0]))
+                    s2 = self.numbers_group(''.join(grups[1]))
+                    s3 = self.letters_group(''.join(grups[2]))
+                    string = s1 + '-' + s2 + '-' + s3
+            
+        return string
+
+    def letters_group(self, string):
+        s = ""
+        for character in string:
+            if(character.isdecimal()):
+                s += numbers_to_characters[character]
+            else:
+                s += character
+    
+        return s
+    
+    def numbers_group(self, string):
+        s = ""
+        for number in string:
+            if(not number.isdecimal()):
+                s += characters_to_numbers[number]
+            else:
+                s += number
+        return s
