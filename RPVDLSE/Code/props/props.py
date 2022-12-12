@@ -2,7 +2,7 @@ import os
 from PIL import Image
 
 
-MAX_SIZE = (210, 150)
+MAX_SIZE = (79, 56)
 INTERNAL = 0
 EXTERNAL = 1
 
