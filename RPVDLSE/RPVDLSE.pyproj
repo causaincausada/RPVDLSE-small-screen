@@ -38,6 +38,7 @@
     <Compile Include="Code\views\others\guiMenuBar.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Code\views\others\inputRute.py" />
     <Compile Include="Code\views\others\language.py" />
     <Compile Include="Code\views\others\messages.py" />
     <Compile Include="Code\views\others\guiCamera.py">

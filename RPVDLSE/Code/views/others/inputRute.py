@@ -44,7 +44,7 @@ class InputRute(tk.Toplevel):
         self.language.language_change(root.root.num_language)
 
     def initialize(self):
-        size_font_labels = 15
+        size_font_labels = 12
         self.label_protocol = ttk.Label(self,
                                         text=self.language.protocol,
                                         font=("", size_font_labels))

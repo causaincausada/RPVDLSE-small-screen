@@ -87,13 +87,13 @@ class GuiGallery(ttk.Frame):
                                        value='internal',
                                        variable=self.selected_radio_button,
                                        command=self.click_rb_internal,
-                                       style="Big.TRadiobutton")
+                                       )
         rb_externals = ttk.Radiobutton(frame_radio_button_ie, 
                                        text=self.language.externals,
                                        value='external',
                                        command=self.click_rb_external,
                                        variable=self.selected_radio_button,
-                                       style="Big.TRadiobutton")
+                                       )
         self.selected_radio_button.set("internal")  # Default option
 
         # Location elements(Buttons and Radiobutton in Frame Up and Frame Radio)
@@ -248,8 +248,8 @@ class GuiGallery(ttk.Frame):
         i = 0
         for l_img in self.l_imgs:
             if i < num_imgs:
-                if len(images[i].name) > 20:
-                    l_img.config(text=images[i].name[0:20] + "...")
+                if len(images[i].name) > 10:
+                    l_img.config(text=images[i].name[0:10] + "...")
                 else:
                     l_img.config(text=images[i].name)
                 l_tool_tip = ToolTip(l_img, images[i].name)

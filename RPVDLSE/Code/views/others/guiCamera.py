@@ -62,7 +62,7 @@ class GuiCamera(tk.Toplevel):
         if self.cap is not None:
             ret, self.frame = self.cap.read()
             if ret:
-                self.frame = imutils.resize(self.frame, width=640)
+                self.frame = imutils.resize(self.frame, width=480)
                 self.frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
                 im = Image.fromarray(self.frame)
                 img = ImageTk.PhotoImage(image=im)
@@ -75,7 +75,7 @@ class GuiCamera(tk.Toplevel):
                     if ret:
                         break
                 if ret:
-                    self.frame = imutils.resize(self.frame, width=640)
+                    self.frame = imutils.resize(self.frame, width=480)
                     self.frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
                     im = Image.fromarray(self.frame)
                     img = ImageTk.PhotoImage(image=im)
@@ -97,7 +97,7 @@ class GuiCamera(tk.Toplevel):
     def click_button_snapshot(self):
         self.button_snapshot.config(state=DISABLED)
         frame_save = self.frame
-        frame_save = imutils.resize(frame_save, width=640)
+        frame_save = imutils.resize(frame_save, width=480)
         frame_save = cv2.cvtColor(frame_save, cv2.COLOR_BGR2RGB)
         now = datetime.now()
         year = str(now.year)[2:]

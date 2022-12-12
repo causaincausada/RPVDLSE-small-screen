@@ -13,8 +13,8 @@ from Code.props.tooltip import ToolTip
 class GuiResults(ttk.Frame):
     def __init__(self, root):
         super().__init__(root.tab_control)
-        size_font_labels = 15
-        size_font_title = 20
+        size_font_labels = 8
+        size_font_title = 11
         # Language pack
         self.root = root
         self.language = Language()
@@ -32,7 +32,7 @@ class GuiResults(ttk.Frame):
         # frame config
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
-        self.rowconfigure(1, weight=20)
+        self.rowconfigure(1, weight=10)
 
         # Frame Filters
         # layout grid

@@ -22,22 +22,22 @@ class GuiMenuBar(Menu):
         self.settings_menu = Menu(root, tearoff=0)
         language_menu = Menu(root, tearoff=0)
         self.cam_menu = Menu(root, tearoff=0)
-        size_font_menu_item = 15
+        #size_font_menu_item = 15
         # add a menu item to the menu --back up--
         results_menu.add_command(
             label=self.language.backup,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             command=self.act_ask_confirm_backup
         )
         # add menu items in menu restore
         restore_menu.add_command(
             label=self.language.restore_menu_file_label,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             command=self.act_select_backup
         )
         restore_menu.add_command(
             label=self.language.restore,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             command=self.act_restore_all
         )
         # add items in menu language
@@ -73,35 +73,35 @@ class GuiMenuBar(Menu):
         # add menu radiobuttons Language in settings menu
         self.settings_menu.add_cascade(
             label=self.language.language,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             menu=language_menu
         )
         self.settings_menu.add_cascade(
             label=self.language.camera,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             menu=self.cam_menu
         )
         self.settings_menu.add_command(
             label=self.language.try_connect,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             command=self.try_connect_mongodb
         )
         # add a menu item to the menu --restore--
         results_menu.add_cascade(
             label=self.language.restore,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             menu=restore_menu
         )
 
         # add the results menu to the menubar
         self.add_cascade(
             label=self.language.menubar_results_label,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             menu=results_menu
         )
         self.add_cascade(
             label=self.language.settings,
-            font=("", size_font_menu_item),
+            #font=("", size_font_menu_item),
             menu=self.settings_menu
         )
 

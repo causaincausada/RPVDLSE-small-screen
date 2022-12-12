@@ -9,9 +9,9 @@ from Code.views.others.messages import Messages
 
 DEFAULT_THEME = 'plastik'
 DEFAULT_WINDOW_TITLE = 'RPVDLSE'
-GEOMETRY = '1050x750+0+0'
-MINSIZE_WINDOW_X = 1050
-MINSIZE_WINDOW_Y = 750
+GEOMETRY = '525x375+0+0'
+MINSIZE_WINDOW_X = 525
+MINSIZE_WINDOW_Y = 375
 
 
 class Gui(ThemedTk):
@@ -30,7 +30,7 @@ class Gui(ThemedTk):
         self.geometry(GEOMETRY)
         self.minsize(MINSIZE_WINDOW_X, MINSIZE_WINDOW_Y)
         self.title(DEFAULT_WINDOW_TITLE)
-        self.resizable(False, False)
+        #self.resizable(False, False)
         self.protocol("WM_DELETE_WINDOW", self.on_close)
         # self.state('zoomed') #quitar?
 
